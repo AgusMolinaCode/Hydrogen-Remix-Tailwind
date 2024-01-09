@@ -3,9 +3,8 @@ import {Suspense} from 'react';
 import {Await, useLoaderData} from '@remix-run/react';
 import {AnalyticsPageType} from '@shopify/hydrogen';
 
-import {ProductSwimlane, FeaturedCollections, Hero} from '~/components';
+import {ProductSwimlane, FeaturedCollections} from '~/components';
 import {MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
-import {getHeroPlaceholder} from '~/lib/placeholders';
 import {seoPayload} from '~/lib/seo.server';
 import {routeHeaders} from '~/data/cache';
 
@@ -23,47 +22,32 @@ export async function loader({params, context}: LoaderFunctionArgs) {
     throw new Response(null, {status: 404});
   }
 
-  const {shop, hero} = await context.storefront.query(HOMEPAGE_SEO_QUERY, {
-    variables: {handle: 'freestyle'},
+  const {shop} = await context.storefront.query(HOMEPAGE_SEO_QUERY, {
+    variables: {handle: 'home-hero'},
   });
 
   const seo = seoPayload.home();
 
   return defer({
     shop,
-    primaryHero: hero,
-    // These different queries are separated to illustrate how 3rd party content
-    // fetching can be optimized for both above and below the fold.
+    featuredCollection: context.storefront.query(FEATURED_COLLECTION_QUERY, {
+      variables: {
+        handle: 'home-hero',
+        country,
+        language,
+      },
+    }),
     featuredProducts: context.storefront.query(
       HOMEPAGE_FEATURED_PRODUCTS_QUERY,
       {
         variables: {
-          /**
-           * Country and language properties are automatically injected
-           * into all queries. Passing them is unnecessary unless you
-           * want to override them from the following default:
-           */
           country,
           language,
         },
       },
     ),
-    secondaryHero: context.storefront.query(COLLECTION_HERO_QUERY, {
-      variables: {
-        handle: 'backcountry',
-        country,
-        language,
-      },
-    }),
     featuredCollections: context.storefront.query(FEATURED_COLLECTIONS_QUERY, {
       variables: {
-        country,
-        language,
-      },
-    }),
-    tertiaryHero: context.storefront.query(COLLECTION_HERO_QUERY, {
-      variables: {
-        handle: 'winter-2022',
         country,
         language,
       },
@@ -76,46 +60,52 @@ export async function loader({params, context}: LoaderFunctionArgs) {
 }
 
 export default function Homepage() {
-  const {
-    primaryHero,
-    secondaryHero,
-    tertiaryHero,
-    featuredCollections,
-    featuredProducts,
-  } = useLoaderData<typeof loader>();
-
-  // TODO: skeletons vs placeholders
-  const skeletons = getHeroPlaceholder([{}, {}, {}]);
+  const {featuredCollections, featuredProducts, featuredCollection} =
+    useLoaderData<typeof loader>();
 
   return (
     <>
-      {primaryHero && (
-        <Hero {...primaryHero} height="full" top loading="eager" />
-      )}
-
-      {featuredProducts && (
+      {featuredCollection && (
         <Suspense>
-          <Await resolve={featuredProducts}>
-            {({products}) => {
-              if (!products?.nodes) return <></>;
+          <Await resolve={featuredCollection}>
+            {({collection}) => {
+              if (!collection) return <></>;
               return (
-                <ProductSwimlane
-                  products={products}
-                  title="Featured Products"
-                  count={4}
-                />
+                <>
+                  <h1 className="text-2xl text-white">{collection.title}</h1>
+                  {collection.image && (
+                    <img
+                      src={collection.image.url}
+                      alt={collection.image.altText || 'Imagen de la colección'}
+                      width={collection.image.width || 0}
+                      height={collection.image.height || 0}
+                      className="animate-fadeIn"
+                    />
+                  )}
+                </>
               );
             }}
           </Await>
         </Suspense>
       )}
-
-      {secondaryHero && (
-        <Suspense fallback={<Hero {...skeletons[1]} />}>
-          <Await resolve={secondaryHero}>
-            {({hero}) => {
-              if (!hero) return <></>;
-              return <Hero {...hero} />;
+      {featuredProducts && (
+        <Suspense>
+          <Await resolve={featuredProducts}>
+            {({products}) => {
+              if (!products?.nodes) return <></>;
+              const filteredProducts = products.nodes.filter(
+                (product) => !product.handle.startsWith('ktm'),
+              );
+              return (
+                console.log(filteredProducts),
+                (
+                  <ProductSwimlane
+                    products={{nodes: filteredProducts}}
+                    title="Featured Products"
+                    count={4}
+                  />
+                )
+              );
             }}
           </Await>
         </Suspense>
@@ -126,23 +116,18 @@ export default function Homepage() {
           <Await resolve={featuredCollections}>
             {({collections}) => {
               if (!collections?.nodes) return <></>;
-              return (
-                <FeaturedCollections
-                  collections={collections}
-                  title="Collections"
-                />
+              const filteredCollections = collections.nodes.filter(
+                (collection) => !collection.handle.startsWith('home'),
               );
-            }}
-          </Await>
-        </Suspense>
-      )}
-
-      {tertiaryHero && (
-        <Suspense fallback={<Hero {...skeletons[2]} />}>
-          <Await resolve={tertiaryHero}>
-            {({hero}) => {
-              if (!hero) return <></>;
-              return <Hero {...hero} />;
+              return (
+                console.log(filteredCollections),
+                (
+                  <FeaturedCollections
+                    collections={{nodes: filteredCollections}}
+                    title="Collections"
+                  />
+                )
+              );
             }}
           </Await>
         </Suspense>
@@ -176,6 +161,12 @@ const COLLECTION_CONTENT_FRAGMENT = `#graphql
         ...Media
       }
     }
+    image {
+      altText
+      width
+      height
+      url
+    }
   }
   ${MEDIA_FRAGMENT}
 ` as const;
@@ -194,21 +185,11 @@ const HOMEPAGE_SEO_QUERY = `#graphql
   ${COLLECTION_CONTENT_FRAGMENT}
 ` as const;
 
-const COLLECTION_HERO_QUERY = `#graphql
-  query heroCollectionContent($handle: String, $country: CountryCode, $language: LanguageCode)
-  @inContext(country: $country, language: $language) {
-    hero: collection(handle: $handle) {
-      ...CollectionContent
-    }
-  }
-  ${COLLECTION_CONTENT_FRAGMENT}
-` as const;
-
 // @see: https://shopify.dev/api/storefront/current/queries/products
 export const HOMEPAGE_FEATURED_PRODUCTS_QUERY = `#graphql
   query homepageFeaturedProducts($country: CountryCode, $language: LanguageCode)
   @inContext(country: $country, language: $language) {
-    products(first: 8) {
+    products(first: 10) {
       nodes {
         ...ProductCard
       }
@@ -238,4 +219,14 @@ export const FEATURED_COLLECTIONS_QUERY = `#graphql
       }
     }
   }
+` as const;
+
+export const FEATURED_COLLECTION_QUERY = `#graphql
+  query featuredCollection($handle: String!, $country: CountryCode, $language: LanguageCode)
+  @inContext(country: $country, language: $language) {
+    collection(handle: $handle) {
+      ...CollectionContent
+    }
+  }
+  ${COLLECTION_CONTENT_FRAGMENT}
 ` as const;
