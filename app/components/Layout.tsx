@@ -1,4 +1,5 @@
 import {useParams, Form, Await} from '@remix-run/react';
+import {Navbar} from '@nextui-org/react';
 import {useWindowScroll} from 'react-use';
 import {Disclosure} from '@headlessui/react';
 import {Suspense, useEffect, useMemo} from 'react';
@@ -189,13 +190,11 @@ function MobileHeader({
   return (
     <header
       role="banner"
-      className={`${
-        isHome
-          ? 'bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary shadow-darkHeader'
-          : 'bg-contrast/80 text-primary'
-      } flex lg:hidden items-center h-nav sticky backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 px-4 md:px-8`}
+      className={
+        'flex lg:hidden items-center h-nav sticky bg-black z-40 top-0 justify-between w-full leading-none gap-4 px-4 md:px-8'
+      }
     >
-      <div className="flex items-center justify-start w-full gap-4">
+      <div className="flex items-center justify-start w-full gap-4 bg-black">
         <button
           onClick={openMenu}
           className="relative flex items-center justify-center w-8 h-8"
@@ -260,16 +259,15 @@ function DesktopHeader({
 }) {
   const params = useParams();
   const {y} = useWindowScroll();
+
   return (
-    <header
+    <Navbar
+      shouldHideOnScroll
+      maxWidth="full"
       role="banner"
-      className={`${
-        isHome
-          ? 'bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary shadow-darkHeader'
-          : 'bg-contrast/80 text-primary'
-      } ${
-        !isHome && y > 50 && ' shadow-lightHeader'
-      } hidden h-nav lg:flex items-center sticky transition duration-300 backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-8 px-12 py-8`}
+      className={
+        'hidden h-nav lg:flex items-center sticky transition duration-300 bg-black backdrop-blur-lg z-40 top-0 justify-between mx-auto w-full leading-none gap-8 px-1 py-3'
+      }
     >
       <div className="flex gap-12">
         <Link className="font-bold" to="/" prefetch="intent">
@@ -319,7 +317,7 @@ function DesktopHeader({
         <AccountLink className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5" />
         <CartCount isHome={isHome} openCart={openCart} />
       </div>
-    </header>
+    </Navbar>
   );
 }
 
