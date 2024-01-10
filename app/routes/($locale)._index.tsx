@@ -4,9 +4,11 @@ import {Await, useLoaderData} from '@remix-run/react';
 import {AnalyticsPageType} from '@shopify/hydrogen';
 
 import {ProductSwimlane, FeaturedCollections} from '~/components';
+import {HomeFeaturedCollection} from '~/components/HomeFeaturedCollection';
 import {MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import {seoPayload} from '~/lib/seo.server';
 import {routeHeaders} from '~/data/cache';
+import HeroInfo from '~/components/HeroInfo';
 
 export const headers = routeHeaders;
 
@@ -65,29 +67,9 @@ export default function Homepage() {
 
   return (
     <>
-      {featuredCollection && (
-        <Suspense>
-          <Await resolve={featuredCollection}>
-            {({collection}) => {
-              if (!collection) return <></>;
-              return (
-                <>
-                  <h1 className="text-2xl text-white">{collection.title}</h1>
-                  {collection.image && (
-                    <img
-                      src={collection.image.url}
-                      alt={collection.image.altText || 'Imagen de la colección'}
-                      width={collection.image.width || 0}
-                      height={collection.image.height || 0}
-                      className="animate-fadeIn"
-                    />
-                  )}
-                </>
-              );
-            }}
-          </Await>
-        </Suspense>
-      )}
+      <Suspense>
+        <HeroInfo />
+      </Suspense>
       {featuredProducts && (
         <Suspense>
           <Await resolve={featuredProducts}>
@@ -97,14 +79,11 @@ export default function Homepage() {
                 (product) => !product.handle.startsWith('ktm'),
               );
               return (
-                console.log(filteredProducts),
-                (
-                  <ProductSwimlane
-                    products={{nodes: filteredProducts}}
-                    title="Featured Products"
-                    count={4}
-                  />
-                )
+                <ProductSwimlane
+                  products={{nodes: filteredProducts}}
+                  title="Featured Products"
+                  count={4}
+                />
               );
             }}
           </Await>
@@ -120,13 +99,10 @@ export default function Homepage() {
                 (collection) => !collection.handle.startsWith('home'),
               );
               return (
-                console.log(filteredCollections),
-                (
-                  <FeaturedCollections
-                    collections={{nodes: filteredCollections}}
-                    title="Collections"
-                  />
-                )
+                <FeaturedCollections
+                  collections={{nodes: filteredCollections}}
+                  title="Collections"
+                />
               );
             }}
           </Await>

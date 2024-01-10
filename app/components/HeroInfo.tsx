@@ -5,10 +5,10 @@ const HeroInfo = () => {
     <div>
       <h1>HeroInfo</h1>
       <img
-        src="/enduro3.jpeg"
+        src="/enduro6.jpg"
         alt="HeroImage"
         loading="lazy"
-        className="animate-fadeIn"
+        className="animate-fadeup"
       />
     </div>
   );
