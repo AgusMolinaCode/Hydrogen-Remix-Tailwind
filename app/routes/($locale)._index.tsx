@@ -62,14 +62,15 @@ export async function loader({params, context}: LoaderFunctionArgs) {
 }
 
 export default function Homepage() {
-  const {featuredCollections, featuredProducts, featuredCollection} =
+  const {featuredCollections, featuredProducts} =
     useLoaderData<typeof loader>();
 
   return (
     <>
-      <Suspense>
+      <div className="h-[600px]">
         <HeroInfo />
-      </Suspense>
+      </div>
+
       {featuredProducts && (
         <Suspense>
           <Await resolve={featuredProducts}>

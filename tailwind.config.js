@@ -80,5 +80,5 @@ export default {
       },
     },
   },
-  plugins: [formsPlugin, typographyPlugin],
+  plugins: [formsPlugin, typographyPlugin, require('tailwindcss-animated')],
 };
