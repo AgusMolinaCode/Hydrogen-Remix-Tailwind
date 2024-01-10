@@ -1,3 +1,4 @@
+import {NextUIProvider} from '@nextui-org/react';
 import {
   defer,
   type LinksFunction,
@@ -112,15 +113,17 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Layout
-          key={`${locale.language}-${locale.country}`}
-          layout={data.layout}
-        >
-          <Outlet />
-        </Layout>
-        <ScrollRestoration nonce={nonce} />
-        <Scripts nonce={nonce} />
-        <LiveReload nonce={nonce} />
+        <NextUIProvider>
+          <Layout
+            key={`${locale.language}-${locale.country}`}
+            layout={data.layout}
+          >
+            <Outlet />
+          </Layout>
+          <ScrollRestoration nonce={nonce} />
+          <Scripts nonce={nonce} />
+          <LiveReload nonce={nonce} />
+        </NextUIProvider>
       </body>
     </html>
   );

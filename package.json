@@ -18,6 +18,7 @@
   "prettier": "@shopify/prettier-config",
   "dependencies": {
     "@headlessui/react": "^1.7.2",
+    "@nextui-org/react": "^2.2.9",
     "@remix-run/react": "2.1.0",
     "@remix-run/server-runtime": "2.1.0",
     "@shopify/cli": "3.51.0",
@@ -26,6 +27,7 @@
     "@shopify/remix-oxygen": "^2.0.2",
     "clsx": "^1.2.1",
     "cross-env": "^7.0.3",
+    "framer-motion": "^10.17.12",
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",
     "isbot": "^3.6.5",

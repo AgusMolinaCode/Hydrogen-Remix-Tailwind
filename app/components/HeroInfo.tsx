@@ -1,10 +1,11 @@
+import {Button} from '@nextui-org/react';
 import React from 'react';
 
 const HeroInfo = () => {
   return (
     <div
       style={{
-        backgroundImage: `url('/image.webp')`,
+        backgroundImage: `url('/image2.webp')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
@@ -17,9 +18,9 @@ const HeroInfo = () => {
       }}
     >
       <div>
-        <button className="bg-white text-black px-4 py-2 rounded-lg shadow-lg absolute bottom-5 left-auto right-auto">
+        <Button className="bg-white text-black px-4 mt-[38rem] rounded-lg shadow-lg">
           Shop Now
-        </button>
+        </Button>
       </div>
     </div>
   );
