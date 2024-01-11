@@ -1,4 +1,8 @@
 @font-face {
+  font-family: 'Outfit';
+  src: url('./fonts/Outfit.ttf') format('ttf');
+}
+@font-face {
   font-family: 'IBMPlexSerif';
   font-display: swap;
   font-weight: 400;

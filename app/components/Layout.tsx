@@ -263,14 +263,15 @@ function DesktopHeader({
   return (
     <Navbar
       shouldHideOnScroll
+      isBordered
       maxWidth="full"
       role="banner"
       className={
-        'hidden h-nav lg:flex items-center sticky transition duration-300 bg-black backdrop-blur-lg z-40 top-0 justify-between mx-auto w-full leading-none gap-8 px-1 py-3'
+        'hidden h-nav lg:flex items-center sticky transition duration-300 bg-[#202123]/70 backdrop-blur-sm z-40 top-0 justify-between mx-auto w-full leading-none gap-8 px-1 py-3 border-b-[0.4px] border-contrast/10 dark:border-contrast/20 md:px-8 lg:px-12'
       }
     >
       <div className="flex gap-12">
-        <Link className="font-bold" to="/" prefetch="intent">
+        <Link className="font-bold font-outfit" to="/" prefetch="intent">
           {title}
         </Link>
         <nav className="flex gap-8">
@@ -282,7 +283,7 @@ function DesktopHeader({
               target={item.target}
               prefetch="intent"
               className={({isActive}) =>
-                isActive ? 'pb-1 border-b -mb-px' : 'pb-1'
+                isActive ? 'pb-1 border-b -mb-px font-outfit' : 'pb-1'
               }
             >
               {item.title}
