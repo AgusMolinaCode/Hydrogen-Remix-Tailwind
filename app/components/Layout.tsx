@@ -271,7 +271,7 @@ function DesktopHeader({
       }
     >
       <div className="flex gap-12">
-        <Link className="font-bold font-outfit" to="/" prefetch="intent">
+        <Link className="font-bold font-righteous" to="/" prefetch="intent">
           {title}
         </Link>
         <nav className="flex gap-8">

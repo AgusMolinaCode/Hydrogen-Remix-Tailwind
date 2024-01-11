@@ -44,7 +44,7 @@ export default {
         mobileGallery: 'calc(100vw - 3rem)',
       },
       fontFamily: {
-        outfit: ['Outfit', 'sans-serif', 'ui-sans-serif', 'system-ui'],
+        righteous: ['Righteous', 'sans-serif'],
         sans: ['Helvetica Neue', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         serif: ['"IBMPlexSerif"', 'Palatino', 'ui-serif'],
       },

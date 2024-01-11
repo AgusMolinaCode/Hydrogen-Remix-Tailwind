@@ -22,7 +22,7 @@ const HeroInfo = () => {
       <div>
         <Button
           href="/products"
-          className="bg-white text-black px-4 mt-[38rem] rounded-lg shadow-lg font-bold text-md"
+          className="bg-white text-black px-4 mt-[38rem] rounded-lg shadow-lg font-bold font-racing text-md"
         >
           Ver Coleccion
           <ChevronDoubleRightIcon className="w-8 h-8 ml-2 animate-fade animate-infinite animate-duration-[1500ms]" />
