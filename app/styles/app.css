@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap');
 /* Tokens */
 :root {
   --color-primary: 20 20 20; /* Text, buttons, etc. */
@@ -112,9 +113,9 @@ shop-pay-button {
     h4,
     h5,
     h6 {
-      @apply font-righteous text-primary;
+      @apply font-outfit text-primary;
     }
-    @apply prose mx-auto mb-12 grid justify-center font-righteous text-primary;
+    @apply prose mx-auto mb-12 grid justify-center font-racing text-primary;
     p,
     ul,
     li {

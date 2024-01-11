@@ -44,8 +44,9 @@ export default {
         mobileGallery: 'calc(100vw - 3rem)',
       },
       fontFamily: {
-        righteous: ['Righteous', 'sans-serif'],
-        sans: ['Helvetica Neue', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        outfit: ['Outfit'],
+        racing: ['Racing Sans One'],
+        sans: '"DM Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
         serif: ['"IBMPlexSerif"', 'Palatino', 'ui-serif'],
       },
       fontSize: {

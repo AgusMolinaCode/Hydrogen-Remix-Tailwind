@@ -12,8 +12,8 @@
   src: url('./fonts/IBMPlexSerif-TextItalic.woff2') format('woff2');
 }
 @font-face {
-  font-family: 'Righteous';
+  font-family: Outfit;
+  src: url('../assets/font/Outfit-VariableFont_wght.ttf');
   font-display: swap;
-  font-weight: 400;
-  src: url('./fonts/Righteous-Regular.woff') format('woff');
+  font-weight: 600;
 }

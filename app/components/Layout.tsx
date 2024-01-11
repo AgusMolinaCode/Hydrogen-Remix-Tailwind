@@ -271,7 +271,11 @@ function DesktopHeader({
       }
     >
       <div className="flex gap-12">
-        <Link className="font-bold font-righteous" to="/" prefetch="intent">
+        <Link
+          className="font-semibold font-outfit text-3xl text-rose-100"
+          to="/"
+          prefetch="intent"
+        >
           {title}
         </Link>
         <nav className="flex gap-8">
@@ -283,7 +287,9 @@ function DesktopHeader({
               target={item.target}
               prefetch="intent"
               className={({isActive}) =>
-                isActive ? 'pb-1 border-b -mb-px font-outfit' : 'pb-1'
+                isActive
+                  ? 'pb-1 border-b -mb-px font-outfit font-semibold'
+                  : 'pb-1 font-outfit font-semibold flex items-end'
               }
             >
               {item.title}
