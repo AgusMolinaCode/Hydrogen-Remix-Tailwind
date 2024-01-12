@@ -6,7 +6,7 @@ import {
   NavbarMenu,
   NavbarMenuItem,
 } from '@nextui-org/react';
-import {useWindowScroll} from 'react-use';
+import {useWindowScroll, useLocation} from 'react-use';
 import {Disclosure} from '@headlessui/react';
 import {Suspense, useEffect, useMemo, useState} from 'react';
 import {CartForm} from '@shopify/hydrogen';
@@ -40,6 +40,7 @@ import {useIsHydrated} from '~/hooks/useIsHydrated';
 import {useCartFetchers} from '~/hooks/useCartFetchers';
 import {useRootLoaderData} from '~/root';
 
+import {useSidebarContext} from '../lib/layout/layout-context';
 type LayoutProps = {
   children: React.ReactNode;
   layout?: LayoutQuery & {
@@ -258,136 +259,122 @@ function DesktopHeader({
   menu,
   openCart,
   title,
+  openMenu,
 }: {
   isHome: boolean;
   openCart: () => void;
+  openMenu: () => void;
   menu?: EnhancedMenu;
   title: string;
 }) {
   const params = useParams();
   const {y} = useWindowScroll();
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  const menuItems = [
-    'Profile',
-    'Dashboard',
-    'Activity',
-    'Analytics',
-    'System',
-    'Deployments',
-    'My Settings',
-    'Team Settings',
-    'Help & Feedback',
-    'Log Out',
-  ];
-
+  const [MenuOpen, setMenuOpen] = useState(false);
   return (
-    <Navbar
-      onMenuOpenChange={setIsMenuOpen}
-      shouldHideOnScroll
-      maxWidth="full"
-      role="banner"
-      className={
-        'hidden h-nav lg:flex items-center sticky transition duration-300 bg-[#202123]/70 backdrop-blur-sm z-40 top-0 justify-between mx-auto w-full leading-none gap-8 px-1 py-3 border-b-[0.4px] border-contrast/10 dark:border-contrast/20 md:px-8 lg:px-12'
-      }
-    >
-      <div className="flex gap-12">
-        <NavbarContent>
-          <NavbarMenuToggle
-            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-            className={`w-20 transition-transform duration-300 transform ${
-              isMenuOpen ? 'rotate-45' : 'rotate-0'
-            }`}
-            onClick={toggleMenu}
-          >
-            {isMenuOpen ? (
-              <XMarkIcon width={50} className="w-10" />
-            ) : (
-              <Bars2Icon width={50} className="w-10" />
-            )}
-          </NavbarMenuToggle>
-        </NavbarContent>
-        <nav className="flex gap-8">
-          {/* Top level menu items */}
-          {(menu?.items || []).map((item) => (
+    <div>
+      <Navbar
+        onClick={openMenu}
+        shouldHideOnScroll
+        maxWidth="full"
+        role="banner"
+        className={
+          'hidden h-nav lg:flex items-center sticky transition duration-300 bg-[#202123]/70 backdrop-blur-sm z-40 top-0 justify-around mx-auto w-full leading-none gap-8 px-1 py-3 border-b-[0.4px] border-contrast/10 dark:border-contrast/20 md:px-8 lg:px-12'
+        }
+      >
+        <div className="flex gap-4">
+          <div>
+            <NavbarContent>
+              <NavbarContent className="hover:bg-blue-500/20 duration-300 rounded-full">
+                <NavbarMenuToggle
+                  aria-label={MenuOpen ? 'Close menu' : 'Open menu'}
+                  className="relative flex items-center justify-center w-10 h-10 rounded-full border-1"
+                >
+                  {MenuOpen ? (
+                    <XMarkIcon width={100} className="w-20" />
+                  ) : (
+                    <Bars2Icon width={100} className="w-20" />
+                  )}
+                </NavbarMenuToggle>
+              </NavbarContent>
+            </NavbarContent>
+          </div>
+          <div className="flex items-center">
+            <p className="font-outfit font-bold text-lg text-gray-400">Menu </p>
             <Link
-              key={item.id}
-              to={item.to}
-              target={item.target}
+              className="font-semibold font-racing text-3xl text-rose-100 pl-3"
+              to="/"
               prefetch="intent"
-              className={({isActive}) =>
-                isActive
-                  ? 'font-outfit font-bold flex items-end underline'
-                  : 'font-outfit font-semibold flex items-end'
-              }
             >
-              {item.title}
+              | {title} SHOP
             </Link>
-          ))}
-        </nav>
-      </div>
-      <div>
-        <Link
-          className="font-semibold font-racing text-3xl text-rose-100 leading-[0.65rem] pr-28"
-          to="/"
-          prefetch="intent"
-        >
-          {title} SHOP
-        </Link>
-      </div>
-      <div className="flex items-center gap-1">
-        <Form
-          method="get"
-          action={params.locale ? `/${params.locale}/search` : '/search'}
-          className="flex items-center gap-2"
-        >
-          <Input
-            className={
-              isHome
-                ? 'focus:border-contrast/20 dark:focus:border-primary/20'
-                : 'focus:border-primary/20'
-            }
-            type="search"
-            variant="minisearch"
-            placeholder="Search"
-            name="q"
-          />
-          <button
-            type="submit"
-            className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5"
+          </div>
+        </div>
+        <div className="flex items-center gap-1">
+          <Form
+            method="get"
+            action={params.locale ? `/${params.locale}/search` : '/search'}
+            className="flex items-center gap-2"
           >
-            <IconSearch />
-          </button>
-        </Form>
-        <AccountLink className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5" />
-        <CartCount isHome={isHome} openCart={openCart} />
-      </div>
-      <NavbarMenu className="w-[200px] backdrop-blur-sm bg-[#202123]/70 mt-8">
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem className="" key={index}>
-            <Link
-              color={
-                index === 2
-                  ? 'primary'
-                  : index === menuItems.length - 1
-                  ? 'danger'
-                  : 'foreground'
+            <Input
+              className={
+                isHome
+                  ? 'focus:border-contrast/20 dark:focus:border-primary/20'
+                  : 'focus:border-primary/20'
               }
-              className="w-[200px]"
-              href="#"
-              size="lg"
+              type="search"
+              variant="minisearch"
+              placeholder="Search"
+              name="q"
+            />
+            <button
+              type="submit"
+              className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5"
             >
-              {item}
-            </Link>
+              <IconSearch />
+            </button>
+          </Form>
+          <AccountLink className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5" />
+          <CartCount isHome={isHome} openCart={openCart} />
+        </div>
+        <NavbarMenu
+          motionProps={
+            MenuOpen
+              ? {
+                  initial: {opacity: 0, x: -20},
+                  animate: {opacity: 1, x: 0},
+                  exit: {opacity: 0, x: -20},
+                  transition: {duration: 0.3},
+                }
+              : {
+                  initial: {opacity: 0, x: -20},
+                  animate: {opacity: 1, x: 0},
+                  exit: {opacity: 0, x: -20},
+                  transition: {duration: 0.3},
+                }
+          }
+          className="w-[250px] h-[600px] overflow-hidden backdrop-blur-sm bg-[#202123]/70 mt-8 rounded-br-2xl"
+        >
+          <NavbarMenuItem>
+            {(menu?.items || []).map((item) => (
+              <Link
+                key={item.id}
+                to={item.to}
+                target={item.target}
+                prefetch="intent"
+                className={({isActive}) =>
+                  isActive
+                    ? 'font-outfit font-bold flex items-end underline'
+                    : 'font-outfit font-semibold flex items-end'
+                }
+              >
+                {item.title}
+              </Link>
+            ))}
           </NavbarMenuItem>
-        ))}
-      </NavbarMenu>
-    </Navbar>
+        </NavbarMenu>
+      </Navbar>
+    </div>
   );
 }
 
