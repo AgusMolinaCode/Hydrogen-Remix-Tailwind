@@ -5,6 +5,12 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownSection,
+  DropdownItem,
+  Button,
 } from '@nextui-org/react';
 import {useWindowScroll, useLocation} from 'react-use';
 import {Disclosure} from '@headlessui/react';
@@ -40,7 +46,6 @@ import {useIsHydrated} from '~/hooks/useIsHydrated';
 import {useCartFetchers} from '~/hooks/useCartFetchers';
 import {useRootLoaderData} from '~/root';
 
-import {useSidebarContext} from '../lib/layout/layout-context';
 type LayoutProps = {
   children: React.ReactNode;
   layout?: LayoutQuery & {
@@ -259,11 +264,9 @@ function DesktopHeader({
   menu,
   openCart,
   title,
-  openMenu,
 }: {
   isHome: boolean;
   openCart: () => void;
-  openMenu: () => void;
   menu?: EnhancedMenu;
   title: string;
 }) {
@@ -271,33 +274,63 @@ function DesktopHeader({
   const {y} = useWindowScroll();
 
   const [MenuOpen, setMenuOpen] = useState(false);
+
   return (
     <div>
       <Navbar
-        onClick={openMenu}
         shouldHideOnScroll
         maxWidth="full"
         role="banner"
         className={
-          'hidden h-nav lg:flex items-center sticky transition duration-300 bg-[#202123]/70 backdrop-blur-sm z-40 top-0 justify-around mx-auto w-full leading-none gap-8 px-1 py-3 border-b-[0.4px] border-contrast/10 dark:border-contrast/20 md:px-8 lg:px-12'
+          'hidden h-[5rem] lg:flex items-center transition duration-300 bg-[#202123]/70 backdrop-blur-sm z-40 top-0 justify-around mx-auto w-full leading-none gap-8 px-1 border-b-[0.4px] border-contrast/10 dark:border-contrast/20 md:px-8 lg:px-12 fixed left-0 right-0'
         }
       >
         <div className="flex gap-4">
           <div>
-            <NavbarContent>
-              <NavbarContent className="hover:bg-blue-500/20 duration-300 rounded-full">
-                <NavbarMenuToggle
-                  aria-label={MenuOpen ? 'Close menu' : 'Open menu'}
-                  className="relative flex items-center justify-center w-10 h-10 rounded-full border-1"
+            <Dropdown
+              className="p-0 bg-transparent hover:bg-black/20"
+              onClose={() => setMenuOpen(!MenuOpen)}
+            >
+              <DropdownTrigger>
+                <Button
+                  className="bg-black/20 px-0 border-1 rounded-full border-gray-400/20 hover:bg-black/30 min-w-unit-10 h-unit-10 dropdown"
+                  onClick={() => setMenuOpen(!MenuOpen)}
                 >
                   {MenuOpen ? (
-                    <XMarkIcon width={100} className="w-20" />
+                    <XMarkIcon
+                      width={100}
+                      className="w-20 animate-rotate-y animate-delay-400 text-white"
+                    />
                   ) : (
-                    <Bars2Icon width={100} className="w-20" />
+                    <Bars2Icon
+                      width={100}
+                      className="w-20 animate-rotate-x animate-delay-400 text-white"
+                    />
                   )}
-                </NavbarMenuToggle>
-              </NavbarContent>
-            </NavbarContent>
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu color="success" className="p-0">
+                <DropdownItem
+                  className="bg-black/20 p-5 hover:bg-black/20"
+                  key="new"
+                >
+                  {(menu?.items || []).map((item) => (
+                    <Link
+                      key={item.id}
+                      to={item.to}
+                      target={item.target}
+                      className={({isActive}) =>
+                        isActive
+                          ? 'font-outfit text-lg m-2 font-bold flex items-end underline'
+                          : 'font-outfit text-lg m-2 font-semibold flex items-end'
+                      }
+                    >
+                      {item.title}
+                    </Link>
+                  ))}
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
           </div>
           <div className="flex items-center">
             <p className="font-outfit font-bold text-lg text-gray-400">Menu </p>
@@ -337,42 +370,6 @@ function DesktopHeader({
           <AccountLink className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5" />
           <CartCount isHome={isHome} openCart={openCart} />
         </div>
-        <NavbarMenu
-          motionProps={
-            MenuOpen
-              ? {
-                  initial: {opacity: 0, x: -20},
-                  animate: {opacity: 1, x: 0},
-                  exit: {opacity: 0, x: -20},
-                  transition: {duration: 0.3},
-                }
-              : {
-                  initial: {opacity: 0, x: -20},
-                  animate: {opacity: 1, x: 0},
-                  exit: {opacity: 0, x: -20},
-                  transition: {duration: 0.3},
-                }
-          }
-          className="w-[250px] h-[600px] overflow-hidden backdrop-blur-sm bg-[#202123]/70 mt-8 rounded-br-2xl"
-        >
-          <NavbarMenuItem>
-            {(menu?.items || []).map((item) => (
-              <Link
-                key={item.id}
-                to={item.to}
-                target={item.target}
-                prefetch="intent"
-                className={({isActive}) =>
-                  isActive
-                    ? 'font-outfit font-bold flex items-end underline'
-                    : 'font-outfit font-semibold flex items-end'
-                }
-              >
-                {item.title}
-              </Link>
-            ))}
-          </NavbarMenuItem>
-        </NavbarMenu>
       </Navbar>
     </div>
   );
