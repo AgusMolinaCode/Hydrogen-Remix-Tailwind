@@ -46,6 +46,7 @@ export default {
       fontFamily: {
         outfit: ['Outfit'],
         racing: ['Racing Sans One'],
+        Righteous: ['Righteous'],
         sans: '"DM Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
         serif: ['"IBMPlexSerif"', 'Palatino', 'ui-serif'],
       },

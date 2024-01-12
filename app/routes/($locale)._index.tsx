@@ -67,7 +67,7 @@ export default function Homepage() {
 
   return (
     <>
-      <div className="h-[800px]">
+      <div className="h-[620px] sm:h-[700px]">
         <HeroInfo />
       </div>
 
