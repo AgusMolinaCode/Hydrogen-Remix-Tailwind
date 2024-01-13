@@ -1,19 +1,14 @@
 import {useParams, Form, Await} from '@remix-run/react';
 import {
   Navbar,
-  NavbarContent,
-  NavbarMenuToggle,
-  NavbarMenu,
-  NavbarMenuItem,
   Dropdown,
   DropdownTrigger,
   DropdownMenu,
-  DropdownSection,
   DropdownItem,
   Button,
   Input,
 } from '@nextui-org/react';
-import {useWindowScroll, useLocation} from 'react-use';
+import {useWindowScroll} from 'react-use';
 import {Disclosure} from '@headlessui/react';
 import {Suspense, useEffect, useMemo, useState} from 'react';
 import {CartForm} from '@shopify/hydrogen';
@@ -65,7 +60,7 @@ export function Layout({children, layout}: LayoutProps) {
   const {headerMenu, footerMenu} = layout || {};
   return (
     <>
-      <div className="flex flex-col min-h-screen lg:pt-8">
+      <div className="flex flex-col min-h-screen pt-10">
         <div className="">
           <a href="#mainContent" className="sr-only">
             Skip to content
@@ -122,7 +117,7 @@ function Header({title, menu}: {title: string; menu?: EnhancedMenu}) {
         isHome={isHome}
         title={title}
         openCart={openCart}
-        openMenu={openMenu}
+        menu={menu}
       />
     </>
   );
@@ -172,21 +167,20 @@ function MenuMobileNav({
   return (
     <nav className="grid gap-4 p-6 sm:gap-6 sm:px-12 sm:py-8">
       {/* Top level menu items */}
+
       {(menu?.items || []).map((item) => (
-        <span key={item.id} className="block">
-          <Link
-            to={item.to}
-            target={item.target}
-            onClick={onClose}
-            className={({isActive}) =>
-              isActive ? 'pb-1 border-b -mb-px' : 'pb-1'
-            }
-          >
-            <Text as="span" size="copy">
-              {item.title}
-            </Text>
-          </Link>
-        </span>
+        <Link
+          key={item.id}
+          to={item.to}
+          target={item.target}
+          className={({isActive}) =>
+            isActive
+              ? 'font-outfit text-lg m-2 font-bold flex items-end underline hover:text-orange-500 duration-200'
+              : 'font-outfit text-lg m-2 font-semibold flex items-end hover:text-orange-500 duration-200'
+          }
+        >
+          {item.title}
+        </Link>
       ))}
     </nav>
   );
@@ -196,73 +190,123 @@ function MobileHeader({
   title,
   isHome,
   openCart,
-  openMenu,
+  menu,
 }: {
   title: string;
   isHome: boolean;
   openCart: () => void;
-  openMenu: () => void;
+  menu?: EnhancedMenu;
 }) {
   // useHeaderStyleFix(containerStyle, setContainerStyle, isHome);
 
   const params = useParams();
+  const [MenuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header
-      role="banner"
-      className={
-        'flex lg:hidden items-center h-nav sticky bg-black z-40 top-0 justify-between w-full leading-none gap-4 px-4 md:px-8'
-      }
-    >
-      <div className="flex items-center justify-start w-full gap-4 bg-black">
-        <button
-          onClick={openMenu}
-          className="relative flex items-center justify-center w-10 h-10"
-        >
-          <IconMenu />
-        </button>
-        <Form
-          method="get"
-          action={params.locale ? `/${params.locale}/search` : '/search'}
-          className="items-center gap-2 sm:flex"
-        >
-          <button
-            type="submit"
-            className="relative flex items-center justify-center w-10 h-10"
-          >
-            <MagnifyingGlassIcon />
-          </button>
-          <Input
-            className={
-              isHome
-                ? 'focus:border-contrast/20 dark:focus:border-primary/20'
-                : 'focus:border-primary/20'
-            }
-            type="search"
-            variant="underlined"
-            placeholder="Search"
-            name="q"
-          />
-        </Form>
-      </div>
-
-      <Link
-        className="flex items-center self-stretch leading-[3rem] md:leading-[4rem] justify-center flex-grow w-full h-full"
-        to="/"
+    <div>
+      <Navbar
+        shouldHideOnScroll
+        maxWidth="full"
+        role="banner"
+        className={
+          'flex h-[5rem] lg:hidden items-center transition duration-300 bg-[#202123]/70 backdrop-blur-sm z-40 top-0 justify-around mx-auto w-full leading-none gap-4 border-b-[0.4px] border-contrast/10 dark:border-contrast/20  fixed left-0 right-0'
+        }
       >
-        <Heading
-          className="font-bold text-center leading-none"
-          as={isHome ? 'h1' : 'h2'}
-        >
-          {title}
-        </Heading>
-      </Link>
-
-      <div className="flex items-center justify-end w-full gap-4">
-        <AccountLink className="relative flex items-center justify-center w-10 h-10" />
-        <CartCount isHome={isHome} openCart={openCart} />
-      </div>
-    </header>
+        <div className="flex gap-1">
+          <div>
+            <Dropdown
+              backdrop="blur"
+              className="p-0 bg-transparent hover:bg-black/70"
+              onClose={() => setMenuOpen(!MenuOpen)}
+            >
+              <DropdownTrigger>
+                <Button
+                  className="bg-black/20 px-0 border-1 rounded-full border-gray-400/20 hover:bg-black/30 min-w-unit-10 h-unit-10 dropdown"
+                  onClick={() => setMenuOpen(!MenuOpen)}
+                >
+                  {MenuOpen ? (
+                    <Bars2Icon
+                      width={100}
+                      className="w-12 lg:w-20 animate-rotate-y animate-delay-400 text-white"
+                    />
+                  ) : (
+                    <Bars2Icon
+                      width={100}
+                      className="w-12 lg:w-20 animate-rotate-x animate-delay-400 text-white"
+                    />
+                  )}
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu
+                color="undefined"
+                className="p-0 hover:bg-black/25 w-[200px]"
+              >
+                <DropdownItem
+                  className="bg-black/70 p-5 hover:bg-black/20"
+                  key="new"
+                >
+                  {(menu?.items || []).map((item) => (
+                    <Link
+                      key={item.id}
+                      to={item.to}
+                      target={item.target}
+                      className={({isActive}) =>
+                        isActive
+                          ? 'font-outfit text-lg m-2 font-bold flex items-end underline hover:text-orange-500 duration-200'
+                          : 'font-outfit text-lg m-2 font-semibold flex items-end hover:text-orange-500 duration-200'
+                      }
+                    >
+                      {item.title}
+                    </Link>
+                  ))}
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </div>
+          <div className="flex items-center">
+            {/* <p className="font-outfit font-bold text-lg text-gray-400">Menu </p> */}
+            <Link
+              className="font-semibold font-racing flex text-lg text-rose-100"
+              to="/"
+              prefetch="intent"
+            >
+              {title}
+            </Link>
+          </div>
+        </div>
+        <div className="flex items-center gap-1">
+          <Form
+            method="get"
+            action={params.locale ? `/${params.locale}/search` : '/search'}
+            className="flex items-center gap-2"
+          >
+            {/* <Input
+              style={{
+                borderWidth: '0px',
+                outline: 'none',
+                color: 'white',
+                boxShadow: 'none',
+              }}
+              className={
+                isHome ? ' text-white font-outfit' : ' text-white font-outfit'
+              }
+              type="search"
+              variant="underlined"
+              placeholder="Buscar"
+              name="q"
+            /> */}
+            <button
+              type="submit"
+              className="relative flex items-center justify-center w-8 lg:w-10 h-8 lg:h-10 focus:ring-primary/5"
+            >
+              <MagnifyingGlassIcon />
+            </button>
+          </Form>
+          <AccountLink className="relative flex items-center justify-center w-8 lg:w-10 h-8 lg:h-10 focus:ring-primary/5" />
+          <CartCount isHome={isHome} openCart={openCart} />
+        </div>
+      </Navbar>
+    </div>
   );
 }
 
@@ -289,7 +333,7 @@ function DesktopHeader({
         maxWidth="full"
         role="banner"
         className={
-          'hidden h-[5rem] lg:flex items-center transition duration-300 bg-[#202123]/70 backdrop-blur-sm z-40 top-0 justify-around mx-auto w-full leading-none gap-8 px-1 border-b-[0.4px] border-contrast/10 dark:border-contrast/20 md:px-8 lg:px-12 fixed left-0 right-0'
+          'hidden h-[5rem] lg:flex items-center transition duration-300 bg-[#202123]/70 backdrop-blur-sm z-40 top-0 justify-around mx-auto w-full leading-none gap-8 px-2 border-b-[0.4px] border-contrast/10 dark:border-contrast/20 md:px-8 lg:px-12 fixed left-0 right-0'
         }
       >
         <div className="flex gap-4">
@@ -297,15 +341,11 @@ function DesktopHeader({
             <Dropdown
               backdrop="blur"
               className="p-0 bg-transparent hover:bg-black/70"
-              onClose={() => setMenuOpen(!MenuOpen)}
             >
               <DropdownTrigger>
-                <Button
-                  className="bg-black/20 px-0 border-1 rounded-full border-gray-400/20 hover:bg-black/30 min-w-unit-10 h-unit-10 dropdown"
-                  onClick={() => setMenuOpen(!MenuOpen)}
-                >
+                <Button className="bg-black/20 px-0 border-1 rounded-full border-gray-400/20 hover:bg-black/30 min-w-unit-10 h-unit-10 dropdown">
                   {MenuOpen ? (
-                    <XMarkIcon
+                    <Bars2Icon
                       width={100}
                       className="w-20 animate-rotate-y animate-delay-400 text-white"
                     />
@@ -447,7 +487,7 @@ function Badge({
         <div
           className={`${
             dark ? '' : ''
-          } absolute top-0 right-0 text-[0.925rem] font-semibold font-outfit h-6 w-6 flex items-center justify-center  text-center rounded-full border-1 text-black border-black bg-orange-300`}
+          } absolute top-0 right-0 text-[0.925rem] font-semibold font-outfit h-5 lg:h-6 w-5 lg:w-6 flex items-center justify-center  text-center rounded-full border-1 text-black border-black bg-orange-300`}
         >
           <span>{count || 0}</span>
         </div>
@@ -459,14 +499,14 @@ function Badge({
   return isHydrated ? (
     <button
       onClick={openCart}
-      className="relative flex items-center justify-center w-10 h-10 focus:ring-primary/5"
+      className="relative flex items-center justify-center w-8 lg:w-10 h-8 lg:h-10 focus:ring-primary/5"
     >
       {BadgeCounter}
     </button>
   ) : (
     <Link
       to="/cart"
-      className="relative flex items-center justify-center w-10 h-10 focus:ring-primary/5"
+      className="relative flex items-center justify-center w-8 lg:w-10 h-8 lg:h-10 focus:ring-primary/5"
     >
       {BadgeCounter}
     </Link>

@@ -135,7 +135,7 @@ shop-pay-button {
   }
 
   .swimlane {
-    @apply grid w-full snap-x snap-mandatory scroll-px-6 grid-flow-col justify-start gap-4 overflow-x-scroll px-6 pb-4;
+    @apply grid w-full snap-x snap-mandatory scroll-px-6 grid-flow-col justify-start gap-4 overflow-x-scroll px-1 pb-4;
   }
 }
 
@@ -203,3 +203,4 @@ shop-pay-button {
     height: 600px;
   }
 }
+
