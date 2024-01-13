@@ -11,23 +11,30 @@ import {
   DropdownSection,
   DropdownItem,
   Button,
+  Input,
 } from '@nextui-org/react';
 import {useWindowScroll, useLocation} from 'react-use';
 import {Disclosure} from '@headlessui/react';
 import {Suspense, useEffect, useMemo, useState} from 'react';
 import {CartForm} from '@shopify/hydrogen';
-import {Bars2Icon, XMarkIcon} from '@heroicons/react/16/solid';
+import {
+  Bars2Icon,
+  XMarkIcon,
+  MagnifyingGlassIcon,
+  UserIcon,
+  UserCircleIcon,
+  ShoppingBagIcon,
+  ShoppingCartIcon,
+} from '@heroicons/react/16/solid';
 
 import {type LayoutQuery} from 'storefrontapi.generated';
 import {
   Drawer,
   useDrawer,
   Text,
-  Input,
   IconLogin,
   IconAccount,
   IconBag,
-  IconSearch,
   Heading,
   IconMenu,
   IconCaret,
@@ -58,7 +65,7 @@ export function Layout({children, layout}: LayoutProps) {
   const {headerMenu, footerMenu} = layout || {};
   return (
     <>
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col min-h-screen lg:pt-8">
         <div className="">
           <a href="#mainContent" className="sr-only">
             Skip to content
@@ -210,7 +217,7 @@ function MobileHeader({
       <div className="flex items-center justify-start w-full gap-4 bg-black">
         <button
           onClick={openMenu}
-          className="relative flex items-center justify-center w-8 h-8"
+          className="relative flex items-center justify-center w-10 h-10"
         >
           <IconMenu />
         </button>
@@ -221,9 +228,9 @@ function MobileHeader({
         >
           <button
             type="submit"
-            className="relative flex items-center justify-center w-8 h-8"
+            className="relative flex items-center justify-center w-10 h-10"
           >
-            <IconSearch />
+            <MagnifyingGlassIcon />
           </button>
           <Input
             className={
@@ -232,7 +239,7 @@ function MobileHeader({
                 : 'focus:border-primary/20'
             }
             type="search"
-            variant="minisearch"
+            variant="underlined"
             placeholder="Search"
             name="q"
           />
@@ -252,7 +259,7 @@ function MobileHeader({
       </Link>
 
       <div className="flex items-center justify-end w-full gap-4">
-        <AccountLink className="relative flex items-center justify-center w-8 h-8" />
+        <AccountLink className="relative flex items-center justify-center w-10 h-10" />
         <CartCount isHome={isHome} openCart={openCart} />
       </div>
     </header>
@@ -288,7 +295,8 @@ function DesktopHeader({
         <div className="flex gap-4">
           <div>
             <Dropdown
-              className="p-0 bg-transparent hover:bg-black/20"
+              backdrop="blur"
+              className="p-0 bg-transparent hover:bg-black/70"
               onClose={() => setMenuOpen(!MenuOpen)}
             >
               <DropdownTrigger>
@@ -309,9 +317,12 @@ function DesktopHeader({
                   )}
                 </Button>
               </DropdownTrigger>
-              <DropdownMenu color="success" className="p-0">
+              <DropdownMenu
+                color="undefined"
+                className="p-0 hover:bg-black/25 w-[200px]"
+              >
                 <DropdownItem
-                  className="bg-black/20 p-5 hover:bg-black/20"
+                  className="bg-black/70 p-5 hover:bg-black/20"
                   key="new"
                 >
                   {(menu?.items || []).map((item) => (
@@ -321,8 +332,8 @@ function DesktopHeader({
                       target={item.target}
                       className={({isActive}) =>
                         isActive
-                          ? 'font-outfit text-lg m-2 font-bold flex items-end underline'
-                          : 'font-outfit text-lg m-2 font-semibold flex items-end'
+                          ? 'font-outfit text-lg m-2 font-bold flex items-end underline hover:text-orange-500 duration-200'
+                          : 'font-outfit text-lg m-2 font-semibold flex items-end hover:text-orange-500 duration-200'
                       }
                     >
                       {item.title}
@@ -350,24 +361,28 @@ function DesktopHeader({
             className="flex items-center gap-2"
           >
             <Input
+              style={{
+                borderWidth: '0px',
+                outline: 'none',
+                color: 'white',
+                boxShadow: 'none',
+              }}
               className={
-                isHome
-                  ? 'focus:border-contrast/20 dark:focus:border-primary/20'
-                  : 'focus:border-primary/20'
+                isHome ? ' text-white font-outfit' : ' text-white font-outfit'
               }
               type="search"
-              variant="minisearch"
-              placeholder="Search"
+              variant="underlined"
+              placeholder="Buscar"
               name="q"
             />
             <button
               type="submit"
-              className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5"
+              className="relative flex items-center justify-center w-10 h-10 focus:ring-primary/5"
             >
-              <IconSearch />
+              <MagnifyingGlassIcon />
             </button>
           </Form>
-          <AccountLink className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5" />
+          <AccountLink className="relative flex items-center justify-center w-10 h-10 focus:ring-primary/5" />
           <CartCount isHome={isHome} openCart={openCart} />
         </div>
       </Navbar>
@@ -381,11 +396,11 @@ function AccountLink({className}: {className?: string}) {
 
   return isLoggedIn ? (
     <Link to="/account" className={className}>
-      <IconAccount />
+      <UserCircleIcon />
     </Link>
   ) : (
     <Link to="/account/login" className={className}>
-      <IconLogin />
+      <UserIcon />
     </Link>
   );
 }
@@ -428,13 +443,11 @@ function Badge({
   const BadgeCounter = useMemo(
     () => (
       <>
-        <IconBag />
+        <ShoppingCartIcon />
         <div
           className={`${
-            dark
-              ? 'text-primary bg-contrast dark:text-contrast dark:bg-primary'
-              : 'text-contrast bg-primary'
-          } absolute bottom-1 right-1 text-[0.625rem] font-medium subpixel-antialiased h-3 min-w-[0.75rem] flex items-center justify-center leading-none text-center rounded-full w-auto px-[0.125rem] pb-px`}
+            dark ? '' : ''
+          } absolute top-0 right-0 text-[0.925rem] font-semibold font-outfit h-6 w-6 flex items-center justify-center  text-center rounded-full border-1 text-black border-black bg-orange-300`}
         >
           <span>{count || 0}</span>
         </div>
@@ -446,14 +459,14 @@ function Badge({
   return isHydrated ? (
     <button
       onClick={openCart}
-      className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5"
+      className="relative flex items-center justify-center w-10 h-10 focus:ring-primary/5"
     >
       {BadgeCounter}
     </button>
   ) : (
     <Link
       to="/cart"
-      className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5"
+      className="relative flex items-center justify-center w-10 h-10 focus:ring-primary/5"
     >
       {BadgeCounter}
     </Link>

@@ -31,7 +31,7 @@ function root({
 }): SeoConfig<Organization> {
   return {
     title: shop?.name,
-    titleTemplate: '%s | Hydrogen Demo Store',
+    titleTemplate: '%s | AM MOTOS',
     description: truncate(shop?.description ?? ''),
     handle: '@shopify',
     url,
@@ -45,11 +45,7 @@ function root({
       name: shop.name,
       logo: shop.brand?.logo?.image?.url,
       sameAs: [
-        'https://twitter.com/shopify',
-        'https://facebook.com/shopify',
-        'https://instagram.com/shopify',
-        'https://youtube.com/shopify',
-        'https://tiktok.com/@shopify',
+        'https://www.linkedin.com/in/agustin-molina-994635138/?locale=es_ES',
       ],
       url,
       potentialAction: {
@@ -64,8 +60,9 @@ function root({
 function home(): SeoConfig<WebPage> {
   return {
     title: 'Home',
-    titleTemplate: '%s | Hydrogen Demo Store',
-    description: 'The best place to buy snowboarding products',
+    titleTemplate: '%s | AM MOTOS',
+    description:
+      'Repuestos importados y accesorios para motos, cuatrimotos y scooters',
     robots: {
       noIndex: false,
       noFollow: false,
@@ -258,7 +255,7 @@ function collection({
     description: truncate(
       collection?.seo?.description ?? collection?.description ?? '',
     ),
-    titleTemplate: '%s | Collection',
+    titleTemplate: '%s | Coleccion',
     media: {
       type: 'image',
       url: collection?.image?.url,
@@ -294,8 +291,8 @@ function collectionsJsonLd({
   return {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: 'Collections',
-    description: 'All collections',
+    name: 'Col',
+    description: 'Todas las colecciones de AM MOTOS',
     url,
     mainEntity: {
       '@type': 'ItemList',
@@ -314,7 +311,7 @@ function listCollections({
   return {
     title: 'Collections',
     titleTemplate: '%s | Collections',
-    description: 'All hydrogen collections',
+    description: 'Todas las colecciones de AM MOTOS',
     url,
     jsonLd: collectionsJsonLd({collections, url}),
   };
