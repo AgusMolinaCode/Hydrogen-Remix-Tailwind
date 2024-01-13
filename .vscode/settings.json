@@ -32,7 +32,7 @@
     "editor.fontSize": 14,
     "files.autoSave": "afterDelay",
     "terminal.integrated.fontSize": 14,
-    "chat.editor.fontSize": 14,
+    "chat.editor.fontSize": 12,
     "editor.fontFamily": "'Monaspace Neon', monospace",
     "notebook.output.fontFamily": "monospace",
     "terminal.integrated.fontFamily": "monospace",

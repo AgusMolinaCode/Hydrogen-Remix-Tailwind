@@ -19,6 +19,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.2",
     "@heroicons/react": "^2.1.1",
+    "@motionone/utils": "^10.17.0",
     "@nextui-org/react": "^2.2.9",
     "@react-aria/interactions": "^3.20.1",
     "@remix-run/react": "2.1.0",
