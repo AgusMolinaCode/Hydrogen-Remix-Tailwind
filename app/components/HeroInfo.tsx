@@ -15,7 +15,7 @@ const HeroInfo = () => {
             <ChevronDoubleRightIcon className="w-8 h-8 ml-2 animate-fade animate-infinite animate-duration-[1500ms]" />
           </Button>
         </Link>
-        <div className="absolute bottom-0 left-0 flex w-full">
+        <div className="absolute bottom-0 left-0 w-full">
           <SliderMenuHeader />
         </div>
       </div>

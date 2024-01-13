@@ -16,7 +16,7 @@ interface ParallaxProps {
   baseVelocity: number;
 }
 
-function ParallaxText({children, baseVelocity = 100}: ParallaxProps) {
+function ParallaxText({children, baseVelocity = 80}: ParallaxProps) {
   const baseX = useMotionValue(0);
   const {scrollY} = useScroll();
   const scrollVelocity = useVelocity(scrollY);
@@ -24,7 +24,7 @@ function ParallaxText({children, baseVelocity = 100}: ParallaxProps) {
     damping: 50,
     stiffness: 400,
   });
-  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
+  const velocityFactor = useTransform(smoothVelocity, [0, 500], [0, 5], {
     clamp: false,
   });
 
@@ -33,7 +33,7 @@ function ParallaxText({children, baseVelocity = 100}: ParallaxProps) {
    * have to replace for wrapping that works for you or dynamically
    * calculate
    */
-  const x = useTransform(baseX, (v) => `${wrap(-20, -45, v)}%`);
+  const x = useTransform(baseX, (v) => `${wrap(-0, -15, v)}%`);
 
   const directionFactor = useRef<number>(1);
   useAnimationFrame((t, delta) => {
@@ -62,12 +62,19 @@ function ParallaxText({children, baseVelocity = 100}: ParallaxProps) {
    * dynamically generated number of children.
    */
   return (
-    <div className="parallax">
-      <motion.div className="scroller" style={{x}}>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
+    <div className="parallax bg-rose-500">
+      <motion.div className="scroller w-full" style={{x}}>
+        {[...Array(18)].map((_, index) => (
+          <p
+            key={_}
+            className="text-lg tracking-normal flex items-center text-gray-600 justify-center m-1 font-Righteous"
+          >
+            {children}{' '}
+            <span className="font-bold text-lg ml-1 font-Righteous tracking-normal text-gray-900">
+              $25.000 pesos
+            </span>
+          </p>
+        ))}
       </motion.div>
     </div>
   );
@@ -76,8 +83,9 @@ function ParallaxText({children, baseVelocity = 100}: ParallaxProps) {
 export default function SliderMenuHeader() {
   return (
     <section>
-      <ParallaxText baseVelocity={-5}>Framer Motion</ParallaxText>
-      <ParallaxText baseVelocity={5}>Scroll velocity</ParallaxText>
+      <ParallaxText baseVelocity={2}>
+        Envios gratis en compras mayores a
+      </ParallaxText>
     </section>
   );
 }
