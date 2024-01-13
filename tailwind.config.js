@@ -83,7 +83,7 @@ export default {
       },
       animation: {
         fadeIn: 'fadeIn .8s ease-in-out',
-        carousel: 'marquee 80s linear infinite',
+        carousel: 'marquee 60s linear infinite',
         blink: 'blink 1.4s both infinite',
       },
     },
