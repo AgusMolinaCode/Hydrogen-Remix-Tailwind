@@ -174,8 +174,8 @@ function MenuMobileNav({
             onClick={onClose}
             className={({isActive}) =>
               isActive
-                ? 'underline font-outfit font-bold'
-                : ' font-outfit font-bold'
+                ? 'font-outfit font-bold text-orange-500'
+                : 'font-outfit font-bold'
             }
           >
             <Text as="span" size="copy" className="text-xl">
@@ -210,7 +210,7 @@ function MobileHeader({
         isHome
           ? 'bg-[#202123]/70 dark:bg-black/20 backdrop-blur-sm text-contrast dark:text-primary shadow-darkHeader'
           : 'bg-[#202123]/70 text-primary'
-      } flex lg:hidden items-center h-nav sticky backdrop-blur-sm z-40 top-0 justify-between w-full leading-none gap-2 px-1 md:px-8`}
+      } flex lg:hidden items-center h-14 sticky backdrop-blur-sm z-40 top-0 justify-between w-full leading-none gap-2 px-1 md:px-8`}
     >
       <div className="flex items-center justify-start w-full gap-4">
         <button

@@ -60,7 +60,7 @@ export function Drawer({
                 leaveFrom="translate-x-0"
                 leaveTo={offScreen[openFrom]}
               >
-                <Dialog.Panel className="w-[300px] max-w-lg text-left align-middle transition-all transform shadow-xl h-screen-dynamic bg-contrast">
+                <Dialog.Panel className="w-[300px] max-w-lg text-left align-middle transition-all transform shadow-xl h-screen-dynamic bg-black/80 backdrop-blur-md border-r-1 border-rose-100 mt-2">
                   <header
                     className={`sticky top-0 flex items-center px-1 h-nav sm:px-8 md:px-12 ${
                       heading ? 'justify-between' : 'justify-end'
@@ -90,6 +90,7 @@ export function Drawer({
                       />
                     </button>
                   </header>
+                  <div className="border-b-1 border-rose-100 mt-1" />
                   {children}
                 </Dialog.Panel>
               </Transition.Child>
