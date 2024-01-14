@@ -426,7 +426,7 @@ function Badge({
   const BadgeCounter = useMemo(
     () => (
       <>
-        <ShoppingCartIcon className="text-white lg:text-black" />
+        <ShoppingCartIcon className="text-white" />
         <div
           className={`${
             dark ? '' : ''

@@ -17,8 +17,13 @@ export function ProductSwimlane({
   ...props
 }: ProductSwimlaneProps) {
   return (
-    <Section heading={title} padding="y" {...props}>
-      <div className="flex flex-wrap hiddenScroll md:pb-8 md:scroll-px-8 lg:scroll-px-12 md:px-8 lg:px-12">
+    <Section
+      heading={title}
+      padding="y"
+      {...props}
+      className="bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-stone-900 via-gray-900 to-neutral-800"
+    >
+      <div className="flex overflow-x-auto">
         {products.nodes.map((product) => (
           <ProductCard
             product={product}
