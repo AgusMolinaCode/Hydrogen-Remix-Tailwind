@@ -69,7 +69,7 @@ export function Drawer({
                     {heading !== null && (
                       <Dialog.Title>
                         <Heading
-                          className="font-racing text-2xl p-2"
+                          className="font-racing text-2xl p-2 text-white"
                           as="span"
                           size="lead"
                           id="cart-contents"

@@ -175,7 +175,7 @@ function MenuMobileNav({
             className={({isActive}) =>
               isActive
                 ? 'font-outfit font-bold text-orange-500'
-                : 'font-outfit font-bold'
+                : 'font-outfit font-bold text-white'
             }
           >
             <Text as="span" size="copy" className="text-xl">
@@ -333,7 +333,7 @@ function DesktopHeader({
               to="/"
               prefetch="intent"
             >
-              | {title} SHOP
+              <h1>| {title} SHOP</h1>
             </Link>
           </div>
         </div>

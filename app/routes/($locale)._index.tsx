@@ -67,7 +67,7 @@ export default function Homepage() {
 
   return (
     <>
-      <div className="h-[590px] md:h-[820px]">
+      <div className="h-[546px] md:h-[820px] bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-stone-900 via-gray-900 to-neutral-800">
         <HeroInfo />
       </div>
 
@@ -82,7 +82,6 @@ export default function Homepage() {
               return (
                 <ProductSwimlane
                   products={{nodes: filteredProducts}}
-                  title="Featured Products"
                   count={4}
                 />
               );
