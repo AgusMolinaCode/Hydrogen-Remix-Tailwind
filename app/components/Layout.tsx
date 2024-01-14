@@ -14,11 +14,9 @@ import {Suspense, useEffect, useMemo, useState} from 'react';
 import {CartForm} from '@shopify/hydrogen';
 import {
   Bars2Icon,
-  XMarkIcon,
   MagnifyingGlassIcon,
   UserIcon,
   UserCircleIcon,
-  ShoppingBagIcon,
   ShoppingCartIcon,
 } from '@heroicons/react/16/solid';
 
@@ -38,6 +36,7 @@ import {
   Cart,
   CartLoading,
   Link,
+  IconSearch,
 } from '~/components';
 import {
   type EnhancedMenu,
@@ -60,7 +59,7 @@ export function Layout({children, layout}: LayoutProps) {
   const {headerMenu, footerMenu} = layout || {};
   return (
     <>
-      <div className="flex flex-col min-h-screen pt-10">
+      <div className="flex flex-col min-h-screen lg:pt-10">
         <div className="">
           <a href="#mainContent" className="sr-only">
             Skip to content
@@ -117,7 +116,7 @@ function Header({title, menu}: {title: string; menu?: EnhancedMenu}) {
         isHome={isHome}
         title={title}
         openCart={openCart}
-        menu={menu}
+        openMenu={openMenu}
       />
     </>
   );
@@ -167,20 +166,23 @@ function MenuMobileNav({
   return (
     <nav className="grid gap-4 p-6 sm:gap-6 sm:px-12 sm:py-8">
       {/* Top level menu items */}
-
       {(menu?.items || []).map((item) => (
-        <Link
-          key={item.id}
-          to={item.to}
-          target={item.target}
-          className={({isActive}) =>
-            isActive
-              ? 'font-outfit text-lg m-2 font-bold flex items-end underline hover:text-orange-500 duration-200'
-              : 'font-outfit text-lg m-2 font-semibold flex items-end hover:text-orange-500 duration-200'
-          }
-        >
-          {item.title}
-        </Link>
+        <span key={item.id} className="block">
+          <Link
+            to={item.to}
+            target={item.target}
+            onClick={onClose}
+            className={({isActive}) =>
+              isActive
+                ? 'underline font-outfit font-bold'
+                : ' font-outfit font-bold'
+            }
+          >
+            <Text as="span" size="copy" className="text-xl">
+              {item.title}
+            </Text>
+          </Link>
+        </span>
       ))}
     </nav>
   );
@@ -190,123 +192,64 @@ function MobileHeader({
   title,
   isHome,
   openCart,
-  menu,
+  openMenu,
 }: {
   title: string;
   isHome: boolean;
   openCart: () => void;
-  menu?: EnhancedMenu;
+  openMenu: () => void;
 }) {
   // useHeaderStyleFix(containerStyle, setContainerStyle, isHome);
 
   const params = useParams();
-  const [MenuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div>
-      <Navbar
-        shouldHideOnScroll
-        maxWidth="full"
-        role="banner"
-        className={
-          'flex h-[5rem] lg:hidden items-center transition duration-300 bg-[#202123]/70 backdrop-blur-sm z-40 top-0 justify-around mx-auto w-full leading-none gap-4 border-b-[0.4px] border-contrast/10 dark:border-contrast/20  fixed left-0 right-0'
-        }
-      >
-        <div className="flex gap-1">
-          <div>
-            <Dropdown
-              backdrop="blur"
-              className="p-0 bg-transparent hover:bg-black/70"
-              onClose={() => setMenuOpen(!MenuOpen)}
-            >
-              <DropdownTrigger>
-                <Button
-                  className="bg-black/20 px-0 border-1 rounded-full border-gray-400/20 hover:bg-black/30 min-w-unit-10 h-unit-10 dropdown"
-                  onClick={() => setMenuOpen(!MenuOpen)}
-                >
-                  {MenuOpen ? (
-                    <Bars2Icon
-                      width={100}
-                      className="w-12 lg:w-20 animate-rotate-y animate-delay-400 text-white"
-                    />
-                  ) : (
-                    <Bars2Icon
-                      width={100}
-                      className="w-12 lg:w-20 animate-rotate-x animate-delay-400 text-white"
-                    />
-                  )}
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu
-                color="undefined"
-                className="p-0 hover:bg-black/25 w-[200px]"
-              >
-                <DropdownItem
-                  className="bg-black/70 p-5 hover:bg-black/20"
-                  key="new"
-                >
-                  {(menu?.items || []).map((item) => (
-                    <Link
-                      key={item.id}
-                      to={item.to}
-                      target={item.target}
-                      className={({isActive}) =>
-                        isActive
-                          ? 'font-outfit text-lg m-2 font-bold flex items-end underline hover:text-orange-500 duration-200'
-                          : 'font-outfit text-lg m-2 font-semibold flex items-end hover:text-orange-500 duration-200'
-                      }
-                    >
-                      {item.title}
-                    </Link>
-                  ))}
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          </div>
-          <div className="flex items-center">
-            {/* <p className="font-outfit font-bold text-lg text-gray-400">Menu </p> */}
-            <Link
-              className="font-semibold font-racing flex text-lg text-rose-100"
-              to="/"
-              prefetch="intent"
-            >
-              {title}
-            </Link>
-          </div>
-        </div>
-        <div className="flex items-center gap-1">
-          <Form
-            method="get"
-            action={params.locale ? `/${params.locale}/search` : '/search'}
-            className="flex items-center gap-2"
+    <header
+      role="banner"
+      className={`${
+        isHome
+          ? 'bg-[#202123]/70 dark:bg-black/20 backdrop-blur-sm text-contrast dark:text-primary shadow-darkHeader'
+          : 'bg-[#202123]/70 text-primary'
+      } flex lg:hidden items-center h-nav sticky backdrop-blur-sm z-40 top-0 justify-between w-full leading-none gap-2 px-1 md:px-8`}
+    >
+      <div className="flex items-center justify-start w-full gap-4">
+        <button
+          onClick={openMenu}
+          className="relative flex items-center justify-center w-10 h-10 text-white border rounded-full"
+        >
+          <IconMenu />
+        </button>
+        <Form
+          method="get"
+          action={params.locale ? `/${params.locale}/search` : '/search'}
+          className="items-center gap-2 sm:flex"
+        >
+          <button
+            type="submit"
+            className="relative flex items-center justify-center w-8 h-8"
           >
-            {/* <Input
-              style={{
-                borderWidth: '0px',
-                outline: 'none',
-                color: 'white',
-                boxShadow: 'none',
-              }}
-              className={
-                isHome ? ' text-white font-outfit' : ' text-white font-outfit'
-              }
-              type="search"
-              variant="underlined"
-              placeholder="Buscar"
-              name="q"
-            /> */}
-            <button
-              type="submit"
-              className="relative flex items-center justify-center w-8 lg:w-10 h-8 lg:h-10 focus:ring-primary/5"
-            >
-              <MagnifyingGlassIcon />
-            </button>
-          </Form>
-          <AccountLink className="relative flex items-center justify-center w-8 lg:w-10 h-8 lg:h-10 focus:ring-primary/5" />
-          <CartCount isHome={isHome} openCart={openCart} />
-        </div>
-      </Navbar>
-    </div>
+            <MagnifyingGlassIcon className="text-white" />
+          </button>
+        </Form>
+      </div>
+
+      <Link
+        className="flex items-center self-stretch leading-[3rem] md:leading-[4rem] justify-center flex-grow w-full h-full"
+        to="/"
+      >
+        <Heading
+          className="font-bold text-center font-racing text-2xl text-rose-100 leading-none"
+          as={isHome ? 'h1' : 'h2'}
+        >
+          {title}
+        </Heading>
+      </Link>
+
+      <div className="flex items-center justify-end w-full gap-4">
+        <AccountLink className="relative flex items-center justify-center w-8 h-8 text-white" />
+        <CartCount isHome={isHome} openCart={openCart} />
+      </div>
+    </header>
   );
 }
 
@@ -483,7 +426,7 @@ function Badge({
   const BadgeCounter = useMemo(
     () => (
       <>
-        <ShoppingCartIcon />
+        <ShoppingCartIcon className="text-white lg:text-black" />
         <div
           className={`${
             dark ? '' : ''

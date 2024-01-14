@@ -33,7 +33,7 @@ function ParallaxText({children, baseVelocity = 80}: ParallaxProps) {
    * have to replace for wrapping that works for you or dynamically
    * calculate
    */
-  const x = useTransform(baseX, (v) => `${wrap(-0, -15, v)}%`);
+  const x = useTransform(baseX, (v) => `${wrap(-0, -200, v)}%`);
 
   const directionFactor = useRef<number>(1);
   useAnimationFrame((t, delta) => {
@@ -64,13 +64,13 @@ function ParallaxText({children, baseVelocity = 80}: ParallaxProps) {
   return (
     <div className="parallax bg-rose-500">
       <motion.div className="scroller w-full" style={{x}}>
-        {[...Array(18)].map((_, index) => (
+        {[...Array(30)].map((_, index) => (
           <p
             key={_}
-            className="text-lg tracking-normal flex items-center text-gray-600 justify-center m-1 font-Righteous"
+            className="text-base sm:text-lg tracking-normal flex items-center text-gray-600 justify-center m-1 font-Righteous"
           >
             {children}{' '}
-            <span className="font-bold text-lg ml-1 font-Righteous tracking-normal text-gray-900">
+            <span className="font-bold text-base sm:text-lg ml-1 font-Righteous tracking-normal text-gray-900">
               $25.000 pesos
             </span>
           </p>
@@ -83,7 +83,7 @@ function ParallaxText({children, baseVelocity = 80}: ParallaxProps) {
 export default function SliderMenuHeader() {
   return (
     <section>
-      <ParallaxText baseVelocity={2}>
+      <ParallaxText baseVelocity={6}>
         Envios gratis en compras mayores a
       </ParallaxText>
     </section>
