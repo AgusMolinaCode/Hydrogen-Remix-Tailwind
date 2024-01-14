@@ -22,7 +22,11 @@ export function ProductSwimlane({
     >
       <div className="swimlane">
         {products.nodes.map((product) => (
-          <ProductCard product={product} key={product.id} className="w-80" />
+          <ProductCard
+            product={product}
+            key={product.id}
+            className="snap-start w-80"
+          />
         ))}
       </div>
     </Section>
