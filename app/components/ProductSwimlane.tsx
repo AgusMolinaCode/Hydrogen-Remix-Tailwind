@@ -2,7 +2,6 @@ import React, {useRef, useState} from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {Scrollbar} from 'swiper/modules';
 
-import '../styles/swiper/style.css';
 import 'swiper/css/scrollbar';
 
 import type {HomepageFeaturedProductsQuery} from 'storefrontapi.generated';
@@ -22,15 +21,15 @@ export function ProductSwimlane({
   ...props
 }: ProductSwimlaneProps) {
   return (
-    <div className="pt-2 md:pt-8 px-1">
+    <Section padding="card" display="flex" className="pt-8 px-1">
       <Swiper
         modules={[Scrollbar]}
         slidesPerView={1}
-        spaceBetween={2}
+        spaceBetween={3}
         grabCursor={true}
-        style={{height: '500px'}}
+        style={{height: '600px'}}
         breakpoints={{
-          420: {
+          550: {
             slidesPerView: 2,
             spaceBetween: 20,
           },
@@ -52,6 +51,6 @@ export function ProductSwimlane({
           ))}
         </div>
       </Swiper>
-    </div>
+    </Section>
   );
 }

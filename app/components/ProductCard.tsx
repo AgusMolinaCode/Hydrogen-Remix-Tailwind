@@ -63,8 +63,8 @@ export function ProductCard({
           <div className="">
             {image && (
               <Image
-                className="w-full fadeIn p-3 md:p-0 rounded-xl"
-                sizes="(min-width: 64em) 25vw, (min-width: 48em) 30vw, 45vw"
+                className="object-fill fadeIn p-3 md:p-0 rounded-xl h-[400px] md:h-full w-[180px] md:w-full"
+                // sizes="(min-width: 64em) 25vw, (min-width: 48em) 30vw, 45vw"
                 aspectRatio="3/4"
                 data={image}
                 alt={image.altText || `Picture of ${product.title}`}

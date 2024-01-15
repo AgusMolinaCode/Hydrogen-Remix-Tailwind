@@ -20,7 +20,6 @@
   --height-nav: 3rem;
   --screen-height: 100vh;
   --screen-height-dynamic: 100vh;
-  
 
   @media (min-width: 32em) {
     --height-nav: 4rem;
@@ -191,7 +190,7 @@ shop-pay-button {
   background-position: center;
   background-repeat: no-repeat;
   width: 100%;
-  height: 878px;
+  height: 876px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -201,7 +200,7 @@ shop-pay-button {
 
 @media (max-width: 768px) {
   .hero-info {
-    height: 600px;
+    height: 601px;
   }
 }
 
@@ -240,42 +239,45 @@ shop-pay-button {
 }
 
 .swiper-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    display: flex;
-    transition-property: transform;
-    transition-timing-function: var(--swiper-wrapper-transition-timing-function,initial);
-    box-sizing: content-box;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: flex;
+  transition-property: transform;
+  transition-timing-function: var(
+    --swiper-wrapper-transition-timing-function,
+    initial
+  );
+  box-sizing: content-box;
 }
 
 .swiper-horizontal {
-    touch-action: pan-y;
+  touch-action: pan-y;
 }
 
 .swiper {
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-    overflow: hidden;
-    overflow: clip;
-    list-style: none;
-    padding: 0;
-    z-index: 1;
-    display: block;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  overflow: hidden;
+  overflow: clip;
+  list-style: none;
+  padding: 0;
+  z-index: 1;
+  display: block;
 }
 
 .swiper-backface-hidden .swiper-slide {
-    transform: translateZ(0);
-    backface-visibility: hidden;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .swiper-slide {
-    flex-shrink: 0;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    transition-property: transform;
-    display: block;
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition-property: transform;
+  display: block;
 }

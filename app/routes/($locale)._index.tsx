@@ -67,7 +67,7 @@ export default function Homepage() {
 
   return (
     <>
-      <div className="h-[546px] md:h-[820px] bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-stone-900 via-gray-900 to-neutral-800">
+      <div className="h-[545px] md:h-[820px] bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-stone-900 via-gray-900 to-neutral-800">
         <HeroInfo />
       </div>
 
@@ -76,14 +76,22 @@ export default function Homepage() {
           <Await resolve={featuredProducts}>
             {({products}) => {
               if (!products?.nodes) return <></>;
-              const filteredProducts = products.nodes.filter(
+              let filteredProducts = products.nodes.filter(
                 (product) => !product.handle.startsWith('ktm'),
               );
+
+              // Ordenar los productos de más reciente a más antiguo
+              filteredProducts = filteredProducts.sort(
+                (a, b) =>
+                  new Date(b.publishedAt).getTime() -
+                  new Date(a.publishedAt).getTime(),
+              );
+
+              // Obtener los primeros 10 productos
+              const latestProducts = filteredProducts.slice(0, 10);
+
               return (
-                <ProductSwimlane
-                  products={{nodes: filteredProducts}}
-                  count={4}
-                />
+                <ProductSwimlane products={{nodes: latestProducts}} count={4} />
               );
             }}
           </Await>
