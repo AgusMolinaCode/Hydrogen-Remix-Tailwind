@@ -25,9 +25,6 @@ import {
   Drawer,
   useDrawer,
   Text,
-  IconLogin,
-  IconAccount,
-  IconBag,
   Heading,
   IconMenu,
   IconCaret,
@@ -36,7 +33,6 @@ import {
   Cart,
   CartLoading,
   Link,
-  IconSearch,
 } from '~/components';
 import {
   type EnhancedMenu,
@@ -59,7 +55,7 @@ export function Layout({children, layout}: LayoutProps) {
   const {headerMenu, footerMenu} = layout || {};
   return (
     <>
-      <div className="flex flex-col min-h-screen lg:pt-10">
+      <div className="flex flex-col lg:pt-10 pb-10">
         <div className="">
           <a href="#mainContent" className="sr-only">
             Skip to content
@@ -68,11 +64,11 @@ export function Layout({children, layout}: LayoutProps) {
         {headerMenu && layout?.shop.name && (
           <Header title={layout.shop.name} menu={headerMenu} />
         )}
-        <main role="main" id="mainContent" className="flex-grow">
+        <main role="main" id="mainContent" className="">
           {children}
         </main>
       </div>
-      {footerMenu && <Footer menu={footerMenu} />}
+      {/* {footerMenu && <Footer menu={footerMenu} />} */}
     </>
   );
 }

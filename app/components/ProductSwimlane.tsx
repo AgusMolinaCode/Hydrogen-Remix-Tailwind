@@ -1,3 +1,10 @@
+import React, {useRef, useState} from 'react';
+import {Swiper, SwiperSlide} from 'swiper/react';
+import {Scrollbar} from 'swiper/modules';
+
+import '../styles/swiper/style.css';
+import 'swiper/css/scrollbar';
+
 import type {HomepageFeaturedProductsQuery} from 'storefrontapi.generated';
 import {ProductCard, Section} from '~/components';
 
@@ -15,20 +22,36 @@ export function ProductSwimlane({
   ...props
 }: ProductSwimlaneProps) {
   return (
-    <Section
-      padding="y"
-      {...props}
-      className="bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-stone-900 via-gray-900 to-neutral-800"
-    >
-      <div className="swimlane">
-        {products.nodes.map((product) => (
-          <ProductCard
-            product={product}
-            key={product.id}
-            className="snap-start w-80"
-          />
-        ))}
-      </div>
-    </Section>
+    <div className="pt-2 md:pt-8 px-1">
+      <Swiper
+        modules={[Scrollbar]}
+        slidesPerView={1}
+        spaceBetween={2}
+        grabCursor={true}
+        style={{height: '500px'}}
+        breakpoints={{
+          420: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+          1300: {
+            slidesPerView: 5,
+            spaceBetween: 7,
+          },
+        }}
+      >
+        <div className="flex">
+          {products.nodes.map((product) => (
+            <SwiperSlide key={`slide-${product.id}`} className="">
+              <ProductCard product={product} key={product.id} />
+            </SwiperSlide>
+          ))}
+        </div>
+      </Swiper>
+    </div>
   );
 }

@@ -19,7 +19,7 @@ export function FeaturedCollections({
   const collectionsWithImage = collections.nodes.filter((item) => item.image);
 
   return (
-    <Section {...props} heading={title}>
+    <Section {...props} heading={title} className="lg:pt-20 lg:mt-28">
       <Grid items={collectionsWithImage.length}>
         {collectionsWithImage.map((collection) => {
           return (
