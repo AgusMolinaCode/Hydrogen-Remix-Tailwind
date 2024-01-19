@@ -205,15 +205,15 @@ export default function OrderRoute() {
                     colSpan={3}
                     className="hidden pt-6 pl-6 pr-3 font-normal text-right sm:table-cell md:pl-0"
                   >
-                    <Text>Subtotal</Text>
+                    <Text className="text-white font-bold">Subtotal</Text>
                   </th>
                   <th
                     scope="row"
                     className="pt-6 pr-3 font-normal text-left sm:hidden"
                   >
-                    <Text>Subtotal</Text>
+                    <Text className="text-white font-bold">Subtotal</Text>
                   </th>
-                  <td className="pt-6 pl-3 pr-4 text-right md:pr-3">
+                  <td className="pt-6 pl-3 pr-4 text-right md:pr-3 text-white">
                     <Money data={order.subtotalPriceV2!} />
                   </td>
                 </tr>

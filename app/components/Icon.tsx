@@ -233,7 +233,7 @@ export function IconXMark({
 
 export function IconRemove(props: IconProps) {
   return (
-    <Icon {...props} fill="transparent" stroke={props.stroke || 'currentColor'}>
+    <Icon {...props} fill="transparent" stroke={props.stroke || '#ffffff'}>
       <title>Remove</title>
       <path
         d="M4 6H16"

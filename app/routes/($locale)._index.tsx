@@ -34,7 +34,7 @@ export async function loader({params, context}: LoaderFunctionArgs) {
     shop,
     featuredCollection: context.storefront.query(FEATURED_COLLECTION_QUERY, {
       variables: {
-        handle: 'home-hero',
+        handle: 'Featured',
         country,
         language,
       },
@@ -76,27 +76,24 @@ export default function Homepage() {
           <Await resolve={featuredProducts}>
             {({products}) => {
               if (!products?.nodes) return <></>;
-              let filteredProducts = products.nodes.filter(
-                (product) => !product.handle.startsWith('ktm'),
+              const filteredProducts = products.nodes.filter(
+                (product) =>
+                  product.collections.edges.length > 0 &&
+                  product.collections.edges[0].node.title === 'Featured',
               );
-
-              // Ordenar los productos de más reciente a más antiguo
-              filteredProducts = filteredProducts.sort(
-                (a, b) =>
-                  new Date(b.publishedAt).getTime() -
-                  new Date(a.publishedAt).getTime(),
-              );
-
-              // Obtener los primeros 10 productos
-              const latestProducts = filteredProducts.slice(0, 10);
 
               return (
-                <ProductSwimlane products={{nodes: latestProducts}} count={4} />
+                <ProductSwimlane
+                  products={{nodes: filteredProducts}}
+                  count={4}
+                />
               );
             }}
           </Await>
         </Suspense>
       )}
+
+      {/* Creamos el FeaturedCollection para traer una sola coleccion */}
 
       {featuredCollections && (
         <Suspense>
@@ -169,11 +166,10 @@ const HOMEPAGE_SEO_QUERY = `#graphql
   ${COLLECTION_CONTENT_FRAGMENT}
 ` as const;
 
-// @see: https://shopify.dev/api/storefront/current/queries/products
 export const HOMEPAGE_FEATURED_PRODUCTS_QUERY = `#graphql
   query homepageFeaturedProducts($country: CountryCode, $language: LanguageCode)
   @inContext(country: $country, language: $language) {
-    products(first: 10) {
+    products(first: 12) {
       nodes {
         ...ProductCard
       }
@@ -182,7 +178,6 @@ export const HOMEPAGE_FEATURED_PRODUCTS_QUERY = `#graphql
   ${PRODUCT_CARD_FRAGMENT}
 ` as const;
 
-// @see: https://shopify.dev/api/storefront/current/queries/collections
 export const FEATURED_COLLECTIONS_QUERY = `#graphql
   query homepageFeaturedCollections($country: CountryCode, $language: LanguageCode)
   @inContext(country: $country, language: $language) {

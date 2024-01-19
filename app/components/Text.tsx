@@ -16,7 +16,7 @@ export function Text({
   className?: string;
   color?: 'default' | 'primary' | 'subtle' | 'notice' | 'contrast';
   format?: boolean;
-  size?: 'lead' | 'copy' | 'fine';
+  size?: 'lead' | 'copy' | 'fine' | 'Thirdxl';
   width?: 'default' | 'narrow' | 'wide';
   children: React.ReactNode;
   [key: string]: any;
@@ -33,6 +33,7 @@ export function Text({
     lead: 'text-lead font-medium',
     copy: 'text-copy',
     fine: 'text-fine subpixel-antialiased',
+    Thirdxl: 'text-3xl',
   };
 
   const widths: Record<string, string> = {

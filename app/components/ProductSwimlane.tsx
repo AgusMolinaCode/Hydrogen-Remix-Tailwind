@@ -21,13 +21,16 @@ export function ProductSwimlane({
   ...props
 }: ProductSwimlaneProps) {
   return (
-    <Section padding="card" display="flex" className="pt-8 px-1">
+    <Section padding="card" display="flex" className="pt-4 sm:pt-8 px-1">
       <Swiper
         modules={[Scrollbar]}
         slidesPerView={1}
         spaceBetween={3}
         grabCursor={true}
-        style={{height: '600px'}}
+        style={{
+          height: '600px',
+          width: '100%',
+        }}
         breakpoints={{
           550: {
             slidesPerView: 2,
@@ -38,7 +41,7 @@ export function ProductSwimlane({
             spaceBetween: 20,
           },
           1300: {
-            slidesPerView: 5,
+            slidesPerView: 4,
             spaceBetween: 7,
           },
         }}

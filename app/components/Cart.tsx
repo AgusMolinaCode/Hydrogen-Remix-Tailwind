@@ -9,6 +9,7 @@ import {
   useOptimisticData,
   OptimisticInput,
 } from '@shopify/hydrogen';
+import {MinusCircleIcon, PlusCircleIcon} from '@heroicons/react/16/solid';
 import type {
   Cart as CartType,
   CartCost,
@@ -25,6 +26,7 @@ import {
   FeaturedProducts,
 } from '~/components';
 import {getInputStyleClasses} from '~/lib/utils';
+import {Input} from '@nextui-org/react';
 
 type Layouts = 'page' | 'drawer';
 
@@ -57,7 +59,7 @@ export function CartDetails({
   // @todo: get optimistic cart cost
   const cartHasItems = !!cart && cart.totalQuantity > 0;
   const container = {
-    drawer: 'grid grid-cols-1 h-screen-no-nav grid-rows-[1fr_auto]',
+    drawer: 'grid grid-cols-1 h-screen-no-nav grid-rows-[1fr_auto] mt-2',
     page: 'w-full pb-12 grid md:grid-cols-2 md:items-start gap-8 md:gap-8 lg:gap-12',
   };
 
@@ -100,7 +102,7 @@ function CartDiscounts({
               <button>
                 <IconRemove
                   aria-hidden="true"
-                  style={{height: 18, marginRight: 4}}
+                  style={{height: 18, marginRight: 4, color: 'white'}}
                 />
               </button>
             </UpdateDiscountForm>
@@ -117,14 +119,20 @@ function CartDiscounts({
             'items-center gap-4 justify-between text-copy',
           )}
         >
-          <input
-            className={getInputStyleClasses()}
+          <Input
+            classNames={{
+              inputWrapper:
+                'relative w-full inline-flex tap-highlight-transparent shadow-sm px-3 bg-default-100 data-[hover=false]:bg-default-200 group-data-[focus=false]:bg-default-100 min-h-unit-10 flex-col items-start justify-center gap-0 transition-background motion-reduce:transition-none !duration-150 outline-none group-data-[focus-visible=false]:z-10 group-data-[focus-visible=false]:ring-2 group-data-[focus-visible=false]:ring-transparent group-data-[focus-visible=false]:ring-offset-2 group-data-[focus-visible=false]:ring-offset-background py-2 rounded-2xl overflow-hidden h-8',
+              input:
+                'border-transparent focus:ring-transparent focus:border-transparent focus:outline-none focus:ring-0 focus font-outfit font-bold',
+            }}
+            variant="flat"
             type="text"
             name="discountCode"
-            placeholder="Discount code"
+            placeholder="Codigo de descuento"
           />
-          <button className="flex justify-end font-medium whitespace-nowrap">
-            Apply Discount
+          <button className="flex justify-end whitespace-nowrap text-gray-300 font-semibold font-outfit">
+            Aplicar descuento
           </button>
         </div>
       </UpdateDiscountForm>
@@ -167,7 +175,7 @@ function CartLines({
     y > 0 ? 'border-t' : '',
     layout === 'page'
       ? 'flex-grow md:translate-y-4'
-      : 'px-6 pb-6 sm-max:pt-2 overflow-auto transition md:px-12',
+      : 'px-1 pb-6 pt-1 sm-max:pt-2 overflow-auto transition md:px-2',
   ]);
 
   return (
@@ -176,7 +184,7 @@ function CartLines({
       aria-labelledby="cart-contents"
       className={className}
     >
-      <ul className="grid gap-6 md:gap-10">
+      <ul className="grid gap-2 md:gap-4">
         {currentLines.map((line) => (
           <CartLineItem key={line.id} line={line as CartLine} />
         ))}
@@ -189,10 +197,10 @@ function CartCheckoutActions({checkoutUrl}: {checkoutUrl: string}) {
   if (!checkoutUrl) return null;
 
   return (
-    <div className="flex flex-col mt-2">
+    <div className="flex flex-col mt-2 font-outfit">
       <a href={checkoutUrl} target="_self">
         <Button as="span" width="full">
-          Continue to Checkout
+          Finalizar compra
         </Button>
       </a>
       {/* @todo: <CartShopPayButton cart={cart} /> */}
@@ -210,7 +218,7 @@ function CartSummary({
   layout: Layouts;
 }) {
   const summary = {
-    drawer: 'grid gap-4 p-6 border-t md:px-12',
+    drawer: 'grid gap-4 p-6 border-t px-3',
     page: 'sticky top-nav grid gap-6 p-4 md:px-6 md:translate-y-4 bg-primary/5 rounded w-full',
   };
 
@@ -221,8 +229,14 @@ function CartSummary({
       </h2>
       <dl className="grid">
         <div className="flex items-center justify-between font-medium">
-          <Text as="dt">Subtotal</Text>
-          <Text as="dd" data-test="subtotal">
+          <Text className="text-gray-300 font-outfit font-bold" as="dt">
+            Subtotal
+          </Text>
+          <Text
+            className="font-bold text-xl text-white font-outfit"
+            as="dd"
+            data-test="subtotal"
+          >
             {cost?.subtotalAmount?.amount ? (
               <Money data={cost?.subtotalAmount} />
             ) : (
@@ -276,7 +290,10 @@ function CartLineItem({line}: {line: CartLine}) {
         <div className="grid gap-2">
           <Heading as="h3" size="copy">
             {merchandise?.product?.handle ? (
-              <Link to={`/products/${merchandise.product.handle}`}>
+              <Link
+                to={`/products/${merchandise.product.handle}`}
+                className="text-white font-bold font-outfit uppercase"
+              >
                 {merchandise?.product?.title || ''}
               </Link>
             ) : (
@@ -286,7 +303,11 @@ function CartLineItem({line}: {line: CartLine}) {
 
           <div className="grid pb-2">
             {(merchandise?.selectedOptions || []).map((option) => (
-              <Text color="subtle" key={option.name}>
+              <Text
+                color="subtle"
+                key={option.name}
+                className="text-gray-300 font-semibold font-outfit text-sm"
+              >
                 {option.name}: {option.value}
               </Text>
             ))}
@@ -299,7 +320,7 @@ function CartLineItem({line}: {line: CartLine}) {
             <ItemRemoveButton lineId={id} />
           </div>
         </div>
-        <Text>
+        <Text className="text-white font-bold font-outfit">
           <CartLinePrice line={line} as="span" />
         </Text>
       </div>
@@ -354,7 +375,9 @@ function CartLineQuantityAdjust({line}: {line: CartLine}) {
             value={prevQuantity}
             disabled={optimisticQuantity <= 1}
           >
-            <span>&#8722;</span>
+            <span className="flex items-center justify-center">
+              <MinusCircleIcon className="text-gray-300" width={20} />
+            </span>
             <OptimisticInput
               id={optimisticId}
               data={{quantity: prevQuantity}}
@@ -362,7 +385,10 @@ function CartLineQuantityAdjust({line}: {line: CartLine}) {
           </button>
         </UpdateCartButton>
 
-        <div className="px-2 text-center" data-test="item-quantity">
+        <div
+          className="px-2 text-center text-white font-bold text-xl"
+          data-test="item-quantity"
+        >
           {optimisticQuantity}
         </div>
 
@@ -373,7 +399,9 @@ function CartLineQuantityAdjust({line}: {line: CartLine}) {
             value={nextQuantity}
             aria-label="Increase quantity"
           >
-            <span>&#43;</span>
+            <span className="flex items-center justify-center">
+              <PlusCircleIcon className="text-gray-300" width={20} />
+            </span>
             <OptimisticInput
               id={optimisticId}
               data={{quantity: nextQuantity}}

@@ -44,6 +44,13 @@ export const PRODUCT_CARD_FRAGMENT = `#graphql
     publishedAt
     handle
     vendor
+    collections(first: 1) {
+      edges {
+        node {
+          title
+        }
+      }
+    }
     variants(first: 1) {
       nodes {
         id
@@ -61,14 +68,6 @@ export const PRODUCT_CARD_FRAGMENT = `#graphql
         compareAtPrice {
           amount
           currencyCode
-        }
-        selectedOptions {
-          name
-          value
-        }
-        product {
-          handle
-          title
         }
       }
     }

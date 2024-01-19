@@ -55,7 +55,7 @@ export function Layout({children, layout}: LayoutProps) {
   const {headerMenu, footerMenu} = layout || {};
   return (
     <>
-      <div className="flex flex-col lg:pt-10 pb-10">
+      <div className="flex flex-col lg:pt-10 pb-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-900 to-gray-600 bg-gradient-to-r">
         <div className="">
           <a href="#mainContent" className="sr-only">
             Skip to content
@@ -349,6 +349,9 @@ function DesktopHeader({
               className={
                 isHome ? ' text-white font-outfit' : ' text-white font-outfit'
               }
+              classNames={{
+                input: 'text-white font-outfit placeholder:text-white',
+              }}
               type="search"
               variant="underlined"
               placeholder="Buscar"
@@ -358,7 +361,7 @@ function DesktopHeader({
               type="submit"
               className="relative flex items-center justify-center w-10 h-10 focus:ring-primary/5"
             >
-              <MagnifyingGlassIcon />
+              <MagnifyingGlassIcon className="text-white" />
             </button>
           </Form>
           <AccountLink className="relative flex items-center justify-center w-10 h-10 focus:ring-primary/5" />
@@ -375,11 +378,11 @@ function AccountLink({className}: {className?: string}) {
 
   return isLoggedIn ? (
     <Link to="/account" className={className}>
-      <UserCircleIcon />
+      <UserCircleIcon className="text-white" />
     </Link>
   ) : (
     <Link to="/account/login" className={className}>
-      <UserIcon />
+      <UserIcon className="text-white" />
     </Link>
   );
 }

@@ -64,9 +64,9 @@ function ParallaxText({children, baseVelocity = 80}: ParallaxProps) {
   return (
     <div className="parallax bg-rose-500">
       <motion.div className="scroller w-full" style={{x}}>
-        {[...Array(30)].map((_, index) => (
+        {[...Array(30)].map((_, i) => (
           <p
-            key={_}
+            key={i}
             className="text-base sm:text-lg tracking-normal flex items-center text-gray-600 justify-center m-1 font-Righteous"
           >
             {children}{' '}

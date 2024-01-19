@@ -1,5 +1,6 @@
 import {Fragment, useState} from 'react';
 import {Dialog, Transition} from '@headlessui/react';
+import {XCircleIcon} from '@heroicons/react/16/solid';
 
 import {Heading, IconClose} from '~/components';
 
@@ -60,7 +61,7 @@ export function Drawer({
                 leaveFrom="translate-x-0"
                 leaveTo={offScreen[openFrom]}
               >
-                <Dialog.Panel className="w-[300px] max-w-lg text-left align-middle transition-all transform shadow-xl h-screen-dynamic bg-black/80 backdrop-blur-md border-r-1 border-rose-100 mt-2">
+                <Dialog.Panel className="w-[380px] md:w-[410px] max-w-lg text-left align-middle transition-all transform shadow-xl h-screen-dynamic bg-black/80 backdrop-blur-md border-r-1 border-rose-100 mt-2">
                   <header
                     className={`sticky top-0 flex items-center px-1 h-nav sm:px-8 md:px-12 ${
                       heading ? 'justify-between' : 'justify-end'
@@ -74,7 +75,8 @@ export function Drawer({
                           size="lead"
                           id="cart-contents"
                         >
-                          {heading}
+                          {/* {heading} */}
+                          Productos
                         </Heading>
                       </Dialog.Title>
                     )}
@@ -84,9 +86,14 @@ export function Drawer({
                       onClick={onClose}
                       data-test="close-cart"
                     >
-                      <IconClose
+                      {/* <IconClose
                         className="p-1 rounded-full border"
                         aria-label="Close panel"
+                      /> */}
+                      <XCircleIcon
+                        className="rounded-full border text-white"
+                        aria-label="Close panel"
+                        width={40}
                       />
                     </button>
                   </header>
