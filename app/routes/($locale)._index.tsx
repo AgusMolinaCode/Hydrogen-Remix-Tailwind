@@ -4,7 +4,6 @@ import {Await, useLoaderData} from '@remix-run/react';
 import {AnalyticsPageType} from '@shopify/hydrogen';
 
 import {ProductSwimlane, FeaturedCollections} from '~/components';
-import {HomeFeaturedCollection} from '~/components/HomeFeaturedCollection';
 import {MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import {seoPayload} from '~/lib/seo.server';
 import {routeHeaders} from '~/data/cache';
@@ -107,14 +106,22 @@ export default function Homepage() {
             {({products}) => {
               if (!products?.nodes) return <></>;
               const filteredProducts = products.nodes.filter(
-                (product: {vendor: string}) => product.vendor === 'EKS',
+                (product: {vendor: string}) => product.vendor === '100%',
               );
 
               return (
-                <ProductSwimlaneTwo
-                  products={{nodes: filteredProducts}}
-                  count={4}
-                />
+                <div>
+                  <h1 className="flex justify-center text-rose-100 text-4xl sm:text-5xl font-racing font-semibold mx-auto items-center gap-2 pt-8">
+                    productos
+                    <span className="font-racing text-5xl sm:text-6xl text-center font-bold text-red-300">
+                      {filteredProducts[0].vendor}
+                    </span>
+                  </h1>
+                  <ProductSwimlaneTwo
+                    products={{nodes: filteredProducts}}
+                    count={4}
+                  />
+                </div>
               );
             }}
           </Await>
@@ -192,7 +199,7 @@ const HOMEPAGE_SEO_QUERY = `#graphql
 export const HOMEPAGE_FEATURED_PRODUCTS_QUERY = `#graphql
   query homepageFeaturedProducts($country: CountryCode, $language: LanguageCode)
   @inContext(country: $country, language: $language) {
-    products(first: 30,sortKey: UPDATED_AT) {
+    products(first: 40,sortKey: UPDATED_AT) {
       nodes {
         ...ProductCard
       }
@@ -205,7 +212,7 @@ export const FEATURED_COLLECTIONS_QUERY = `#graphql
   query homepageFeaturedCollections($country: CountryCode, $language: LanguageCode)
   @inContext(country: $country, language: $language) {
     collections(
-      first: 4,
+      first: 6,
       sortKey: UPDATED_AT
     ) {
       nodes {

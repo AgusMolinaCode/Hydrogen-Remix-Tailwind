@@ -1,4 +1,5 @@
 import {Swiper, SwiperSlide} from 'swiper/react';
+import {Autoplay, Pagination} from 'swiper/modules';
 
 import 'swiper/css/scrollbar';
 
@@ -23,6 +24,11 @@ export function ProductSwimlaneTwo({
   return (
     <Section padding="card" display="flex" className="pt-4 sm:pt-14 px-1">
       <Swiper
+        modules={[Autoplay, Pagination]}
+        autoplay={{
+          delay: 2000,
+          disableOnInteraction: false,
+        }}
         slidesPerView={1}
         spaceBetween={3}
         grabCursor={true}

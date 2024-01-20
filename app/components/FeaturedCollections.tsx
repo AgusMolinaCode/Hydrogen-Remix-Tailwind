@@ -21,31 +21,42 @@ export function FeaturedCollections({
   return (
     <Section
       {...props}
-      heading={title}
+      // heading={title}
       padding="card"
       display="none"
-      className=""
+      className="pt-16 pb-10"
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 content-center mx-auto gap-3 rounded-2xl">
-        {collectionsWithImage.map((collection) => {
-          return (
-            <Link key={collection.id} to={`/collections/${collection.handle}`}>
-              <div className="grid">
-                <div className="card-image bg-primary/5 aspect-[3/2]">
-                  {collection?.image && (
-                    <Image
-                      alt={`Image of ${collection.title}`}
-                      data={collection.image}
-                      sizes="(max-width: 32em) 100vw, 33vw"
-                      aspectRatio="3/2"
-                    />
-                  )}
+      <div>
+        <h1 className="font-racing text-5xl sm:text-6xl text-center text-rose-100">
+          COLECCIONES
+        </h1>
+        <h2 className="font-racing text-3xl sm:text-4xl text-center text-gray-400 pb-12">
+          Descubre nuestras colecciones
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 content-center mx-auto gap-4 rounded-3xl">
+          {collectionsWithImage.map((collection) => {
+            return (
+              <Link
+                key={collection.id}
+                to={`/collections/${collection.handle}`}
+              >
+                <div className="grid">
+                  <div className="card-image bg-primary/5 aspect-[3/2]">
+                    {collection?.image && (
+                      <Image
+                        alt={`Image of ${collection.title}`}
+                        data={collection.image}
+                        sizes="(max-width: 32em) 100vw, 33vw"
+                        aspectRatio="3/2"
+                      />
+                    )}
+                  </div>
+                  {/* <Heading size="copy">{collection.title}</Heading> */}
                 </div>
-                {/* <Heading size="copy">{collection.title}</Heading> */}
-              </div>
-            </Link>
-          );
-        })}
+              </Link>
+            );
+          })}
+        </div>
       </div>
     </Section>
   );
