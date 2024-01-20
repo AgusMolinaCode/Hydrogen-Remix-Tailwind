@@ -9,6 +9,9 @@ import {MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import {seoPayload} from '~/lib/seo.server';
 import {routeHeaders} from '~/data/cache';
 import HeroInfo from '~/components/HeroInfo';
+import HeroTwo from '~/components/HeroTwo';
+import {ProductSwimlaneTwo} from '~/components/ProductSwimlaneTwo';
+import SliderMenuVendor from '~/components/SliderMenuVendor';
 
 export const headers = routeHeaders;
 
@@ -62,7 +65,7 @@ export async function loader({params, context}: LoaderFunctionArgs) {
 }
 
 export default function Homepage() {
-  const {featuredCollections, featuredProducts} =
+  const {featuredCollections, featuredProducts, featuredCollection} =
     useLoaderData<typeof loader>();
 
   return (
@@ -93,19 +96,39 @@ export default function Homepage() {
         </Suspense>
       )}
 
-      {/* Creamos el FeaturedCollection para traer una sola coleccion */}
+      <div className="pt-2 sm:pt-14">
+        <HeroTwo />
+      </div>
+
+      <SliderMenuVendor />
+      {featuredProducts && (
+        <Suspense>
+          <Await resolve={featuredProducts}>
+            {({products}) => {
+              if (!products?.nodes) return <></>;
+              const filteredProducts = products.nodes.filter(
+                (product: {vendor: string}) => product.vendor === 'EKS',
+              );
+
+              return (
+                <ProductSwimlaneTwo
+                  products={{nodes: filteredProducts}}
+                  count={4}
+                />
+              );
+            }}
+          </Await>
+        </Suspense>
+      )}
 
       {featuredCollections && (
         <Suspense>
           <Await resolve={featuredCollections}>
             {({collections}) => {
               if (!collections?.nodes) return <></>;
-              const filteredCollections = collections.nodes.filter(
-                (collection) => !collection.handle.startsWith('home'),
-              );
               return (
                 <FeaturedCollections
-                  collections={{nodes: filteredCollections}}
+                  collections={{nodes: collections.nodes}}
                   title="Collections"
                 />
               );
@@ -169,7 +192,7 @@ const HOMEPAGE_SEO_QUERY = `#graphql
 export const HOMEPAGE_FEATURED_PRODUCTS_QUERY = `#graphql
   query homepageFeaturedProducts($country: CountryCode, $language: LanguageCode)
   @inContext(country: $country, language: $language) {
-    products(first: 12) {
+    products(first: 30,sortKey: UPDATED_AT) {
       nodes {
         ...ProductCard
       }

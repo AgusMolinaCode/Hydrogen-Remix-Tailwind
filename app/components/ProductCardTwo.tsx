@@ -7,7 +7,7 @@ import type {ProductCardFragment} from 'storefrontapi.generated';
 import {Text, Link, AddToCartButton, Button} from '~/components';
 import {isDiscounted, isNewArrival} from '~/lib/utils';
 
-export function ProductCard({
+export function ProductCardTwo({
   product,
   label,
   className,
@@ -23,7 +23,7 @@ export function ProductCard({
   quickAdd?: boolean;
 }) {
   let cardLabel;
-
+  // console.log(product);
   const cardProduct: Product = product?.variants
     ? (product as Product)
     : ({} as Product);
@@ -53,16 +53,16 @@ export function ProductCard({
   };
 
   return (
-    <div className="flex flex-col gap-2 relative">
+    <div className="flex flex-col gap-2">
       <Link
         onClick={onClick}
         to={`/products/${product.handle}`}
         prefetch="intent"
       >
-        <div className={clsx('grid gap-4 overflow-hidden', className)}>
+        <div className={clsx('grid gap-4 relative overflow-hidden', className)}>
           <div className="">
             {image && (
-              <div className="flex justify-center items-center bg-transparent backdrop-blur h-[440px] md:h-[550px] w-full relative rounded-2xl bg-zinc-600 border-r border-l border-gray-500 overflow-hidden">
+              <div className="flex justify-center items-center bg-transparent backdrop-blur h-[400px] w-full relative rounded-2xl bg-gradient-to-bl from-gray-900 via-gray-500 to-gray-900 border-r border-l border-gray-500 overflow-hidden">
                 <Image
                   className="object-contain fadeIn p-2 rounded-xl md:h-full md:w-full hover:scale-105 duration-300"
                   data={image}
@@ -71,15 +71,22 @@ export function ProductCard({
                 />
               </div>
             )}
-            <div className="flex justify-between gap-4 absolute bottom-0 w-full rounded-bl-xl items-center rounded-br-xl bg-black/20 border-t h-9 backdrop-blur-3xl px-3">
+            <div className="w-full px-6 rounded-bl-xl flex flex-col items-center justify-center rounded-br-xl bg-orange-200/20 absolute bottom-0 backdrop-blur-3xl h-24 border-t">
               <Text
-                className="text-rose-100 font-Righteous font-bold"
+                className="text-rose-300 font-Righteous font-semibold"
                 as="h3"
                 size="copy"
               >
+                {product.vendor}
+              </Text>
+              <Text
+                className="text-gray-100 font-Righteous font-bold"
+                as="h3"
+                size="Thirdxl"
+              >
                 {product.title}
               </Text>
-              <Text className="text-rose-100 font-Righteous font-bold">
+              <Text className="text-gray-100 font-Righteous font-bold">
                 <Money withoutTrailingZeros data={price!} />
                 {isDiscounted(price as MoneyV2, compareAtPrice as MoneyV2) && (
                   <CompareAtPrice

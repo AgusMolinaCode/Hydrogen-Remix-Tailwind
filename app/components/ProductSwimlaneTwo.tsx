@@ -3,7 +3,9 @@ import {Swiper, SwiperSlide} from 'swiper/react';
 import 'swiper/css/scrollbar';
 
 import type {HomepageFeaturedProductsQuery} from 'storefrontapi.generated';
-import {ProductCard, Section} from '~/components';
+import {Section} from '~/components';
+
+import {ProductCardTwo} from './ProductCardTwo';
 
 const mockProducts = {
   nodes: new Array(12).fill(''),
@@ -13,7 +15,7 @@ type ProductSwimlaneProps = HomepageFeaturedProductsQuery & {
   count?: number;
 };
 
-export function ProductSwimlane({
+export function ProductSwimlaneTwo({
   products = mockProducts,
   count = 12,
   ...props
@@ -45,7 +47,7 @@ export function ProductSwimlane({
         <div className="flex">
           {products.nodes.map((product) => (
             <SwiperSlide key={`slide-${product.id}`} className="">
-              <ProductCard product={product} key={product.id} />
+              <ProductCardTwo product={product} key={product.id} />
             </SwiperSlide>
           ))}
         </div>
