@@ -113,7 +113,7 @@ export function Section({
   children?: React.ReactNode;
   className?: string;
   divider?: 'none' | 'top' | 'bottom' | 'both';
-  display?: 'grid' | 'flex';
+  display?: 'grid' | 'flex' | 'none';
   heading?: string;
   padding?: 'x' | 'y' | 'swimlane' | 'all' | 'card';
   [key: string]: any;
@@ -136,6 +136,7 @@ export function Section({
   const displays = {
     flex: 'flex',
     grid: 'grid',
+    none: '',
   };
 
   const styles = clsx(

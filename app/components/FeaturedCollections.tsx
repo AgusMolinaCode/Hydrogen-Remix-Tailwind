@@ -19,12 +19,18 @@ export function FeaturedCollections({
   const collectionsWithImage = collections.nodes.filter((item) => item.image);
 
   return (
-    <Section {...props} heading={title} className="">
-      <Grid items={collectionsWithImage.length}>
+    <Section
+      {...props}
+      heading={title}
+      padding="card"
+      display="none"
+      className=""
+    >
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 content-center mx-auto gap-3 rounded-2xl">
         {collectionsWithImage.map((collection) => {
           return (
             <Link key={collection.id} to={`/collections/${collection.handle}`}>
-              <div className="grid gap-4">
+              <div className="grid">
                 <div className="card-image bg-primary/5 aspect-[3/2]">
                   {collection?.image && (
                     <Image
@@ -35,12 +41,12 @@ export function FeaturedCollections({
                     />
                   )}
                 </div>
-                <Heading size="copy">{collection.title}</Heading>
+                {/* <Heading size="copy">{collection.title}</Heading> */}
               </div>
             </Link>
           );
         })}
-      </Grid>
+      </div>
     </Section>
   );
 }
