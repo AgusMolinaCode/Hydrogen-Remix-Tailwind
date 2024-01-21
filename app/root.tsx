@@ -123,11 +123,6 @@ export default function App() {
             <Outlet />
           </Layout>
           <ScrollRestoration nonce={nonce} />
-          <script
-            async
-            type="text/javascript"
-            src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=UR2xfB"
-          ></script>
           <Scripts nonce={nonce} />
           <LiveReload nonce={nonce} />
         </NextUIProvider>

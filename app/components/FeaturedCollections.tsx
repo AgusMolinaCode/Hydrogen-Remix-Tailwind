@@ -33,13 +33,13 @@ export function FeaturedCollections({
         <h2 className="font-racing text-3xl sm:text-4xl text-center text-gray-400 pb-12">
           Descubre nuestras colecciones
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 content-center mx-auto gap-4 ">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 content-center mx-auto gap-4">
           {collectionsWithImage.map((collection) => {
             return (
               <Link
                 key={collection.id}
                 to={`/collections/${collection.handle}`}
-                className="hover:border hover:border-orange-500 hover:shadow-2xl transition-shadow duration-300 rounded-2xl"
+                className=" hover:shadow-2xl transition-shadow duration-300 rounded-2xl overflow-hidden"
               >
                 <div className="grid">
                   <div className="aspect-[3/2]">
@@ -49,11 +49,10 @@ export function FeaturedCollections({
                         data={collection.image}
                         sizes="(max-width: 32em) 100vw, 33vw"
                         aspectRatio="3/2"
-                        className="rounded-2xl"
+                        className="rounded-2xl transform transition-transform duration-300 hover:scale-110"
                       />
                     )}
                   </div>
-                  {/* <Heading size="copy">{collection.title}</Heading> */}
                 </div>
               </Link>
             );
