@@ -68,7 +68,7 @@ export function Layout({children, layout}: LayoutProps) {
           {children}
         </main>
       </div>
-      {/* {footerMenu && <Footer menu={footerMenu} />} */}
+      {footerMenu && <Footer menu={footerMenu} />}
     </>
   );
 }
@@ -479,6 +479,7 @@ function Footer({menu}: {menu?: EnhancedMenu}) {
         &copy; {new Date().getFullYear()} / Shopify, Inc. Hydrogen is an MIT
         Licensed Open Source project.
       </div>
+      <div className="klaviyo-form-WaStBR"></div>
     </Section>
   );
 }
