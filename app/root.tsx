@@ -157,6 +157,11 @@ export function ErrorBoundary({error}: {error: Error}) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <title>{title}</title>
+        <script
+          async
+          type="text/javascript"
+          src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=UR2xfB"
+        ></script>
         <Meta />
         <Links />
       </head>

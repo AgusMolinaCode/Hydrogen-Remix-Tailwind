@@ -480,6 +480,7 @@ function Footer({menu}: {menu?: EnhancedMenu}) {
         Licensed Open Source project.
       </div>
       <div className="klaviyo-form-RxqAFk"></div>
+      <button className="klaviyo_form_trigger">Click here</button>
     </Section>
   );
 }
