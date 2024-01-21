@@ -110,11 +110,6 @@ export default function App() {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta name="msvalidate.01" content="A352E6A0AF9A652267361BBB572B8468" />
-        <script
-          async
-          type="text/javascript"
-          src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=UR2xfB"
-        ></script>
         <Seo />
         <Meta />
         <Links />
@@ -157,11 +152,6 @@ export function ErrorBoundary({error}: {error: Error}) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <title>{title}</title>
-        <script
-          async
-          type="text/javascript"
-          src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=UR2xfB"
-        ></script>
         <Meta />
         <Links />
       </head>
