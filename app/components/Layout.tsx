@@ -28,8 +28,6 @@ import {
   Heading,
   IconMenu,
   IconCaret,
-  Section,
-  CountrySelector,
   Cart,
   CartLoading,
   Link,
@@ -466,8 +464,44 @@ function Footer({menu}: {menu?: EnhancedMenu}) {
     : [];
 
   return (
-    <div className="pt-32">
-      <FooterMenu menu={menu} />
+    <div className="mt-20 sm:mt-32 border-t border-gray-500">
+      <div className="px-2 sm:px-6 flex flex-wrap justify-between pt-4">
+        <div className="flex flex-col">
+          <div className="flex gap-2 items-center">
+            <div className="animate-pulse animate-infinite w-4 sm:w-6 h-4 sm:h-6 bg-green-400 rounded-full" />
+            <div>
+              <p className="font-outfit text-md sm:text-2xl">
+                Registrate para recibir las ultimas noticias y ofertas
+              </p>
+            </div>
+          </div>
+          <div className="py-8">
+            <Link to="/account/register" className="">
+              <Button
+                className="text-white font-semibold text-xl bg-orange-200/25 border border-orange-400 font-outfit"
+                size="lg"
+                color="primary"
+              >
+                Registrate
+              </Button>
+            </Link>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          {menu?.items?.map((item, index) => {
+            return (
+              <div
+                key={item.id}
+                className="px-2 p-2 md:flex md:justify-center md:mx-auto font-outfit text-rose-100 text-lg sm:text-xl hover:underline duration-300"
+              >
+                <FooterLink item={item} />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      {/* <FooterMenu menu={menu} /> */}
       <SliderMenuFooter />
     </div>
   );

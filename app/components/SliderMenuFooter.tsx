@@ -62,7 +62,7 @@ function ParallaxText({children, baseVelocity = 80}: ParallaxProps) {
         {[...Array(30)].map((_, i) => (
           <p
             key={i}
-            className="text-[10rem] sm:text-[18rem] tracking-normal flex items-center justify-center  font-racing bg-gray-600/45 bg-clip-text text-transparent pr-2"
+            className="text-[10rem] sm:text-[18rem] tracking-normal flex items-center justify-center  font-racing bg-gray-600/25 bg-clip-text text-transparent pr-2"
           >
             {children}{' '}
           </p>
@@ -75,7 +75,7 @@ function ParallaxText({children, baseVelocity = 80}: ParallaxProps) {
 export default function SliderMenuFooter() {
   return (
     <section>
-      <ParallaxText baseVelocity={3}>AM MOTOS .</ParallaxText>
+      <ParallaxText baseVelocity={15}>AM MOTOS ⁃</ParallaxText>
     </section>
   );
 }
