@@ -286,8 +286,8 @@ shop-pay-button {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 100%;
-  height: 100%;
+  width: 20%;
+  height: 20%;
   text-align: center;
   transform: rotate(var(--rotate)) translate(50%);
 }

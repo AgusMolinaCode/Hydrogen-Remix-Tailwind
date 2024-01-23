@@ -29,21 +29,13 @@ function ParallaxText({children, baseVelocity = 80}: ParallaxProps) {
     clamp: false,
   });
 
-  /**
-   * This is a magic wrapping for the length of the text - you
-   * have to replace for wrapping that works for you or dynamically
-   * calculate
-   */
+  const rotate = useTransform(baseX, [0, 600], [0, 360]);
   const x = useTransform(baseX, (v) => `${wrap(-0, -600, v)}%`);
 
   const directionFactor = useRef<number>(1);
   useAnimationFrame((t, delta) => {
     let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
 
-    /**
-     * This is what changes the direction of the scroll once we
-     * switch scrolling directions.
-     */
     if (velocityFactor.get() < 0) {
       directionFactor.current = -1;
     } else if (velocityFactor.get() > 0) {
@@ -59,7 +51,7 @@ function ParallaxText({children, baseVelocity = 80}: ParallaxProps) {
     <div className="parallax-two">
       <motion.div
         className="scroller-two fixed bottom-5 right-4 rounded-full"
-        style={{x}}
+        style={{rotate}}
       >
         {[...Array(30)].map((_, i) => (
           <p
@@ -76,19 +68,22 @@ function ParallaxText({children, baseVelocity = 80}: ParallaxProps) {
 
 export default function SliderMenuWsp() {
   return (
-    <div className="w-32 h-32 rounded-full">
+    <div className="">
       <Link
         to="https://wa.me/1159474844"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-8 right-5 z-50"
+        className="fixed bottom-14 right-7 z-50 "
       >
+        <p className="text-center font-outfit text-gray-800 flex justify-center mx-auto p-1 bg-green-200/50 rounded-2xl mb-1 font-bold animate-infinite animate-carousel">
+          Whatsapp
+        </p>
         <img
           src="/wsp.png"
           alt="WhatsApp icon"
-          className="w-10 sm:w-14 h-10 sm:h-14 object-cover"
+          className="w-10 sm:w-14 h-10 sm:h-14 object-cover rounded-full animate-pulse animate-infinite mx-auto flex justify-center"
         />
-        <ParallaxText baseVelocity={20}>Whatsapp</ParallaxText>
+        {/* <ParallaxText baseVelocity={30}>Whatsapp</ParallaxText> */}
       </Link>
     </div>
   );

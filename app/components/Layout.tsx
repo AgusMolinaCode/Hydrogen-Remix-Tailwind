@@ -68,7 +68,7 @@ export function Layout({children, layout}: LayoutProps) {
         )}
         <main role="main" id="mainContent" className="">
           {/* <SliderMenuWsp /> */}
-          <WhatsAppIcon />
+          {/* <WhatsAppIcon /> */}
           {children}
         </main>
         {footerMenu && <Footer menu={footerMenu} />}
@@ -474,7 +474,7 @@ function Footer({menu}: {menu?: EnhancedMenu}) {
           <div className="flex gap-2 items-center">
             <div className="animate-pulse animate-infinite w-4 sm:w-6 h-4 sm:h-6 bg-green-400 rounded-full" />
             <div>
-              <p className="font-outfit text-md sm:text-2xl">
+              <p className="font-outfit text-md sm:text-2xl text-rose-100">
                 Registrate para recibir las ultimas noticias y ofertas
               </p>
             </div>

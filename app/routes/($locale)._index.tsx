@@ -11,6 +11,7 @@ import HeroInfo from '~/components/HeroInfo';
 import HeroTwo from '~/components/HeroTwo';
 import {ProductSwimlaneTwo} from '~/components/ProductSwimlaneTwo';
 import SliderMenuVendor from '~/components/SliderMenuVendor';
+import SliderMenuWsp from '~/components/SliderMenuWsp';
 
 export const headers = routeHeaders;
 
@@ -99,7 +100,8 @@ export default function Homepage() {
         <HeroTwo />
       </div>
 
-      <SliderMenuVendor />
+      <SliderMenuWsp />
+      {/* <SliderMenuVendor /> */}
       {featuredProducts && (
         <Suspense>
           <Await resolve={featuredProducts}>
