@@ -73,9 +73,9 @@ export default function SliderMenuWsp() {
         to="https://wa.me/1159474844"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-14 right-7 z-50 "
+        className="fixed bottom-11 sm:bottom-14 right-5 sm:right-7 z-50 "
       >
-        <p className="text-center font-outfit text-gray-800 flex justify-center mx-auto p-1 bg-green-200/50 rounded-2xl mb-1 font-bold animate-infinite animate-carousel">
+        <p className="text-center font-outfit text-gray-800 flex justify-center mx-auto p-1 bg-green-200/50 rounded-2xl mb-1 font-bold">
           Whatsapp
         </p>
         <img
