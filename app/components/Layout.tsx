@@ -42,6 +42,8 @@ import {useCartFetchers} from '~/hooks/useCartFetchers';
 import {useRootLoaderData} from '~/root';
 
 import SliderMenuFooter from './SliderMenuFooter';
+import WhatsAppIcon from './WhatsAppIcon';
+import SliderMenuWsp from './SliderMenuWsp';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -65,6 +67,8 @@ export function Layout({children, layout}: LayoutProps) {
           <Header title={layout.shop.name} menu={headerMenu} />
         )}
         <main role="main" id="mainContent" className="">
+          {/* <SliderMenuWsp /> */}
+          <WhatsAppIcon />
           {children}
         </main>
         {footerMenu && <Footer menu={footerMenu} />}

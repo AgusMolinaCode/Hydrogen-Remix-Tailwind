@@ -253,6 +253,45 @@ shop-pay-button {
   margin-right: 30px;
 }
 
+.parallax-two {
+  overflow: hidden;
+  letter-spacing: -2px;
+  line-height: 0.8;
+  margin: 0;
+  white-space: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.parallax-two .scroller-two {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 64px;
+  display: flex;
+  white-space: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.parallax-two span {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transform: rotate(var(--rotate)) translate(50%);
+}
+
 .swiper-wrapper {
   position: relative;
   width: 100%;
@@ -356,3 +395,4 @@ shop-pay-button {
     left: 0;
     top: 0;
 }
+
