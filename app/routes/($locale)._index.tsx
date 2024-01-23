@@ -101,7 +101,7 @@ export default function Homepage() {
       </div>
 
       <SliderMenuWsp />
-      {/* <SliderMenuVendor /> */}
+      <SliderMenuVendor />
       {featuredProducts && (
         <Suspense>
           <Await resolve={featuredProducts}>
