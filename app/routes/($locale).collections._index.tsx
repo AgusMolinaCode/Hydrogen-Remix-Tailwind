@@ -8,7 +8,7 @@ import {getImageLoadingPriority} from '~/lib/const';
 import {seoPayload} from '~/lib/seo.server';
 import {routeHeaders} from '~/data/cache';
 
-const PAGINATION_SIZE = 4;
+const PAGINATION_SIZE = 3;
 
 export const headers = routeHeaders;
 
