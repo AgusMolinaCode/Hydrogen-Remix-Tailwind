@@ -67,8 +67,6 @@ export function Layout({children, layout}: LayoutProps) {
           <Header title={layout.shop.name} menu={headerMenu} />
         )}
         <main role="main" id="mainContent" className="">
-          {/* <SliderMenuWsp /> */}
-          {/* <WhatsAppIcon /> */}
           {children}
         </main>
         {footerMenu && <Footer menu={footerMenu} />}
@@ -302,7 +300,7 @@ function DesktopHeader({
               </DropdownTrigger>
               <DropdownMenu
                 color="undefined"
-                className="p-0 hover:bg-black/25 w-[200px]"
+                className="p-0 hover:bg-black/25 w-[230px]"
               >
                 <DropdownItem
                   className="bg-black/70 p-5 hover:bg-black/20"

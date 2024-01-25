@@ -257,16 +257,21 @@ export function IconRemove(props: IconProps) {
   );
 }
 
-export function IconFilters(props: IconProps) {
+export function IconFilters() {
   return (
-    <Icon {...props} fill="transparent" stroke={props.stroke || 'currentColor'}>
-      <title>Filters</title>
-      <circle cx="4.5" cy="6.5" r="2" />
-      <line x1="6" y1="6.5" x2="14" y2="6.5" />
-      <line x1="4.37114e-08" y1="6.5" x2="3" y2="6.5" />
-      <line x1="4.37114e-08" y1="13.5" x2="8" y2="13.5" />
-      <line x1="11" y1="13.5" x2="14" y2="13.5" />
-      <circle cx="9.5" cy="13.5" r="2" />
-    </Icon>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      className="w-6 h-6"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75"
+      />
+    </svg>
   );
 }

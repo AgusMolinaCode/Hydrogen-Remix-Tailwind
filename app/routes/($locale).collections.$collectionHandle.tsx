@@ -150,17 +150,20 @@ export default function Collection() {
 
   return (
     <>
-      <PageHeader heading={collection.title}>
+      <div>
+        <h1 className="text-center font-racing text-6xl text-rose-100 mt-8 sm:mt-12">
+          {collection.title}
+        </h1>
         {collection?.description && (
-          <div className="flex items-baseline justify-between w-full">
+          <div className="flex  justify-center mx-auto w-full">
             <div>
-              <Text format width="narrow" as="p" className="inline-block">
+              <h1 className="text-center font-racing text-rose-100 text-2xl">
                 {collection.description}
-              </Text>
+              </h1>
             </div>
           </div>
         )}
-      </PageHeader>
+      </div>
       <Section>
         <SortFilter
           filters={collection.products.filters as Filter[]}

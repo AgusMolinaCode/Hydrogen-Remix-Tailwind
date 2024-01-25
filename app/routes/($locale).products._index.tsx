@@ -58,7 +58,7 @@ export default function AllProducts() {
 
   return (
     <>
-      <PageHeader heading="All Products" variant="allCollections" />
+      <PageHeader heading="Todos los productos" variant="allCollections" />
       <Section>
         <Pagination connection={products}>
           {({nodes, isLoading, NextLink, PreviousLink}) => {

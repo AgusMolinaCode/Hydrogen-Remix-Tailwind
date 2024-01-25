@@ -13,8 +13,9 @@ import type {
   Filter,
   ProductFilter,
 } from '@shopify/hydrogen/storefront-api-types';
+import {AdjustmentsHorizontalIcon} from '@heroicons/react/16/solid';
 
-import {Heading, IconFilters, IconCaret, IconXMark, Text} from '~/components';
+import {Heading, IconCaret, IconXMark, Text} from '~/components';
 
 export type AppliedFilter = {
   label: string;
@@ -48,11 +49,19 @@ export function SortFilter({
       <div className="flex items-center justify-between w-full">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={
-            'relative flex items-center justify-center w-8 h-8 focus:ring-primary/5'
-          }
+          className="flex items-center justify-center w-8 h-8 text-white"
         >
-          <IconFilters />
+          {isOpen ? (
+            <div className="flex gap-2 items-center">
+              <AdjustmentsHorizontalIcon className="w-6 h-6 text-rose-300" />
+              <p className="text-rose-300 font-outfit text-lg">Cerrar</p>
+            </div>
+          ) : (
+            <div className="flex gap-2 items-center">
+              <AdjustmentsHorizontalIcon className="w-6 h-6 text-rose-100" />
+              <p className="text-rose-100 font-outfit text-lg"> Filtros</p>
+            </div>
+          )}
         </button>
         <SortMenu />
       </div>
@@ -114,8 +123,8 @@ export function FiltersDrawer({
           </div>
         ) : null}
 
-        <Heading as="h4" size="lead" className="pb-4">
-          Filter By
+        <Heading as="h4" size="copy" className="pb-4 font-outfit font-bold">
+          Filtros
         </Heading>
         <div className="divide-y">
           {filters.map((filter: Filter) => (
