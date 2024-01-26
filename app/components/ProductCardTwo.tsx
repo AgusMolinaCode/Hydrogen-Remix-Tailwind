@@ -71,7 +71,7 @@ export function ProductCardTwo({
                 />
               </div>
             )}
-            <div className="w-full px-6 rounded-bl-xl flex flex-col items-center justify-center rounded-br-xl bg-orange-200/20 absolute bottom-0 backdrop-blur-3xl h-24 border-t">
+            <div className="w-full px-6 rounded-bl-xl flex flex-col items-center justify-center rounded-br-xl bg-orange-200/20 absolute bottom-0 backdrop-blur-3xl border-t">
               <Text
                 className="text-rose-300 font-Righteous font-semibold"
                 as="h3"
@@ -80,13 +80,13 @@ export function ProductCardTwo({
                 {product.vendor}
               </Text>
               <Text
-                className="text-gray-100 font-Righteous font-bold"
+                className="text-gray-100 font-Righteous font-bold text-center"
                 as="h3"
                 size="Thirdxl"
               >
                 {product.title}
               </Text>
-              <Text className="text-gray-100 font-Righteous font-bold">
+              <Text className="text-gray-100 font-Righteous font-bold py-2">
                 <Money withoutTrailingZeros data={price!} />
                 {isDiscounted(price as MoneyV2, compareAtPrice as MoneyV2) && (
                   <CompareAtPrice

@@ -1,9 +1,10 @@
 import clsx from 'clsx';
 import type {ShopifyAnalyticsProduct} from '@shopify/hydrogen';
 import {flattenConnection, Image, Money, useMoney} from '@shopify/hydrogen';
+import {ShoppingBagIcon} from '@heroicons/react/16/solid';
 import type {MoneyV2, Product} from '@shopify/hydrogen/storefront-api-types';
 
-import type {ProductCardFragment} from 'storefrontapi.generated';
+import type {ProductCardFragment, MediaFragment} from 'storefrontapi.generated';
 import {Text, Link, AddToCartButton, Button} from '~/components';
 import {isDiscounted, isNewArrival} from '~/lib/utils';
 
@@ -37,9 +38,9 @@ export function ProductCard({
   if (label) {
     cardLabel = label;
   } else if (isDiscounted(price as MoneyV2, compareAtPrice as MoneyV2)) {
-    cardLabel = 'Sale';
+    cardLabel = 'Oferta';
   } else if (isNewArrival(product.publishedAt)) {
-    cardLabel = 'New';
+    cardLabel = 'Nuevo';
   }
 
   const productAnalytics: ShopifyAnalyticsProduct = {
@@ -60,9 +61,12 @@ export function ProductCard({
         prefetch="intent"
       >
         <div className={clsx('grid gap-4 overflow-hidden', className)}>
+          <div className="absolute top-2 left-2 text-black bg-rose-200 hover:bg-rose-100 duration-200 rounded-full p-1 z-20">
+            <ShoppingBagIcon className="w-6 h-6" />
+          </div>
           <div className="">
             {image && (
-              <div className="flex justify-center items-center bg-transparent backdrop-blur h-[440px] md:h-[550px] w-full relative rounded-2xl bg-zinc-600 border-r border-l border-gray-500 overflow-hidden">
+              <div className="flex justify-center items-center bg-transparent backdrop-blur h-[400px] md:h-[420px] w-full relative rounded-2xl bg-zinc-600 border-r border-l border-gray-500 overflow-hidden">
                 <Image
                   className="object-contain fadeIn p-2 rounded-xl md:h-full md:w-full hover:scale-105 duration-300"
                   data={image}
@@ -71,7 +75,7 @@ export function ProductCard({
                 />
               </div>
             )}
-            <div className="flex justify-between gap-4 absolute bottom-0 w-full rounded-bl-xl items-center rounded-br-xl bg-black/20 border-t h-9 backdrop-blur-3xl px-3">
+            <div className="flex justify-between gap-4 absolute bottom-0 w-full rounded-bl-xl items-center rounded-br-xl bg-black/20 border-t h-14 backdrop-blur-3xl px-3">
               <Text
                 className="text-rose-100 font-Righteous font-bold"
                 as="h3"
