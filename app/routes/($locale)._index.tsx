@@ -87,9 +87,9 @@ export default function Homepage() {
 
               return (
                 <div>
-                  <h1 className="flex justify-center text-rose-100 text-4xl sm:text-5xl font-racing font-semibold mx-auto items-center gap-2 pt-8">
+                  <h1 className="flex flex-wrap justify-center text-rose-100 text-3xl sm:text-5xl font-racing font-semibold mx-auto items-center gap-2 pt-8">
                     productos
-                    <span className="font-racing text-4xl sm:text-5xl text-center font-bold text-red-200">
+                    <span className="font-racing text-3xl sm:text-5xl text-center font-bold text-red-200">
                       {filteredProducts[0].collections.edges[0].node.title}
                     </span>
                   </h1>
@@ -120,9 +120,9 @@ export default function Homepage() {
 
               return (
                 <div>
-                  <h1 className="flex justify-center text-rose-100 text-4xl sm:text-5xl font-racing font-semibold mx-auto items-center gap-2 pt-8">
+                  <h1 className="flex justify-center text-rose-100 text-3xl sm:text-5xl font-racing font-semibold mx-auto items-center gap-2 pt-8">
                     productos
-                    <span className="font-racing text-5xl sm:text-6xl text-center font-bold text-red-300">
+                    <span className="font-racing text-3xl sm:text-6xl text-center font-bold text-red-300">
                       {filteredProducts[0].vendor}
                     </span>
                   </h1>
@@ -137,24 +137,13 @@ export default function Homepage() {
         </Suspense>
       )}
 
-      {/* {featuredCollection && (
-        <Suspense>
-          <Await resolve={featuredCollection}>
-            {({hero}) => {
-              if (!hero) return <></>;
-              return <Hero {...hero} />;
-            }}
-          </Await>
-        </Suspense>
-      )} */}
-
       {featuredCollections && (
         <Suspense>
           <Await resolve={featuredCollections}>
             {({collections}) => {
               if (!collections?.nodes) return <></>;
               const filteredCollections = collections.nodes.filter(
-                (collection) => collection.title !== 'Todos los productos',
+                (collection) => collection.title !== 'All',
               );
               return (
                 <FeaturedCollections

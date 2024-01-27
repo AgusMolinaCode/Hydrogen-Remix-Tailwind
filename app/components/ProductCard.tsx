@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import type {ShopifyAnalyticsProduct} from '@shopify/hydrogen';
 import {flattenConnection, Image, Money, useMoney} from '@shopify/hydrogen';
 import {ShoppingBagIcon} from '@heroicons/react/16/solid';
+import {Tooltip} from '@nextui-org/react';
 import type {MoneyV2, Product} from '@shopify/hydrogen/storefront-api-types';
 
 import type {ProductCardFragment, MediaFragment} from 'storefrontapi.generated';
@@ -53,6 +54,14 @@ export function ProductCard({
     quantity: 1,
   };
 
+  function truncateTitle(title: string) {
+    if (title.length > 25) {
+      return title.substring(0, 25) + '...';
+    } else {
+      return title;
+    }
+  }
+
   return (
     <div className="flex flex-col gap-2 relative">
       <Link
@@ -76,13 +85,19 @@ export function ProductCard({
               </div>
             )}
             <div className="flex justify-between gap-4 absolute bottom-0 w-full rounded-bl-xl items-center rounded-br-xl bg-black/20 border-t h-14 backdrop-blur-3xl px-3">
-              <Text
-                className="text-rose-100 font-Righteous font-bold"
-                as="h3"
-                size="copy"
+              <Tooltip
+                content={product.title}
+                className="z-50 bg-black text-white"
+                placement="top"
               >
-                {product.title}
-              </Text>
+                <Text
+                  className="text-rose-100 font-Righteous font-bold"
+                  as="h3"
+                  size="copy"
+                >
+                  {truncateTitle(product.title)}
+                </Text>
+              </Tooltip>
               <Text className="text-rose-100 font-Righteous font-bold">
                 <Money withoutTrailingZeros data={price!} />
                 {isDiscounted(price as MoneyV2, compareAtPrice as MoneyV2) && (
