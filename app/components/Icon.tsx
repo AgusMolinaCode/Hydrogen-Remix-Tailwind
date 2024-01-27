@@ -113,7 +113,7 @@ export function IconCaret({
   return (
     <Icon
       {...props}
-      className={`w-5 h-5 transition ${rotate}`}
+      className={`w-5 h-5 transition ${rotate} text-rose-100`}
       fill="transparent"
       stroke={stroke}
     >

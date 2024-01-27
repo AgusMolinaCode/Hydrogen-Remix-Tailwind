@@ -46,18 +46,18 @@ export function SortFilter({
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
-      <div className="flex items-center justify-between w-full">
+      <div className="grid justify-items-center mx-auto justify-center sm:flex gap-1 items-center sm:justify-between w-full px-2">
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="flex items-center justify-center w-8 h-8 text-white"
         >
           {isOpen ? (
-            <div className="flex gap-2 items-center">
+            <div className="flex gap-1 items-center">
               <AdjustmentsHorizontalIcon className="w-6 h-6 text-rose-300" />
               <p className="text-rose-300 font-outfit text-lg">Cerrar</p>
             </div>
           ) : (
-            <div className="flex gap-2 items-center">
+            <div className="flex gap-1 items-center">
               <AdjustmentsHorizontalIcon className="w-6 h-6 text-rose-100" />
               <p className="text-rose-100 font-outfit text-lg"> Filtros</p>
             </div>
@@ -123,7 +123,11 @@ export function FiltersDrawer({
           </div>
         ) : null}
 
-        <Heading as="h4" size="copy" className="pb-4 font-outfit font-bold">
+        <Heading
+          as="h4"
+          size="copy"
+          className="pb-4 font-outfit font-bold text-rose-100"
+        >
           Filtros
         </Heading>
         <div className="divide-y">
@@ -132,14 +136,19 @@ export function FiltersDrawer({
               {({open}) => (
                 <>
                   <Disclosure.Button className="flex justify-between w-full py-4">
-                    <Text size="lead">{filter.label}</Text>
+                    <Text size="lead" className="text-rose-100 font-outfit">
+                      {filter.label}
+                    </Text>
                     <IconCaret direction={open ? 'up' : 'down'} />
                   </Disclosure.Button>
                   <Disclosure.Panel key={filter.id}>
-                    <ul key={filter.id} className="py-2">
+                    <ul key={filter.id} className="py-2 font-outfit">
                       {filter.values?.map((option) => {
                         return (
-                          <li key={option.id} className="pb-4">
+                          <li
+                            key={option.id}
+                            className="pb-4 text-gray-200 font-outfit"
+                          >
                             {filterMarkup(filter, option)}
                           </li>
                         );
@@ -267,7 +276,7 @@ function PriceRangeFilter({max, min}: {max?: number; min?: number}) {
   return (
     <div className="flex flex-col">
       <label className="mb-4">
-        <span>from</span>
+        <span>Minimo</span>
         <input
           name="minPrice"
           className="text-black"
@@ -278,7 +287,7 @@ function PriceRangeFilter({max, min}: {max?: number; min?: number}) {
         />
       </label>
       <label>
-        <span>to</span>
+        <span>Maximo</span>
         <input
           name="maxPrice"
           className="text-black"
@@ -318,21 +327,21 @@ function filterInputToParams(
 
 export default function SortMenu() {
   const items: {label: string; key: SortParam}[] = [
-    {label: 'Featured', key: 'featured'},
+    {label: 'Novedades', key: 'featured'},
     {
-      label: 'Price: Low - High',
+      label: '$: Bajo - Alto',
       key: 'price-low-high',
     },
     {
-      label: 'Price: High - Low',
+      label: '$: Alto - Bajo',
       key: 'price-high-low',
     },
     {
-      label: 'Best Selling',
+      label: 'Más vendidos',
       key: 'best-selling',
     },
     {
-      label: 'Newest',
+      label: 'Nuevos',
       key: 'newest',
     },
   ];
@@ -344,21 +353,25 @@ export default function SortMenu() {
     <Menu as="div" className="relative z-40">
       <Menu.Button className="flex items-center">
         <span className="px-2">
-          <span className="px-2 font-medium">Sort by:</span>
-          <span>{(activeItem || items[0]).label}</span>
+          <span className="px-2 text-rose-100 font-outfit text-lg">
+            Buscar por:
+          </span>
+          <span className="text-rose-100 font-outfit font-bold">
+            {(activeItem || items[0]).label}
+          </span>
         </span>
         <IconCaret />
       </Menu.Button>
 
       <Menu.Items
         as="nav"
-        className="absolute right-0 flex flex-col p-4 text-right rounded-sm bg-contrast"
+        className="absolute right-0 flex flex-col p-4 text-right bg-black/90 rounded-xl"
       >
         {items.map((item) => (
           <Menu.Item key={item.label}>
             {() => (
               <Link
-                className={`block text-sm pb-2 px-3 ${
+                className={`block text-sm pb-2 px-3 text-rose-100 font-outfit ${
                   activeItem?.key === item.key ? 'font-bold' : 'font-normal'
                 }`}
                 to={getSortLink(item.key, params, location)}

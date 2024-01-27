@@ -42,7 +42,6 @@ import {useCartFetchers} from '~/hooks/useCartFetchers';
 import {useRootLoaderData} from '~/root';
 
 import SliderMenuFooter from './SliderMenuFooter';
-import WhatsAppIcon from './WhatsAppIcon';
 import SliderMenuWsp from './SliderMenuWsp';
 
 type LayoutProps = {
@@ -67,6 +66,7 @@ export function Layout({children, layout}: LayoutProps) {
           <Header title={layout.shop.name} menu={headerMenu} />
         )}
         <main role="main" id="mainContent" className="">
+          <SliderMenuWsp />
           {children}
         </main>
         {footerMenu && <Footer menu={footerMenu} />}
@@ -313,8 +313,8 @@ function DesktopHeader({
                       target={item.target}
                       className={({isActive}) =>
                         isActive
-                          ? 'font-outfit text-lg m-2 font-bold flex items-end underline hover:text-orange-500 duration-200'
-                          : 'font-outfit text-lg m-2 font-semibold flex items-end hover:text-orange-500 duration-200'
+                          ? 'font-outfit text-lg m-2 font-bold flex text-rose-100 items-end underline hover:text-orange-500 duration-200'
+                          : 'font-outfit text-lg m-2 font-semibold text-rose-100 flex items-end hover:text-orange-500 duration-200'
                       }
                     >
                       {item.title}

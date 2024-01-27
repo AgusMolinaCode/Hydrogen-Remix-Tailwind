@@ -3,7 +3,7 @@ import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {Await, useLoaderData} from '@remix-run/react';
 import {AnalyticsPageType} from '@shopify/hydrogen';
 
-import {ProductSwimlane, FeaturedCollections} from '~/components';
+import {ProductSwimlane, FeaturedCollections, Hero} from '~/components';
 import {MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import {seoPayload} from '~/lib/seo.server';
 import {routeHeaders} from '~/data/cache';
@@ -37,7 +37,7 @@ export async function loader({params, context}: LoaderFunctionArgs) {
     shop,
     featuredCollection: context.storefront.query(FEATURED_COLLECTION_QUERY, {
       variables: {
-        handle: 'Featured',
+        handle: 'OFERTAS',
         country,
         language,
       },
@@ -82,14 +82,22 @@ export default function Homepage() {
               const filteredProducts = products.nodes.filter(
                 (product) =>
                   product.collections.edges.length > 0 &&
-                  product.collections.edges[0].node.title === 'Featured',
+                  product.collections.edges[0].node.title === 'MAS VENDIDOS',
               );
 
               return (
-                <ProductSwimlane
-                  products={{nodes: filteredProducts}}
-                  count={4}
-                />
+                <div>
+                  <h1 className="flex justify-center text-rose-100 text-4xl sm:text-5xl font-racing font-semibold mx-auto items-center gap-2 pt-8">
+                    productos
+                    <span className="font-racing text-4xl sm:text-5xl text-center font-bold text-red-200">
+                      {filteredProducts[0].collections.edges[0].node.title}
+                    </span>
+                  </h1>
+                  <ProductSwimlane
+                    products={{nodes: filteredProducts}}
+                    count={4}
+                  />
+                </div>
               );
             }}
           </Await>
@@ -100,7 +108,6 @@ export default function Homepage() {
         <HeroTwo />
       </div>
 
-      <SliderMenuWsp />
       <SliderMenuVendor />
       {featuredProducts && (
         <Suspense>
@@ -130,14 +137,28 @@ export default function Homepage() {
         </Suspense>
       )}
 
+      {/* {featuredCollection && (
+        <Suspense>
+          <Await resolve={featuredCollection}>
+            {({hero}) => {
+              if (!hero) return <></>;
+              return <Hero {...hero} />;
+            }}
+          </Await>
+        </Suspense>
+      )} */}
+
       {featuredCollections && (
         <Suspense>
           <Await resolve={featuredCollections}>
             {({collections}) => {
               if (!collections?.nodes) return <></>;
+              const filteredCollections = collections.nodes.filter(
+                (collection) => collection.title !== 'Todos los productos',
+              );
               return (
                 <FeaturedCollections
-                  collections={{nodes: collections.nodes}}
+                  collections={{nodes: filteredCollections}}
                   title="Collections"
                 />
               );
@@ -214,7 +235,7 @@ export const FEATURED_COLLECTIONS_QUERY = `#graphql
   query homepageFeaturedCollections($country: CountryCode, $language: LanguageCode)
   @inContext(country: $country, language: $language) {
     collections(
-      first: 6,
+      first: 7,
       sortKey: UPDATED_AT
     ) {
       nodes {

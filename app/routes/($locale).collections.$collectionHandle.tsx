@@ -151,13 +151,13 @@ export default function Collection() {
   return (
     <>
       <div>
-        <h1 className="text-center font-racing text-6xl text-rose-100 mt-8 sm:mt-12">
+        <h1 className="text-center font-racing text-4xl sm:text-6xl text-rose-100 mt-8 sm:mt-12">
           {collection.title}
         </h1>
         {collection?.description && (
           <div className="flex  justify-center mx-auto w-full">
             <div>
-              <h1 className="text-center font-racing text-rose-100 text-2xl">
+              <h1 className="text-center font-racing text-rose-100 text-lg sm:text-2xl">
                 {collection.description}
               </h1>
             </div>
@@ -182,10 +182,17 @@ export default function Collection() {
             }) => (
               <>
                 <div className="flex items-center justify-center mb-6">
-                  <Button as={PreviousLink} variant="secondary" width="full">
-                    {isLoading ? 'Loading...' : 'Load previous'}
+                  <Button
+                    as={PreviousLink}
+                    variant="secondary"
+                    className="relative h-12 overflow-hidden rounded bg-neutral-950 px-5 py-2.5 text-white transition-all duration-300 hover:bg-neutral-800 hover:ring-2 hover:ring-neutral-800 hover:ring-offset-2"
+                  >
+                    <span className="relative font-Righteous text-rose-100">
+                      {isLoading ? 'Cargando...' : 'Cargar anterior'}
+                    </span>
                   </Button>
                 </div>
+
                 <ProductsLoadedOnScroll
                   nodes={nodes}
                   inView={inView}
@@ -198,9 +205,11 @@ export default function Collection() {
                     ref={ref}
                     as={NextLink}
                     variant="secondary"
-                    width="full"
+                    className="relative h-12 overflow-hidden rounded bg-neutral-950 px-5 py-2.5 text-white transition-all duration-300 hover:bg-neutral-800 hover:ring-2 hover:ring-neutral-800 hover:ring-offset-2"
                   >
-                    {isLoading ? 'Loading...' : 'Load more products'}
+                    <span className="relative font-Righteous text-rose-100">
+                      {isLoading ? 'Cargando...' : 'Cargar mas productos'}
+                    </span>
                   </Button>
                 </div>
               </>

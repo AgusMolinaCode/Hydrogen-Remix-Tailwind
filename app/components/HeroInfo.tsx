@@ -9,7 +9,7 @@ const HeroInfo = () => {
   return (
     <div className="hero-info">
       <div>
-        <Link to="/products">
+        <Link to="/collections/todos-los-productos">
           <Button className="bg-black/20 backdrop-blur-xl text-rose-100 px-6 mt-[22rem] md:mt-[35rem] rounded-2xl shadow-lg font-bold font-Righteous text-xl py-6 border border-rose-100 animate-fade-up animate-duration-300 delay-500">
             Ver Coleccion
             <ChevronDoubleRightIcon className="w-8 h-8 ml-2 animate-fade animate-infinite animate-duration-[1500ms]" />
