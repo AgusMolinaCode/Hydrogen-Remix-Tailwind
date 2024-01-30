@@ -396,3 +396,48 @@ shop-pay-button {
     top: 0;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+.shop-pay-button {
+    background: rgb(207, 201, 229) !important;
+    line-height: normal;
+    border-radius: var(--shop-pay-button-border-radius, 4px) !important;
+    height: var(--shop-pay-button-height, 42px) !important;
+    width: var(--shop-pay-button-width, 262px) !important;
+    text-decoration: none;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 4px;
+    white-space: nowrap;
+}
+
+.shop-pay-button:not(.disabled):hover {
+    background: #efab0d !important;
+}
+
+.shop-pay-button.disabled {
+    opacity: 0.5;
+}
+
+.shop-pay-button.bordered {
+    border: 1px solid #EDEDED;
+}
+
+shop-pay-logo {
+    display: inline-block;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.visually-hidden {
+    position: absolute;
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    overflow: hidden;
+    padding: 0;
+}
+

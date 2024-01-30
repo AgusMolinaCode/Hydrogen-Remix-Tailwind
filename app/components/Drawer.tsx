@@ -61,7 +61,7 @@ export function Drawer({
                 leaveFrom="translate-x-0"
                 leaveTo={offScreen[openFrom]}
               >
-                <Dialog.Panel className="w-[380px] md:w-[410px] max-w-lg text-left align-middle transition-all transform shadow-xl h-screen-dynamic bg-black/80 backdrop-blur-md border-r-1 border-rose-100 mt-2">
+                <Dialog.Panel className="w-[318px] sm:w-[490px] text-left align-middle transition-all transform shadow-xl h-screen-dynamic bg-black/90 backdrop-blur-md border-r-1 border-gray-500 mt-2">
                   <header
                     className={`sticky top-0 flex items-center px-1 h-nav sm:px-8 md:px-12 ${
                       heading ? 'justify-between' : 'justify-end'
@@ -70,7 +70,7 @@ export function Drawer({
                     {heading !== null && (
                       <Dialog.Title>
                         <Heading
-                          className="font-racing text-2xl p-2 text-white"
+                          className="font-racing text-2xl p-2 text-gray-200"
                           as="span"
                           size="lead"
                           id="cart-contents"
@@ -91,13 +91,13 @@ export function Drawer({
                         aria-label="Close panel"
                       /> */}
                       <XCircleIcon
-                        className="rounded-full border text-white"
+                        className="rounded-full border text-gray-200"
                         aria-label="Close panel"
                         width={40}
                       />
                     </button>
                   </header>
-                  <div className="border-b-1 border-rose-100 mt-1" />
+                  <div className="border-b-1 border-gray-500 mt-1" />
                   {children}
                 </Dialog.Panel>
               </Transition.Child>

@@ -3,6 +3,7 @@ import {Disclosure, Listbox} from '@headlessui/react';
 import {defer, redirect, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {useLoaderData, Await} from '@remix-run/react';
 import type {ShopifyAnalyticsProduct} from '@shopify/hydrogen';
+import '../styles/app.css';
 import {
   AnalyticsPageType,
   Money,
@@ -198,9 +199,7 @@ export default function Product() {
           errorElement="There was a problem loading related products"
           resolve={recommended}
         >
-          {(products) => (
-            <ProductSwimlane title="Related Products" products={products} />
-          )}
+          {(products) => <ProductSwimlane products={products} />}
         </Await>
       </Suspense>
     </>
@@ -336,7 +335,7 @@ export function ProductForm({
           <div className="grid items-stretch gap-4">
             {isOutOfStock ? (
               <Button variant="secondary" disabled>
-                <Text>Sold out</Text>
+                <Text>Sin stock</Text>
               </Button>
             ) : (
               <AddToCartButton
@@ -357,7 +356,7 @@ export function ProductForm({
                   as="span"
                   className="flex items-center justify-center gap-2"
                 >
-                  <span>Add to Cart</span> <span>·</span>{' '}
+                  <span>Agregar al carrito</span> <span>·</span>{' '}
                   <Money
                     withoutTrailingZeros
                     data={selectedVariant?.price!}
@@ -374,13 +373,13 @@ export function ProductForm({
                 </Text>
               </AddToCartButton>
             )}
-            {!isOutOfStock && (
+            {/* {!isOutOfStock && (
               <ShopPayButton
                 width="100%"
                 variantIds={[selectedVariant?.id!]}
                 storeDomain={storeDomain}
               />
-            )}
+            )} */}
           </div>
         )}
       </div>
@@ -426,7 +425,7 @@ function ProductDetail({
                   className="pb-px border-b border-primary/30 text-primary/50"
                   to={learnMore}
                 >
-                  Learn more
+                  Ver más
                 </Link>
               </div>
             )}

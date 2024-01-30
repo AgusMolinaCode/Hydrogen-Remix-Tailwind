@@ -132,7 +132,7 @@ function CartDiscounts({
             placeholder="Codigo de descuento"
           />
           <button className="flex justify-end whitespace-nowrap text-gray-300 font-semibold font-outfit">
-            Aplicar descuento
+            Aplicar
           </button>
         </div>
       </UpdateDiscountForm>
@@ -197,7 +197,7 @@ function CartCheckoutActions({checkoutUrl}: {checkoutUrl: string}) {
   if (!checkoutUrl) return null;
 
   return (
-    <div className="flex flex-col mt-2 font-outfit">
+    <div className="flex flex-col mt-2 py-4 font-outfit">
       <a href={checkoutUrl} target="_self">
         <Button as="span" width="full">
           Finalizar compra
@@ -267,17 +267,17 @@ function CartLineItem({line}: {line: CartLine}) {
   return (
     <li
       key={id}
-      className="flex gap-4"
+      className="flex gap-4 border-b border-gray-500 pb-4 mb-4"
       style={{
         // Hide the line item if the optimistic data action is remove
         // Do not remove the form from the DOM
         display: optimisticData?.action === 'remove' ? 'none' : 'flex',
       }}
     >
-      <div className="flex-shrink">
+      <div className="hidden sm:flex sm:flex-shrink ">
         {merchandise.image && (
           <Image
-            width={110}
+            width={90}
             height={110}
             data={merchandise.image}
             className="object-cover object-center w-24 h-24 border rounded md:w-28 md:h-28"
@@ -366,7 +366,7 @@ function CartLineQuantityAdjust({line}: {line: CartLine}) {
       <label htmlFor={`quantity-${lineId}`} className="sr-only">
         Quantity, {optimisticQuantity}
       </label>
-      <div className="flex items-center border rounded">
+      <div className="flex items-center">
         <UpdateCartButton lines={[{id: lineId, quantity: prevQuantity}]}>
           <button
             name="decrease-quantity"
@@ -482,23 +482,20 @@ export function CartEmpty({
   return (
     <div ref={scrollRef} className={container[layout]} hidden={hidden}>
       <section className="grid gap-6">
-        <Text format>
-          Looks like you haven&rsquo;t added anything yet, let&rsquo;s get you
-          started!
-        </Text>
-        <div>
-          <Button onClick={onClose}>Continue shopping</Button>
+        <p className="text-center py-4 font-outfit text-xl">Carrito vacio</p>
+        <div className="flex justify-center mx-auto">
+          <Button onClick={onClose}>Comprar</Button>
         </div>
       </section>
-      <section className="grid gap-8 pt-16">
+      {/* <section className="grid gap-2 pt-16">
         <FeaturedProducts
           count={4}
-          heading="Shop Best Sellers"
+          heading="Compra los mas vendidos"
           layout={layout}
           onClose={onClose}
           sortKey="BEST_SELLING"
         />
-      </section>
+      </section> */}
     </div>
   );
 }
