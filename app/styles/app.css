@@ -336,25 +336,26 @@ shop-pay-button {
   display: block;
 }
 
-.swiper-horizontal>.swiper-scrollbar, .swiper-scrollbar.swiper-scrollbar-horizontal {
-    position: absolute;
-    left: var(--swiper-scrollbar-sides-offset,1%);
-    bottom: var(--swiper-scrollbar-bottom,0px);
-    top: var(--swiper-scrollbar-top,auto);
-    z-index: 50;
-    height: var(--swiper-scrollbar-size,4px);
-    width: calc(100% - 2 * var(--swiper-scrollbar-sides-offset,1%));
-    padding-top: 15px;
-    padding-bottom: 15px;
-    margin-top: 15px;
-    margin-bottom: 15px;
+.swiper-horizontal > .swiper-scrollbar,
+.swiper-scrollbar.swiper-scrollbar-horizontal {
+  position: absolute;
+  left: var(--swiper-scrollbar-sides-offset, 1%);
+  bottom: var(--swiper-scrollbar-bottom, 0px);
+  top: var(--swiper-scrollbar-top, auto);
+  z-index: 50;
+  height: var(--swiper-scrollbar-size, 4px);
+  width: calc(100% - 2 * var(--swiper-scrollbar-sides-offset, 1%));
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .swiper-scrollbar {
-    border-radius: 12px;
-    position: relative;
-    touch-action: none;
-    background: var(--swiper-scrollbar-bg-color,rgba(0,0,0,.1));
+  border-radius: 12px;
+  position: relative;
+  touch-action: none;
+  background: var(--swiper-scrollbar-bg-color, rgba(0, 0, 0, 0.1));
 }
 
 .progress {
@@ -387,57 +388,66 @@ shop-pay-button {
 }
 
 .swiper-scrollbar-drag {
-    height: 100%;
-    width: 100%;
-    position: relative;
-    background: var(--swiper-scrollbar-drag-bg-color,rgba(199, 74, 42, 0.4));
-    border-radius: var(--swiper-scrollbar-border-radius,10px);
-    left: 0;
-    top: 0;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background: var(--swiper-scrollbar-drag-bg-color, rgba(199, 74, 42, 0.4));
+  border-radius: var(--swiper-scrollbar-border-radius, 10px);
+  left: 0;
+  top: 0;
 }
 
-* {
-  box-sizing: border-box;
+.swiper-button-prev.swiper-button-disabled,
+.swiper-button-next.swiper-button-disabled {
+  opacity: 0.35;
+  cursor: auto;
+  pointer-events: none;
 }
 
-.shop-pay-button {
-    background: rgb(207, 201, 229) !important;
-    line-height: normal;
-    border-radius: var(--shop-pay-button-border-radius, 4px) !important;
-    height: var(--shop-pay-button-height, 42px) !important;
-    width: var(--shop-pay-button-width, 262px) !important;
-    text-decoration: none;
-    color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    column-gap: 4px;
-    white-space: nowrap;
+.swiper-button-prev,
+.swiper-rtl .swiper-button-next {
+  left: var(--swiper-navigation-sides-offset, 10px);
+  right: auto;
 }
 
-.shop-pay-button:not(.disabled):hover {
-    background: #efab0d !important;
+.swiper-button-prev,
+.swiper-button-next {
+  position: absolute;
+  top: var(--swiper-navigation-top-offset, 50%);
+  width: calc(var(--swiper-navigation-size) / 44 * 27);
+  height: var(--swiper-navigation-size);
+  margin-top: calc(0px - (var(--swiper-navigation-size) / 2));
+  z-index: 10;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--swiper-navigation-color, var(--swiper-theme-color));
 }
 
-.shop-pay-button.disabled {
-    opacity: 0.5;
+.swiper-button-next,
+.swiper-rtl .swiper-button-prev {
+  right: var(--swiper-navigation-sides-offset, 10px);
+  left: auto;
 }
 
-.shop-pay-button.bordered {
-    border: 1px solid #EDEDED;
+.swiper-button-next,
+.swiper-rtl .swiper-button-prev {
+  right: var(--swiper-navigation-sides-offset, 10px);
+  left: auto;
 }
 
-shop-pay-logo {
-    display: inline-block;
-    max-height: 100%;
-    max-width: 100%;
+.swiper-button-prev,
+.swiper-button-next {
+  position: absolute;
+  top: var(--swiper-navigation-top-offset, 50%);
+  width: calc(var(--swiper-navigation-size) / 44 * 27);
+  height: var(--swiper-navigation-size);
+  margin-top: calc(0px - (var(--swiper-navigation-size) / 2));
+  z-index: 10;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--swiper-navigation-color, var(--swiper-theme-color));
 }
-
-.visually-hidden {
-    position: absolute;
-    border: 0;
-    clip: rect(0, 0, 0, 0);
-    overflow: hidden;
-    padding: 0;
-}
-

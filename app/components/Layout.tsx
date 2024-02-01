@@ -466,7 +466,7 @@ function Footer({menu}: {menu?: EnhancedMenu}) {
     : [];
 
   return (
-    <div className="mt-20 sm:mt-32 border-t border-gray-500">
+    <div className="mt-2 border-t border-gray-500">
       <div className="px-2 sm:px-6 flex flex-wrap justify-between pt-4">
         <div className="flex flex-col">
           <div className="flex gap-2 items-center">
