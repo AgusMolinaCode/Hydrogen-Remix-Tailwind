@@ -140,16 +140,19 @@ export default function Product() {
 
   return (
     <>
-      <div className="px-0 md:px-4 mt-12">
-        <div className="grid items-start md:gap-6 lg:gap-20 md:grid-cols-2 lg:grid-cols-2">
+      <div className="px-0 md:px-4 mt-12 mb-12 md:mb-32">
+        <div className="grid items-start md:gap-3 lg:gap-4 md:grid-cols-2 lg:grid-cols-2">
           <ProductGallery
             media={media.nodes}
-            className="w-full sm:w-[80%] mx-auto"
+            className="w-full md:w-[70%] xl:w-[80%] ml-auto object-contain"
           />
-          <div className="sticky md:-mb-nav md:top-nav md:-translate-y-nav md:h-screen md:pt-nav hiddenScroll md:overflow-y-scroll ">
-            <section className="flex flex-col w-full max-w-xl gap-4 p-4 md:mx-auto md:max-w-sm md:px-0">
+          <div className="sticky md:-mb-nav md:top-nav md:-translate-y-nav md:pt-nav hiddenScroll md:overflow-y-scroll ">
+            <section className="flex flex-col w-full max-w-xl gap-4 md:mr-auto md:max-w-sm md:px-0">
               <div className="grid gap-2">
-                <Heading as="h1" className="whitespace-normal">
+                <Heading
+                  as="h1"
+                  className="whitespace-normal text-rose-100 font-Righteous text-4xl sm:text-5xl"
+                >
                   {title}
                 </Heading>
                 {vendor && (
@@ -195,7 +198,7 @@ export default function Product() {
         </div>
       </div>
       <Suspense fallback={<Skeleton className="h-32" />}>
-        <h1 className="text-center text-3xl sm:text-4xl font-bold font-racing">
+        <h1 className="text-center text-3xl sm:text-4xl font-bold font-racing text-rose-100">
           Productos relacionados
         </h1>
         <Await
