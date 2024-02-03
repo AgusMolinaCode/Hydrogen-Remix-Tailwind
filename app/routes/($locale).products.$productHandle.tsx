@@ -135,33 +135,79 @@ function redirectToFirstVariant({
 
 export default function Product() {
   const {product, shop, recommended, variants} = useLoaderData<typeof loader>();
-  const {media, title, vendor, descriptionHtml} = product;
+  const {media, title, vendor, descriptionHtml, selectedVariant} = product;
   const {shippingPolicy, refundPolicy} = shop;
+  const isOutOfStock = !selectedVariant?.availableForSale;
+
+  const isOnSale =
+    selectedVariant?.price?.amount &&
+    selectedVariant?.compareAtPrice?.amount &&
+    selectedVariant?.price?.amount < selectedVariant?.compareAtPrice?.amount;
+
+  const compareAtPriceAmount =
+    Number(selectedVariant?.compareAtPrice?.amount) || 0;
+  const priceAmount = Number(selectedVariant?.price?.amount) || 0;
+
+  const discountPercentage: number =
+    compareAtPriceAmount && priceAmount
+      ? (((((compareAtPriceAmount as number) - priceAmount) as number) /
+          compareAtPriceAmount) as number) * 100
+      : 0;
 
   return (
     <>
-      <div className="px-0 md:px-4 mt-12 mb-12 md:mb-32">
+      <div className="px-2 md:px-4 mt-12 mb-12 md:mb-32">
         <div className="grid items-start md:gap-3 lg:gap-4 md:grid-cols-2 lg:grid-cols-2">
           <ProductGallery
             media={media.nodes}
-            className="w-full md:w-[70%] xl:w-[80%] ml-auto object-contain"
+            className="w-full xl:w-[80%] mx-auto sm:ml-auto object-contain"
           />
           <div className="sticky md:-mb-nav md:top-nav md:-translate-y-nav md:pt-nav hiddenScroll md:overflow-y-scroll ">
-            <section className="flex flex-col w-full max-w-xl gap-4 md:mr-auto md:max-w-sm md:px-0">
+            <section className="flex flex-col w-full max-w-xl gap-4 mx-auto md:mx-0 md:mr-auto md:max-w-xl md:px-0">
               <div className="grid gap-2">
+                {vendor && (
+                  <Text className={'opacity-50 font-medium font-Righteous'}>
+                    {vendor}
+                  </Text>
+                )}
                 <Heading
                   as="h1"
-                  className="whitespace-normal text-rose-100 font-Righteous text-4xl sm:text-5xl"
+                  className="whitespace-normal text-rose-100 font-Righteous text-3xl sm:text-5xl border-b border-gray-400/40 pb-6 flex gap-2 items-center justify-between"
                 >
                   {title}
+                  {isOnSale && (
+                    <div
+                      className="relative w-28 h-28 mr-auto flex items-center justify-center"
+                      style={{
+                        backgroundImage: 'url(/etiqueta.webp)',
+                        backgroundSize: 'cover',
+                      }}
+                    >
+                      <span className="text-2xl p-1 text-white font-semibold">{`- ${Math.round(
+                        discountPercentage,
+                      )}%`}</span>
+                    </div>
+                  )}
                 </Heading>
-                {vendor && (
-                  <Text className={'opacity-50 font-medium'}>{vendor}</Text>
-                )}
+                <div className="max-w-lg flex gap-4 font-semibold font-outfit text-2xl sm:text-4xl text-orange-400">
+                  <Money
+                    withoutTrailingZeros
+                    data={selectedVariant?.price!}
+                    as="span"
+                  />
+                  {isOnSale && (
+                    <Money
+                      withoutTrailingZeros
+                      data={selectedVariant?.compareAtPrice!}
+                      as="span"
+                      className="opacity-50 strike"
+                    />
+                  )}
+                </div>
               </div>
               <Suspense fallback={<ProductForm variants={[]} />}>
                 <Await
-                  errorElement="There was a problem loading related products"
+                  errorElement="Hubo un problema cargando variantes de producto"
                   resolve={variants}
                 >
                   {(resp) => (
@@ -221,11 +267,6 @@ export function ProductForm({
 
   const closeRef = useRef<HTMLButtonElement>(null);
 
-  /**
-   * Likewise, we're defaulting to the first variant for purposes
-   * of add to cart if there is none returned from the loader.
-   * A developer can opt out of this, too.
-   */
   const selectedVariant = product.selectedVariant!;
   const isOutOfStock = !selectedVariant?.availableForSale;
 
@@ -362,20 +403,7 @@ export function ProductForm({
                   as="span"
                   className="flex items-center justify-center gap-2"
                 >
-                  <span>Agregar al carrito</span> <span>·</span>{' '}
-                  <Money
-                    withoutTrailingZeros
-                    data={selectedVariant?.price!}
-                    as="span"
-                  />
-                  {isOnSale && (
-                    <Money
-                      withoutTrailingZeros
-                      data={selectedVariant?.compareAtPrice!}
-                      as="span"
-                      className="opacity-50 strike"
-                    />
-                  )}
+                  <span>Agregar al carrito</span>
                 </Text>
               </AddToCartButton>
             )}

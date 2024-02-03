@@ -38,9 +38,11 @@ export function ProductGallery({
 
   return (
     <div
-      className={`swimlane md:grid-flow-row hiddenScroll md:p-0 md:overflow-x-auto md:grid-cols-3 ${className}`}
+      className={`${
+        media.length > 1 ? 'swimlane' : ''
+      } md:grid-flow-row hiddenScroll md:p-0 md:overflow-x-auto md:grid-cols-3 pb-6 sm:pb-0 ${className}`}
     >
-      <div className="md:col-span-3 aspect-square snap-center bg-white dark:bg-contrast/10 w-mobileGallery mx-auto md:w-full rounded-xl">
+      <div className="md:col-span-3 aspect-square snap-center bg-white dark:bg-contrast/10 w-mobileGallery mx-auto md:w-full rounded-xl ">
         {selectedImage.__typename === 'MediaImage' && (
           <Image
             loading="eager"
@@ -68,7 +70,7 @@ export function ProductGallery({
             key={med.id || image?.id}
             role="button"
             tabIndex={0}
-            className="md:col-span-1 md:aspect-[1/1] aspect-square snap-center bg-white dark:bg-contrast/10 w-mobileGallery md:w-full rounded-xl"
+            className="md:col-span-1 md:aspect-[1/1] aspect-square snap-center bg-white dark:bg-contrast/10 w-mobileGallery md:w-full rounded-xl "
             onClick={() => {
               if (windowWidth >= 767) {
                 setSelectedImage(med);
@@ -84,7 +86,7 @@ export function ProductGallery({
               loading="lazy"
               data={image}
               aspectRatio="1/1"
-              className="object-contain object-center w-full h-full aspect-square fadeIn rounded-2xl"
+              className="object-contain object-center w-full h-full aspect-square fadeIn rounded-2xl "
             />
           </div>
         );

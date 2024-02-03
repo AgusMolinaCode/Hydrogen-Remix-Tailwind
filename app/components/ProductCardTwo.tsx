@@ -52,6 +52,14 @@ export function ProductCardTwo({
     quantity: 1,
   };
 
+  function truncateTitle(title: string) {
+    if (title.length > 25) {
+      return title.substring(0, 25) + '...';
+    } else {
+      return title;
+    }
+  }
+
   return (
     <div className="flex flex-col gap-2">
       <Link
@@ -71,22 +79,22 @@ export function ProductCardTwo({
                 />
               </div>
             )}
-            <div className="w-full px-6 rounded-bl-xl flex flex-col items-center justify-center rounded-br-xl bg-orange-200/20 absolute bottom-0 backdrop-blur-3xl border-t">
-              <Text
+            <div className="w-full px-2 rounded-bl-xl flex flex-col items-center justify-center rounded-br-xl bg-orange-200/60 absolute bottom-0 backdrop-blur-3xl border-t h-[80px]">
+              {/* <Text
                 className="text-rose-300 font-Righteous font-semibold"
                 as="h3"
                 size="copy"
               >
                 {product.vendor}
-              </Text>
+              </Text> */}
               <Text
-                className="text-gray-100 font-Righteous font-bold text-center"
+                className="text-gray-800 font-Righteous font-bold text-center text-xl"
                 as="h3"
                 size="Thirdxl"
               >
-                {product.title}
+                {truncateTitle(product.title)}
               </Text>
-              <Text className="text-gray-100 font-Righteous font-bold py-2">
+              <Text className="text-gray-900 font-Righteous font-bold py-2 flex gap-2">
                 <Money withoutTrailingZeros data={price!} />
                 {isDiscounted(price as MoneyV2, compareAtPrice as MoneyV2) && (
                   <CompareAtPrice
