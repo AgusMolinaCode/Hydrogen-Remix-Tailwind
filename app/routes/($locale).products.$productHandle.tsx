@@ -13,6 +13,7 @@ import {
 } from '@shopify/hydrogen';
 import invariant from 'tiny-invariant';
 import clsx from 'clsx';
+import {Select, SelectItem} from '@nextui-org/react';
 
 import type {
   ProductQuery,
@@ -32,6 +33,7 @@ import {
   AddToCartButton,
   Button,
 } from '~/components';
+import {BuyNowButton} from '~/components/BuyNowButton';
 import {getExcerpt} from '~/lib/utils';
 import {seoPayload} from '~/lib/seo.server';
 import type {Storefront} from '~/lib/type';
@@ -166,13 +168,13 @@ export default function Product() {
             <section className="flex flex-col w-full max-w-xl gap-4 mx-auto md:mx-0 md:mr-auto md:max-w-xl md:px-0">
               <div className="grid gap-2">
                 {vendor && (
-                  <Text className={'opacity-50 font-medium font-Righteous'}>
+                  <Text className={'font-medium font-Righteous text-gray-500'}>
                     {vendor}
                   </Text>
                 )}
                 <Heading
                   as="h1"
-                  className="whitespace-normal text-rose-100 font-Righteous text-3xl sm:text-5xl border-b border-gray-400/40 pb-6 flex gap-2 items-center justify-between"
+                  className="whitespace-normal text-rose-100 font-Righteous text-3xl sm:text-5xl border-b border-gray-400/40 pb-6 flex gap-2 items-center justify-between h-24"
                 >
                   {title}
                   {isOnSale && (
@@ -183,7 +185,7 @@ export default function Product() {
                         backgroundSize: 'cover',
                       }}
                     >
-                      <span className="text-2xl p-1 text-white font-semibold">{`- ${Math.round(
+                      <span className="text-2xl text-white font-semibold">{`-${Math.round(
                         discountPercentage,
                       )}%`}</span>
                     </div>
@@ -281,7 +283,7 @@ export function ProductForm({
   };
 
   return (
-    <div className="grid gap-10">
+    <div className="grid gap-4">
       <div className="grid gap-4">
         <VariantSelector
           handle={product.handle}
@@ -292,13 +294,17 @@ export function ProductForm({
             return (
               <div
                 key={option.name}
-                className="flex flex-col flex-wrap mb-4 gap-y-2 last:mb-0"
+                className="grid sm:grid-cols-2 items-center mb-4 gap-y-2 last:mb-0"
               >
-                <Heading as="legend" size="lead" className="min-w-[4rem]">
+                <Heading
+                  as="legend"
+                  size="lead"
+                  className="min-w-[4rem] font-outfit text-rose-100 font-semibold text-lg"
+                >
                   {option.name}
                 </Heading>
-                <div className="flex flex-wrap items-baseline gap-4">
-                  {option.values.length > 7 ? (
+                <div className="flex flex-wrap gap-4">
+                  {option.values.length > 1 && (
                     <div className="relative w-full">
                       <Listbox>
                         {({open}) => (
@@ -306,7 +312,7 @@ export function ProductForm({
                             <Listbox.Button
                               ref={closeRef}
                               className={clsx(
-                                'flex items-center justify-between w-full py-3 px-4 border border-primary',
+                                'flex items-center rounded-2xl justify-between w-full py-1 px-2 border border-white font-outfit font-bold text-white',
                                 open
                                   ? 'rounded-b md:rounded-t md:rounded-b-none'
                                   : 'rounded',
@@ -317,7 +323,7 @@ export function ProductForm({
                             </Listbox.Button>
                             <Listbox.Options
                               className={clsx(
-                                'border-primary bg-contrast absolute bottom-12 z-30 grid h-48 w-full overflow-y-scroll rounded-t border px-2 py-2 transition-[max-height] duration-150 sm:bottom-auto md:rounded-b md:rounded-t-none md:border-t-0 md:border-b',
+                                'border-white bg-black/50 backdrop-blur-lg absolute bottom-12 z-30 grid h-48 w-full rounded-2xl border px-2 py-2 transition-[max-height] duration-150 sm:bottom-auto font-outfit font-bold',
                                 open ? 'max-h-48' : 'max-h-0',
                               )}
                             >
@@ -332,7 +338,7 @@ export function ProductForm({
                                       <Link
                                         to={to}
                                         className={clsx(
-                                          'text-primary w-full p-2 transition rounded flex justify-start items-center text-left cursor-pointer',
+                                          'text-white w-full p-2 transition rounded flex justify-start items-center text-left cursor-pointer font-outfit font-bold',
                                           active && 'bg-primary/10',
                                         )}
                                         onClick={() => {
@@ -355,23 +361,6 @@ export function ProductForm({
                         )}
                       </Listbox>
                     </div>
-                  ) : (
-                    option.values.map(({value, isAvailable, isActive, to}) => (
-                      <Link
-                        key={option.name + value}
-                        to={to}
-                        preventScrollReset
-                        prefetch="intent"
-                        replace
-                        className={clsx(
-                          'leading-none py-1 border-b-[1.5px] cursor-pointer transition-all duration-200',
-                          isActive ? 'border-primary/50' : 'border-primary/0',
-                          isAvailable ? 'opacity-100' : 'opacity-50',
-                        )}
-                      >
-                        {value}
-                      </Link>
-                    ))
                   )}
                 </div>
               </div>
@@ -407,13 +396,10 @@ export function ProductForm({
                 </Text>
               </AddToCartButton>
             )}
-            {/* {!isOutOfStock && (
-              <ShopPayButton
-                width="100%"
-                variantIds={[selectedVariant?.id!]}
-                storeDomain={storeDomain}
-              />
-            )} */}
+            <BuyNowButton
+              lines={[{merchandiseId: selectedVariant.id, quantity: 1}]}
+              disabled={isOutOfStock}
+            />
           </div>
         )}
       </div>
