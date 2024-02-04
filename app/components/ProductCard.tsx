@@ -75,9 +75,9 @@ export function ProductCard({
           </div>
           <div className="">
             {image && (
-              <div className="flex justify-center items-center bg-transparent backdrop-blur h-[410px] md:h-[430px] w-full relative rounded-2xl bg-zinc-600 border-r border-l border-gray-500 overflow-hidden">
+              <div className="flex justify-center items-center bg-transparent backdrop-blur h-full md:h-[430px] w-full relative rounded-2xl bg-zinc-600 border-r border-l border-gray-500 overflow-hidden">
                 <Image
-                  className="object-center sm:object-contain fadeIn p-4 rounded-xl h-[300px] md:h-full md:w-full hover:scale-105 duration-300"
+                  className="object-center sm:object-contain fadeIn p-4 rounded-xl h-[430px] md:h-full md:w-full hover:scale-105 duration-300"
                   data={image}
                   alt={image.altText || `Picture of ${product.title}`}
                   loading={loading}

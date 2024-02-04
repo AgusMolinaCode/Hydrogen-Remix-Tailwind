@@ -70,16 +70,16 @@ export function ProductCardTwo({
         <div className={clsx('grid gap-4 relative overflow-hidden', className)}>
           <div className="">
             {image && (
-              <div className="flex justify-center items-center bg-transparent backdrop-blur h-[400px] w-full relative rounded-2xl bg-gradient-to-bl from-gray-900 via-gray-500 to-gray-900 border-r border-l border-gray-500 overflow-hidden">
+              <div className="flex justify-center items-center bg-transparent backdrop-blur h-[430px] w-full relative rounded-2xl bg-gradient-to-bl from-gray-900 via-gray-500 to-gray-900 border-r border-l border-gray-500 overflow-hidden">
                 <Image
-                  className="object-contain fadeIn p-2 rounded-xl md:h-full md:w-full hover:scale-105 duration-300"
+                  className="object-center object-contain fadeIn p-2 rounded-xl h-full w-full hover:scale-105 duration-300"
                   data={image}
                   alt={image.altText || `Picture of ${product.title}`}
                   loading={loading}
                 />
               </div>
             )}
-            <div className="w-full px-2 rounded-bl-xl flex flex-col items-center justify-center rounded-br-xl bg-orange-200/60 absolute bottom-0 backdrop-blur-3xl border-t h-[80px]">
+            <div className="w-full px-2 rounded-bl-xl flex flex-col items-center justify-center rounded-br-xl bg-orange-200/40 absolute bottom-0 backdrop-blur-3xl border-t h-[80px]">
               {/* <Text
                 className="text-rose-300 font-Righteous font-semibold"
                 as="h3"
