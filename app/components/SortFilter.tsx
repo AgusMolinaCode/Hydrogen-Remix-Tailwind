@@ -175,7 +175,7 @@ function AppliedFilters({filters = []}: {filters: AppliedFilter[]}) {
         size="lead"
         className="pb-4 font-outfit font-semibold text-rose-100"
       >
-        Applied filters
+        Filtros aplicados
       </Heading>
       <div className="flex items-center flex-wrap gap-2">
         {filters.map((filter: AppliedFilter) => {
