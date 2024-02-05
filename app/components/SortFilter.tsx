@@ -13,7 +13,7 @@ import type {
   Filter,
   ProductFilter,
 } from '@shopify/hydrogen/storefront-api-types';
-import {AdjustmentsHorizontalIcon} from '@heroicons/react/16/solid';
+import {AdjustmentsHorizontalIcon, XMarkIcon} from '@heroicons/react/16/solid';
 
 import {Heading, IconCaret, IconXMark, Text} from '~/components';
 
@@ -170,20 +170,26 @@ function AppliedFilters({filters = []}: {filters: AppliedFilter[]}) {
   const location = useLocation();
   return (
     <>
-      <Heading as="h4" size="lead" className="pb-4">
+      <Heading
+        as="h4"
+        size="lead"
+        className="pb-4 font-outfit font-semibold text-rose-100"
+      >
         Applied filters
       </Heading>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex items-center flex-wrap gap-2">
         {filters.map((filter: AppliedFilter) => {
           return (
             <Link
               to={getAppliedFilterLink(filter, params, location)}
-              className="flex px-2 border rounded-full gap"
+              className="flex px-2 border border-rose-100 rounded-full gap-2 items-center"
               key={`${filter.label}-${JSON.stringify(filter.filter)}`}
             >
-              <span className="flex-grow">{filter.label}</span>
+              <span className="flex-grow font-outfit text-rose-100 text-lg font-semibold">
+                {filter.label}
+              </span>
               <span>
-                <IconXMark />
+                <XMarkIcon className="w-8 h-8 text-rose-100" />
               </span>
             </Link>
           );
