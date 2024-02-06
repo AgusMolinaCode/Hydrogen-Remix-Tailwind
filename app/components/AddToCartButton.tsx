@@ -51,8 +51,8 @@ export function AddToCartButton({
               as="button"
               type="submit"
               width={width}
-              variant={variant}
-              className={className}
+              // variant={variant}
+              className="bg-transparent"
               disabled={disabled ?? fetcher.state !== 'idle'}
               {...props}
             >

@@ -137,14 +137,6 @@ export default function Homepage() {
         </Suspense>
       )}
 
-      <div
-        style={{
-          margin: '0 auto',
-        }}
-        className="pxFormGenerator"
-        id="4969-4pKGJOpNkolRlRXSA"
-      />
-
       {featuredCollections && (
         <Suspense>
           <Await resolve={featuredCollections}>

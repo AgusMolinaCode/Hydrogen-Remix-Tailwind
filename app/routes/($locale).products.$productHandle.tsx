@@ -314,7 +314,7 @@ export function ProductForm({
                               className={clsx(
                                 'flex items-center rounded-2xl justify-between w-full py-1 px-2 border border-white font-outfit font-bold text-white',
                                 open
-                                  ? 'rounded-b md:rounded-t md:rounded-b-none'
+                                  ? 'md:rounded-t-2xl md:rounded-b-none md:border-b-0'
                                   : 'rounded',
                               )}
                             >
@@ -324,7 +324,9 @@ export function ProductForm({
                             <Listbox.Options
                               className={clsx(
                                 'border-white bg-black/50 backdrop-blur-lg absolute bottom-12 z-30 grid h-48 w-full rounded-2xl border px-2 py-2 transition-[max-height] duration-150 sm:bottom-auto font-outfit font-bold',
-                                open ? 'max-h-48' : 'max-h-0',
+                                open
+                                  ? 'max-h-48 md:rounded-t-none md:border-t-0'
+                                  : 'max-h-0',
                               )}
                             >
                               {option.values
@@ -381,19 +383,45 @@ export function ProductForm({
                     quantity: 1,
                   },
                 ]}
-                variant="primary"
                 data-test="add-to-cart"
                 analytics={{
                   products: [productAnalytics],
                   totalValue: parseFloat(productAnalytics.price),
                 }}
               >
-                <Text
-                  as="span"
-                  className="flex items-center justify-center gap-2"
-                >
-                  <span>Agregar al carrito</span>
-                </Text>
+                <button className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-3xl bg-indigo-600 px-6 font-medium text-neutral-200 duration-500 w-full">
+                  <div className="translate-x-0 opacity-100 transition group-hover:-translate-x-[150%] group-hover:opacity-0 font-outfit text-lg">
+                    Agregar al carrito
+                  </div>
+                  <div className="absolute translate-x-[150%] opacity-0 transition group-hover:translate-x-0 group-hover:opacity-100">
+                    <svg
+                      width="209px"
+                      height="209px"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      stroke="#000000"
+                      className="w-6 h-6"
+                    >
+                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                      <g
+                        id="SVGRepo_tracerCarrier"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></g>
+                      <g id="SVGRepo_iconCarrier">
+                        {' '}
+                        <path
+                          d="M6.29977 5H21L19 12H7.37671M20 16H8L6 3H3M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z"
+                          stroke="#ffffff"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>{' '}
+                      </g>
+                    </svg>
+                  </div>
+                </button>
               </AddToCartButton>
             )}
             <BuyNowButton
