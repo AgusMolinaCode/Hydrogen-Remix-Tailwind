@@ -222,7 +222,7 @@ export default function Product() {
               <div className="grid gap-4 py-4">
                 {descriptionHtml && (
                   <ProductDetail
-                    title="Product Details"
+                    title="Detalles del producto"
                     content={descriptionHtml}
                   />
                 )}
@@ -276,6 +276,18 @@ export function ProductForm({
     selectedVariant?.price?.amount &&
     selectedVariant?.compareAtPrice?.amount &&
     selectedVariant?.price?.amount < selectedVariant?.compareAtPrice?.amount;
+
+  const currentDate = new Date();
+  const twelveDaysLater = new Date();
+  twelveDaysLater.setDate(currentDate.getDate() + 19);
+  const twentyDaysLater = new Date();
+  twentyDaysLater.setDate(currentDate.getDate() + 27);
+
+  const formatDate = (date: Date) => {
+    return `${date.getDate()} de ${date.toLocaleString('es-ES', {
+      month: 'long',
+    })}`;
+  };
 
   const productAnalytics: ShopifyAnalyticsProduct = {
     ...analytics.products[0],
@@ -371,6 +383,18 @@ export function ProductForm({
         </VariantSelector>
         {selectedVariant && (
           <div className="grid items-stretch gap-4">
+            <div className="bg-[#59ff00] rounded-lg p-1 flex gap-3 items-center justify-center">
+              <img
+                src="/delivery.png"
+                alt=""
+                className="w-[40px] sm:w-[50px] h-[40px] sm:h-[50px]"
+              />
+              <p className="font-outfit font-semibold text-black text-center text-[1rem] sm:text-xl">
+                Llega entre el {formatDate(twelveDaysLater)} y{' '}
+                {formatDate(twentyDaysLater)}.
+              </p>
+            </div>
+
             {isOutOfStock ? (
               <Button variant="secondary" disabled>
                 <Text>Sin stock</Text>
@@ -450,7 +474,11 @@ function ProductDetail({
         <>
           <Disclosure.Button className="text-left">
             <div className="flex justify-between">
-              <Text size="lead" as="h4">
+              <Text
+                size="lead"
+                as="h4"
+                className="text-rose-100 font-outfit font-bold text-lg"
+              >
                 {title}
               </Text>
               <IconClose
