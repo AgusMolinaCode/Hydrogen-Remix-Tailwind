@@ -159,7 +159,6 @@ export default function Homepage() {
           <Await resolve={featuredProduct}>
             {({productByHandle}) => {
               if (!productByHandle) return <></>;
-              console.log(productByHandle);
               return (
                 <div>
                   <h1 className="flex justify-center text-rose-100 text-3xl sm:text-5xl font-racing font-semibold mx-auto items-center gap-2 pt-8">
