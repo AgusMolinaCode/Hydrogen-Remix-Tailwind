@@ -3,7 +3,12 @@ import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {Await, useLoaderData} from '@remix-run/react';
 import {AnalyticsPageType} from '@shopify/hydrogen';
 
-import {ProductSwimlane, FeaturedCollections, Hero} from '~/components';
+import {
+  ProductSwimlane,
+  FeaturedCollections,
+  Hero,
+  ProductCard,
+} from '~/components';
 import {MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import {seoPayload} from '~/lib/seo.server';
 import {routeHeaders} from '~/data/cache';
@@ -51,6 +56,14 @@ export async function loader({params, context}: LoaderFunctionArgs) {
         },
       },
     ),
+    featuredProduct: context.storefront.query(FEATURED_PRODUCT_QUERY, {
+      variables: {
+        handle: 'kit-biela-hot-rods',
+        country,
+        language,
+      },
+    }),
+
     featuredCollections: context.storefront.query(FEATURED_COLLECTIONS_QUERY, {
       variables: {
         country,
@@ -65,8 +78,12 @@ export async function loader({params, context}: LoaderFunctionArgs) {
 }
 
 export default function Homepage() {
-  const {featuredCollections, featuredProducts, featuredCollection} =
-    useLoaderData<typeof loader>();
+  const {
+    featuredCollections,
+    featuredProducts,
+    featuredCollection,
+    featuredProduct,
+  } = useLoaderData<typeof loader>();
 
   return (
     <>
@@ -130,6 +147,28 @@ export default function Homepage() {
                     products={{nodes: filteredProducts}}
                     count={4}
                   />
+                </div>
+              );
+            }}
+          </Await>
+        </Suspense>
+      )}
+
+      {featuredProduct && (
+        <Suspense>
+          <Await resolve={featuredProduct}>
+            {({productByHandle}) => {
+              if (!productByHandle) return <></>;
+              console.log(productByHandle);
+              return (
+                <div>
+                  <h1 className="flex justify-center text-rose-100 text-3xl sm:text-5xl font-racing font-semibold mx-auto items-center gap-2 pt-8">
+                    producto
+                    <span className="font-racing text-3xl sm:text-5xl text-center font-bold text-red-200">
+                      {productByHandle.title}
+                    </span>
+                  </h1>
+                  <ProductCard product={productByHandle} />
                 </div>
               );
             }}
@@ -215,6 +254,16 @@ export const HOMEPAGE_FEATURED_PRODUCTS_QUERY = `#graphql
       nodes {
         ...ProductCard
       }
+    }
+  }
+  ${PRODUCT_CARD_FRAGMENT}
+` as const;
+
+export const FEATURED_PRODUCT_QUERY = `#graphql
+  query featuredProduct($handle: String!, $country: CountryCode, $language: LanguageCode)
+  @inContext(country: $country, language: $language) {
+    productByHandle(handle: $handle) {
+      ...ProductCard
     }
   }
   ${PRODUCT_CARD_FRAGMENT}

@@ -383,13 +383,13 @@ export function ProductForm({
         </VariantSelector>
         {selectedVariant && (
           <div className="grid items-stretch gap-4">
-            <div className="bg-[#59ff00] rounded-lg p-1 flex gap-3 items-center justify-center">
+            <div className="bg-[#59ff00] rounded-xl flex gap-3 items-center justify-center">
               <img
                 src="/delivery.png"
                 alt=""
-                className="w-[40px] sm:w-[50px] h-[40px] sm:h-[50px]"
+                className="w-[35px] sm:w-[45px] h-[35px] sm:h-[45px]"
               />
-              <p className="font-outfit font-semibold text-black text-center text-[1rem] sm:text-xl">
+              <p className="font-outfit font-semibold text-black text-center text-[0.8rem] sm:text-[1rem]">
                 Llega entre el {formatDate(twelveDaysLater)} y{' '}
                 {formatDate(twentyDaysLater)}.
               </p>
