@@ -4,6 +4,7 @@ import {Link} from '.';
 
 export default function SliderMenuWsp() {
   const {scrollYProgress} = useScroll();
+
   const rotate = useTransform(scrollYProgress, [0, 1], [0, 360]);
   const rotateSpring = useSpring(rotate, {
     stiffness: 100,
