@@ -1,8 +1,15 @@
-import {motion} from 'framer-motion';
+import {motion, useScroll, useTransform, useSpring} from 'framer-motion';
 
 import {Link} from '.';
 
 export default function SliderMenuWsp() {
+  const {scrollYProgress} = useScroll();
+  const rotate = useTransform(scrollYProgress, [0, 1], [0, 360]);
+  const rotateSpring = useSpring(rotate, {
+    stiffness: 100,
+    damping: 30,
+  });
+
   return (
     <div className="relative">
       <div className="fixed bottom-2 right-2 z-50 w-[100px] sm:w-[120px] h-[100px] sm:h-[120px]">
@@ -17,11 +24,7 @@ export default function SliderMenuWsp() {
               className="sm:d[M 60, 60 m -48, 0 a 48,48 0 1,0 96,0 a 48,48 0 1,0 -96,0]"
             />
           </defs>
-          <motion.text
-            animate={{rotate: 360}}
-            transition={{duration: 8, ease: 'linear', repeat: Infinity}}
-            fill="#fde4e6"
-          >
+          <motion.text style={{rotate: rotateSpring}} fill="#fde4e6">
             <textPath
               xlinkHref="#circlePath"
               className="text-xs font-outfit text-rose-100 font-semibold tracking-tight"

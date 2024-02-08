@@ -30,7 +30,7 @@ export function ProductSwimlane({
         pagination={{
           clickable: true,
         }}
-        slidesPerView={1}
+        slidesPerView={2}
         spaceBetween={3}
         grabCursor={true}
         style={{

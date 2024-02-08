@@ -74,9 +74,9 @@ export function ProductCard({
           </div>
           <div className="">
             {image && (
-              <div className="flex justify-center items-center bg-transparent backdrop-blur h-full md:h-[430px] w-full relative rounded-2xl bg-zinc-600 border-r border-l border-gray-500 overflow-hidden">
+              <div className="flex justify-center items-center bg-transparent backdrop-blur h-[300px] md:h-[430px] w-full relative rounded-2xl bg-zinc-600 border-r border-l border-gray-500 overflow-hidden">
                 <Image
-                  className="object-center sm:object-contain fadeIn p-4 rounded-xl h-[430px] md:h-full md:w-full hover:scale-105 duration-300"
+                  className="object-center sm:object-contain fadeIn p-4 rounded-xl md:h-full md:w-full hover:scale-105 duration-300"
                   data={image}
                   alt={image.altText || `Picture of ${product.title}`}
                   loading={loading}
@@ -85,14 +85,14 @@ export function ProductCard({
             )}
             <div className="flex justify-between gap-4 absolute bottom-0 w-full rounded-bl-xl items-center rounded-br-xl bg-black/20 border-t h-14 backdrop-blur-3xl px-3">
               <Text
-                className="text-rose-100 font-Righteous font-bold"
+                className="text-rose-100 font-Righteous font-bold text-sm sm:text-lg"
                 as="h3"
                 size="copy"
               >
                 {truncateTitle(product.title)}
               </Text>
 
-              <Text className="text-rose-100 font-Righteous font-bold">
+              <Text className="text-rose-100 font-Righteous font-bold hidden sm:block">
                 <Money withoutTrailingZeros data={price!} />
                 {isDiscounted(price as MoneyV2, compareAtPrice as MoneyV2) && (
                   <CompareAtPrice
