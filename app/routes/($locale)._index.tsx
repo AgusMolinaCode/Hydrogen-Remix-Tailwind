@@ -3,12 +3,7 @@ import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {Await, useLoaderData} from '@remix-run/react';
 import {AnalyticsPageType} from '@shopify/hydrogen';
 
-import {
-  ProductSwimlane,
-  FeaturedCollections,
-  Hero,
-  ProductCard,
-} from '~/components';
+import {ProductSwimlane, FeaturedCollections, Hero} from '~/components';
 import {MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import {seoPayload} from '~/lib/seo.server';
 import {routeHeaders} from '~/data/cache';
@@ -16,7 +11,7 @@ import HeroInfo from '~/components/HeroInfo';
 import HeroTwo from '~/components/HeroTwo';
 import {ProductSwimlaneTwo} from '~/components/ProductSwimlaneTwo';
 import SliderMenuVendor from '~/components/SliderMenuVendor';
-import SliderMenuWsp from '~/components/SliderMenuWsp';
+import {ProductCardForm} from '~/components/ProductCardForm';
 
 export const headers = routeHeaders;
 
@@ -167,7 +162,7 @@ export default function Homepage() {
                       {productByHandle.title}
                     </span>
                   </h1>
-                  <ProductCard product={productByHandle} />
+                  <ProductCardForm product={productByHandle} />
                 </div>
               );
             }}
