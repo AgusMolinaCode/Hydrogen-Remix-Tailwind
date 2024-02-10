@@ -53,7 +53,7 @@ export async function loader({params, context}: LoaderFunctionArgs) {
     ),
     featuredProduct: context.storefront.query(FEATURED_PRODUCT_QUERY, {
       variables: {
-        handle: '100-armega-albar',
+        handle: '100-armega-forecast-black',
         country,
         language,
       },
@@ -156,9 +156,13 @@ export default function Homepage() {
               if (!productByHandle) return <></>;
               return (
                 <div>
-                  <h1 className="flex justify-center text-rose-100 text-3xl sm:text-5xl font-racing font-semibold mx-auto items-center gap-2 pt-10 sm:pt-16 pb-4 sm:pb-8">
-                    producto de la semana
+                  <h1 className="flex justify-center text-rose-100 text-3xl sm:text-5xl font-racing font-semibold mx-auto items-center gap-2 pt-10 sm:pt-16 pb-4">
+                    Oportunidad
                   </h1>
+                  <p className="font-racing font-semibold text-center text-2xl">
+                    Descubre el producto más vendido de la semana, no te quedes
+                    sin el tuyo.
+                  </p>
                   <ProductCardForm product={productByHandle} />
                 </div>
               );

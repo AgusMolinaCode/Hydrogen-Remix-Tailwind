@@ -54,8 +54,8 @@ export function ProductCardForm({
   };
 
   function truncateTitle(title: string) {
-    if (title.length > 25) {
-      return title.substring(0, 25) + '...';
+    if (title.length > 35) {
+      return title.substring(0, 35) + '...';
     } else {
       return title;
     }
@@ -81,7 +81,7 @@ export function ProductCardForm({
       <div>
         <div
           className={clsx(
-            'gap-4 overflow-hidden flex flex-col justify-between h-full px-2',
+            'gap-4 overflow-hidden flex flex-col justify-between h-full px-2 max-w-lg',
             className,
           )}
         >
@@ -102,14 +102,16 @@ export function ProductCardForm({
                 </>
               )}
             </div>
-            <div className="bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100 p-2 rounded-2xl inline-block font-racing text-4xl text-gray-800 my-4">
-              -
-              {getDiscountPercentage(
-                price as MoneyV2,
-                compareAtPrice as MoneyV2,
-              )}
-              % descuento
-            </div>
+            {compareAtPrice && (
+              <div className="bg-gradient-to-r from-red-400 to-yellow-100 p-2 rounded-2xl inline-block font-racing text-4xl text-gray-800 my-4">
+                -
+                {getDiscountPercentage(
+                  price as MoneyV2,
+                  compareAtPrice as MoneyV2,
+                )}
+                % descuento
+              </div>
+            )}
           </div>
           <div>
             <Link
