@@ -44,6 +44,7 @@ export const PRODUCT_CARD_FRAGMENT = `#graphql
     publishedAt
     handle
     vendor
+    description
     collections(first: 1) {
       edges {
         node {

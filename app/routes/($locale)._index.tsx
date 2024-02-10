@@ -12,6 +12,7 @@ import HeroTwo from '~/components/HeroTwo';
 import {ProductSwimlaneTwo} from '~/components/ProductSwimlaneTwo';
 import SliderMenuVendor from '~/components/SliderMenuVendor';
 import {ProductCardForm} from '~/components/ProductCardForm';
+import SliderInfinite from '~/components/SliderInfinite';
 
 export const headers = routeHeaders;
 
@@ -53,7 +54,7 @@ export async function loader({params, context}: LoaderFunctionArgs) {
     ),
     featuredProduct: context.storefront.query(FEATURED_PRODUCT_QUERY, {
       variables: {
-        handle: '100-armega-forecast-black',
+        handle: 'kit-biela-hot-rods',
         country,
         language,
       },
@@ -156,10 +157,10 @@ export default function Homepage() {
               if (!productByHandle) return <></>;
               return (
                 <div>
-                  <h1 className="flex justify-center text-rose-100 text-3xl sm:text-5xl font-racing font-semibold mx-auto items-center gap-2 pt-10 sm:pt-16 pb-4">
-                    Oportunidad
+                  <h1 className="flex justify-center text-rose-100 text-4xl sm:text-5xl font-racing font-semibold mx-auto items-center gap-2 pt-10 sm:pt-16 pb-4">
+                    Producto destacado
                   </h1>
-                  <p className="font-racing font-semibold text-center text-2xl">
+                  <p className="font-racing font-semibold text-center text-xl text-gray-300 sm:text-2xl">
                     Descubre el producto más vendido de la semana, no te quedes
                     sin el tuyo.
                   </p>
@@ -170,6 +171,10 @@ export default function Homepage() {
           </Await>
         </Suspense>
       )}
+
+      <SliderInfinite />
+
+      
 
       {featuredCollections && (
         <Suspense>

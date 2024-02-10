@@ -13,7 +13,6 @@ import {
 } from '@shopify/hydrogen';
 import invariant from 'tiny-invariant';
 import clsx from 'clsx';
-import {Select, SelectItem} from '@nextui-org/react';
 
 import type {
   ProductQuery,
@@ -191,20 +190,32 @@ export default function Product() {
                     </div>
                   )}
                 </Heading>
-                <div className="max-w-lg flex gap-4 font-semibold font-outfit text-2xl sm:text-4xl text-orange-400">
-                  <Money
-                    withoutTrailingZeros
-                    data={selectedVariant?.price!}
-                    as="span"
-                  />
-                  {isOnSale && (
+                <div className="max-w-lg flex flex-col gap-4">
+                  <div className="flex gap-4 font-semibold font-outfit text-2xl sm:text-4xl text-orange-400">
                     <Money
                       withoutTrailingZeros
-                      data={selectedVariant?.compareAtPrice!}
+                      data={selectedVariant?.price!}
                       as="span"
-                      className="opacity-50 strike"
                     />
-                  )}
+                    {isOnSale && (
+                      <Money
+                        withoutTrailingZeros
+                        data={selectedVariant?.compareAtPrice!}
+                        as="span"
+                        className="opacity-50 strike"
+                      />
+                    )}
+                  </div>
+                  <div>
+                    {selectedVariant?.sku && (
+                      <p className="font-outfit text-2xl text-white">
+                        <span className="font-semibold font-outfit text-gray-300 text-xl">
+                          Codigo:
+                        </span>{' '}
+                        {selectedVariant.sku}
+                      </p>
+                    )}
+                  </div>
                 </div>
               </div>
               <Suspense fallback={<ProductForm variants={[]} />}>
@@ -397,7 +408,7 @@ export function ProductForm({
 
             {isOutOfStock ? (
               <Button variant="secondary" disabled>
-                <Text>Sin stock</Text>
+                <Text className="font-outfit">Sin stock</Text>
               </Button>
             ) : (
               <AddToCartButton
@@ -427,20 +438,20 @@ export function ProductForm({
                       stroke="#000000"
                       className="w-6 h-6"
                     >
-                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                       <g
                         id="SVGRepo_tracerCarrier"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       ></g>
                       <g id="SVGRepo_iconCarrier">
                         {' '}
                         <path
                           d="M6.29977 5H21L19 12H7.37671M20 16H8L6 3H3M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z"
                           stroke="#ffffff"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         ></path>{' '}
                       </g>
                     </svg>
@@ -647,7 +658,7 @@ async function getRecommendedProducts(
     variables: {productId, count: 12},
   });
 
-  invariant(products, 'No data returned from Shopify API');
+  invariant(products, 'No hay productos recomendados para mostrar');
 
   const mergedProducts = (products.recommended ?? [])
     .concat(products.additional.nodes)

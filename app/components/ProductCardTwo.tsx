@@ -23,7 +23,6 @@ export function ProductCardTwo({
   quickAdd?: boolean;
 }) {
   let cardLabel;
-  // console.log(product);
   const cardProduct: Product = product?.variants
     ? (product as Product)
     : ({} as Product);

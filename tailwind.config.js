@@ -88,12 +88,19 @@ export default {
             backgroundPosition: '-200% 0',
           },
         },
+        infiniteSlider: {
+          '0%': {transform: 'translateX(0)'},
+          '100%': {
+            transform: 'translateX(calc(-250px * 5))',
+          },
+        },
       },
       animation: {
         fadeIn: 'fadeIn .8s ease-in-out',
         carousel: 'marquee 60s linear infinite',
         blink: 'blink 1.4s both infinite',
         'background-shine': 'background-shine 2s linear infinite',
+        'infinite-slider': 'infiniteSlider 30s linear infinite',
       },
     },
   },

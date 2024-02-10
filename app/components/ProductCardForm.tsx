@@ -1,11 +1,10 @@
 import clsx from 'clsx';
 import type {ShopifyAnalyticsProduct} from '@shopify/hydrogen';
 import {flattenConnection, Image, Money, useMoney} from '@shopify/hydrogen';
-import {ShoppingBagIcon} from '@heroicons/react/16/solid';
 import type {MoneyV2, Product} from '@shopify/hydrogen/storefront-api-types';
 
 import type {ProductCardFragment, MediaFragment} from 'storefrontapi.generated';
-import {Text, Link, AddToCartButton, Button} from '~/components';
+import {Link} from '~/components';
 import {isDiscounted, isNewArrival} from '~/lib/utils';
 
 export function ProductCardForm({
@@ -61,16 +60,28 @@ export function ProductCardForm({
     }
   }
 
+  function truncateDescription(description: string) {
+    if (!description) {
+      return 'Todas las semanas tenemos nuevos productos con los mejores precios. ¡No te los pierdas!';
+    }
+
+    if (description.length > 400) {
+      return description.substring(0, 400) + '...';
+    } else {
+      return description;
+    }
+  }
+
   return (
-    <div className="flex flex-wrap gap-6 sm:justify-center sm:mx-auto pt-8 sm:pt-20 pb-8 sm:pb-20">
-      <div className="">
+    <div className="flex flex-wrap gap-6 justify-center mx-auto mt-8 sm:mt-20 sm:mb-20">
+      <div>
         {image && (
-          <div className="h-[300px] md:h-[430px] w-full relative">
+          <div className="h-[300px] md:h-[430px] w-full  relative">
             <span className="inline-flex h-8 animate-background-shine items-center justify-center rounded-full border border-gray-800 bg-[linear-gradient(110deg,#000,45%,#4D4B4B,55%,#000)] bg-[length:250%_100%] px-3 py-1 text-sm font-medium font-racing text-gray-300 absolute top-1 left-4">
               {cardLabel}
             </span>
             <Image
-              className="object-center sm:object-contain h-full w-full"
+              className="object-center sm:object-contain h-full w-full "
               data={image}
               alt={image.altText || `Picture of ${product.title}`}
               loading={loading}
@@ -90,7 +101,7 @@ export function ProductCardForm({
               {truncateTitle(product.title)}
             </h1>
 
-            <div className="text-red-400 font-Righteous font-bold flex gap-3 text-3xl sm:text-4xl py-8">
+            <div className="text-red-400 font-Righteous font-bold flex gap-3 text-2xl sm:text-3xl py-8">
               <span className="text-xl mt-auto">desde</span>
               <Money withoutTrailingZeros data={price!} />
               {isDiscounted(price as MoneyV2, compareAtPrice as MoneyV2) && (
@@ -102,8 +113,11 @@ export function ProductCardForm({
                 </>
               )}
             </div>
+            <p className="font-semibold font-outfit text-gray-200 text-sm sm:text-md">
+              {truncateDescription(product.description)}
+            </p>
             {compareAtPrice && (
-              <div className="bg-gradient-to-r from-red-400 to-yellow-100 p-2 rounded-2xl inline-block font-racing text-4xl text-gray-800 my-4">
+              <div className="bg-gradient-to-r from-red-400 to-yellow-100 p-1 rounded-2xl inline-block font-racing text-2xl text-gray-800 my-4">
                 -
                 {getDiscountPercentage(
                   price as MoneyV2,
@@ -119,7 +133,7 @@ export function ProductCardForm({
               to={`/products/${product.handle}`}
               prefetch="intent"
             >
-              <button className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-full border border-neutral-200 text-lg sm:text-xl bg-transparent px-4 text-rose-100 font-racing">
+              <button className="group relative inline-flex h-10 items-center justify-center overflow-hidden rounded-full border border-neutral-200 text-lg sm:text-xl bg-transparent px-4 text-rose-100 font-racing">
                 <span className="relative inline-flex overflow-hidden">
                   <div className="absolute origin-bottom transition duration-500 [transform:translateX(-150%)_skewX(33deg)] group-hover:[transform:translateX(0)_skewX(0deg)]">
                     Ver producto
