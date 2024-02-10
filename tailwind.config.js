@@ -80,11 +80,20 @@ export default {
           '20%': {opacity: 1},
           '100% ': {opacity: 0.2},
         },
+        'background-shine': {
+          from: {
+            backgroundPosition: '0 0',
+          },
+          to: {
+            backgroundPosition: '-200% 0',
+          },
+        },
       },
       animation: {
         fadeIn: 'fadeIn .8s ease-in-out',
         carousel: 'marquee 60s linear infinite',
         blink: 'blink 1.4s both infinite',
+        'background-shine': 'background-shine 2s linear infinite',
       },
     },
   },
