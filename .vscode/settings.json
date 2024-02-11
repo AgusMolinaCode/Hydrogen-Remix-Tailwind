@@ -1,0 +1,43 @@
+{
+    "editor.stickyScroll.enabled": true,
+    "activitusbar.alignment": "Left",
+    "activitusbar.views": [
+
+
+        {
+            "name": "terminal",
+            "codicon": "terminal-view-icon",
+        },
+        {
+            "name": "explorer",
+            "codicon": "explorer-view-icon"
+        },
+        {
+            "name": "search",
+            "codicon": "search-view-icon"
+        },
+        {
+            "name": "scm",
+            "codicon": "source-control-view-icon"
+        },
+        {
+            "name": "debug",
+            "codicon": "run-view-icon"
+        },
+        {
+            "name": "extensions",
+            "codicon": "extensions-view-icon"
+        }
+    ],
+    "editor.fontSize": 14,
+    "files.autoSave": "afterDelay",
+    "terminal.integrated.fontSize": 14,
+    "chat.editor.fontSize": 12,
+    "editor.fontFamily": "'Monaspace Neon', monospace",
+    "notebook.output.fontFamily": "monospace",
+    "terminal.integrated.fontFamily": "monospace",
+    "scm.inputFontFamily": "default",
+    "errorLens.fontFamily": "monospace",
+    "editor.foldingImportsByDefault": false,
+    "workbench.fontAliasing": "default"
+}

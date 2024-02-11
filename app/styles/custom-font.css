@@ -1,0 +1,62 @@
+@font-face {
+  font-family: 'IBMPlexSerif';
+  font-display: swap;
+  font-weight: 400;
+  src: url('./fonts/IBMPlexSerif-Text.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBMPlexSerif';
+  font-display: swap;
+  font-weight: 400;
+  font-style: italic;
+  src: url('./fonts/IBMPlexSerif-TextItalic.woff2') format('woff2');
+}
+@font-face {
+  font-family: Outfit;
+  src: url('../assets/font/Outfit-VariableFont_wght.ttf');
+  font-display: swap;
+  font-weight: 400;
+}
+@font-face {
+  font-family: Outfit;
+  src: url('../assets/font/Outfit-VariableFont_wght.ttf');
+  font-display: swap;
+  font-weight: 500;
+}
+@font-face {
+  font-family: Outfit;
+  src: url('../assets/font/Outfit-VariableFont_wght.ttf');
+  font-display: swap;
+  font-weight: 600;
+}
+@font-face {
+  font-family: Outfit;
+  src: url('../assets/font/Outfit-VariableFont_wght.ttf');
+  font-display: swap;
+  font-weight: 700;
+}
+@font-face {
+  font-family: Outfit;
+  src: url('../assets/font/Outfit-VariableFont_wght.ttf');
+  font-display: swap;
+  font-weight: 800;
+}
+@font-face {
+  font-family: Outfit;
+  src: url('../assets/font/Outfit-VariableFont_wght.ttf');
+  font-display: swap;
+  font-weight: 900;
+}
+@font-face {
+  font-family: Racing Sans One;
+  src: url('../assets/font/RacingSansOne-Regular.ttf');
+  font-display: swap;
+  font-weight: 400;
+}
+@font-face {
+  font-family: Righteous;
+  src: url('../assets/font/Righteous-Regular.woff');
+  font-display: swap;
+  font-weight: 400;
+}
+
