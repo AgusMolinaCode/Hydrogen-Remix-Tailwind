@@ -37,7 +37,7 @@ const items = [
     title: 'off-road',
     header: (
       <img
-        className="object-cover w-full h-full"
+        className="object-cover w-full h-full hover:scale-105 transition-transform duration-300 ease-in-out"
         src="/OFF-ROAD.webp"
         alt="Catalogo Motocross"
       />
@@ -48,7 +48,7 @@ const items = [
     title: 'mas-vendidos',
     header: (
       <img
-        className="object-cover w-full h-full"
+        className="object-cover w-full h-full hover:scale-105 transition-transform duration-300 ease-in-out"
         src="/MAS-VENDIDO-1.webp"
         alt="Catalogo Mas Vendido"
       />
@@ -59,7 +59,7 @@ const items = [
     title: 'touring',
     header: (
       <img
-        className="object-cover w-full h-full"
+        className="object-cover w-full h-full hover:scale-105 transition-transform duration-300 ease-in-out"
         src="/TOURING.webp"
         alt="Catalogo Touring"
       />
@@ -70,7 +70,7 @@ const items = [
     title: 'ofertas',
     header: (
       <img
-        className="object-cover w-full h-full"
+        className="object-cover w-full h-full hover:scale-105 transition-transform duration-300 ease-in-out"
         src="/OFERTAS.webp"
         alt="Catalogo Ofertas"
       />
@@ -81,7 +81,7 @@ const items = [
     title: 'todos-los-productos',
     header: (
       <img
-        className="object-cover w-full h-full"
+        className="object-cover w-full h-full hover:scale-105 transition-transform duration-300 ease-in-out"
         src="/TODOS3.webp"
         alt="Catalogo Todos los Productos"
       />
@@ -92,7 +92,7 @@ const items = [
     title: 'atv-utv',
     header: (
       <img
-        className="object-cover w-full h-full"
+        className="object-cover w-full h-full hover:scale-105 transition-transform duration-300 ease-in-out"
         src="/ATV_UTV.webp"
         alt="Catalogo ATV/UTV"
       />
@@ -103,7 +103,7 @@ const items = [
     title: 'indumentaria',
     header: (
       <img
-        className="object-cover w-full h-full"
+        className="object-cover w-full h-full hover:scale-105 transition-transform duration-300 ease-in-out"
         src="/INDUMENTARIA.webp"
         alt="Catalogo Indumentaria"
       />

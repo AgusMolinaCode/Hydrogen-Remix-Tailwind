@@ -2,6 +2,7 @@ import {Suspense} from 'react';
 import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {Await, useLoaderData} from '@remix-run/react';
 import {AnalyticsPageType} from '@shopify/hydrogen';
+import {motion} from 'framer-motion';
 
 import {ProductSwimlane, FeaturedCollections, Hero} from '~/components';
 import {MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
@@ -15,6 +16,14 @@ import {ProductCardForm} from '~/components/ProductCardForm';
 import SliderInfinite from '~/components/SliderInfinite';
 import {BentoGridSecondDemo} from '~/components/BentoGridSecondDemo';
 
+import {
+  slideIn,
+  staggerContainer,
+  textVariant,
+  fadeIn,
+  divVariants,
+  zoomIn,
+} from '../utils/motion';
 export const headers = routeHeaders;
 
 export async function loader({params, context}: LoaderFunctionArgs) {
@@ -100,18 +109,25 @@ export default function Homepage() {
               );
 
               return (
-                <div>
-                  <h1 className="flex flex-wrap justify-center text-rose-100 text-3xl sm:text-5xl font-racing font-semibold mx-auto items-center gap-2 pt-8">
-                    productos
-                    <span className="font-racing text-3xl sm:text-5xl text-center font-bold text-red-200">
-                      {filteredProducts[0].collections.edges[0].node.title}
-                    </span>
-                  </h1>
+                <motion.div
+                  variants={staggerContainer(1, 0.1)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{once: false, amount: 0.25}}
+                >
+                  <motion.div variants={fadeIn('right', 'spring', 0.2, 1)}>
+                    <h1 className="flex flex-wrap justify-center text-rose-100 text-3xl sm:text-5xl font-racing font-semibold mx-auto items-center gap-2 pt-8">
+                      productos
+                      <span className="font-racing text-3xl sm:text-5xl text-center font-bold text-red-200">
+                        {filteredProducts[0].collections.edges[0].node.title}
+                      </span>
+                    </h1>
+                  </motion.div>
                   <ProductSwimlane
                     products={{nodes: filteredProducts}}
                     count={4}
                   />
-                </div>
+                </motion.div>
               );
             }}
           </Await>
@@ -133,18 +149,25 @@ export default function Homepage() {
               );
 
               return (
-                <div>
-                  <h1 className="flex justify-center text-rose-100 text-3xl sm:text-5xl font-racing font-semibold mx-auto items-center gap-2 pt-8">
-                    productos
-                    <span className="font-racing text-3xl sm:text-6xl text-center font-bold text-red-300">
-                      {filteredProducts[0].vendor}
-                    </span>
-                  </h1>
+                <motion.div
+                  variants={staggerContainer(1, 0.1)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{once: false, amount: 0.25}}
+                >
+                  <motion.div variants={fadeIn('right', 'spring', 0.2, 1)}>
+                    <h1 className="flex justify-center text-rose-100 text-3xl sm:text-5xl font-racing font-semibold mx-auto items-center gap-2 pt-8">
+                      productos
+                      <span className="font-racing text-3xl sm:text-6xl text-center font-bold text-red-300">
+                        {filteredProducts[0].vendor}
+                      </span>
+                    </h1>
+                  </motion.div>
                   <ProductSwimlaneTwo
                     products={{nodes: filteredProducts}}
                     count={4}
                   />
-                </div>
+                </motion.div>
               );
             }}
           </Await>
@@ -157,16 +180,23 @@ export default function Homepage() {
             {({productByHandle}) => {
               if (!productByHandle) return <></>;
               return (
-                <div>
-                  <h1 className="flex justify-center text-rose-100 text-4xl sm:text-5xl font-racing font-semibold mx-auto items-center gap-2 pt-10 sm:pt-16 pb-4">
-                    Producto destacado
-                  </h1>
-                  <p className="font-racing font-semibold text-center text-xl text-gray-300 sm:text-2xl">
-                    Descubre el producto más vendido de la semana, no te quedes
-                    sin el tuyo.
-                  </p>
+                <motion.div
+                  variants={staggerContainer(1, 0.1)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{once: false, amount: 0.25}}
+                >
+                  <motion.div variants={fadeIn('right', 'spring', 0.2, 1)}>
+                    <h1 className="flex justify-center text-rose-100 text-4xl sm:text-5xl font-racing font-semibold mx-auto items-center gap-2 pt-10 sm:pt-16 pb-4">
+                      Producto destacado
+                    </h1>
+                    <p className="font-racing font-semibold text-center text-xl text-gray-300 sm:text-2xl">
+                      Descubre el producto más vendido de la semana, no te
+                      quedes sin el tuyo.
+                    </p>
+                  </motion.div>
                   <ProductCardForm product={productByHandle} />
-                </div>
+                </motion.div>
               );
             }}
           </Await>
