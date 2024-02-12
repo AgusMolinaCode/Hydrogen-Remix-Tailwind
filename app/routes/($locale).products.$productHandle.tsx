@@ -342,7 +342,10 @@ export function ProductForm({
                               )}
                             >
                               <span>{option.value}</span>
-                              <IconCaret direction={open ? 'up' : 'down'} />
+                              <IconCaret
+                                direction={open ? 'up' : 'down'}
+                                className="text-white"
+                              />
                             </Listbox.Button>
                             <Listbox.Options
                               className={clsx(
