@@ -42,7 +42,8 @@ export const action: ActionFunction = async ({request, context, params}) => {
     typeof password !== 'string'
   ) {
     return badRequest({
-      formError: 'Please provide both an email and a password.',
+      formError:
+        'Por favor, proporciona tanto un correo electrónico como una contraseña.',
     });
   }
 
@@ -71,7 +72,8 @@ export const action: ActionFunction = async ({request, context, params}) => {
   } catch (error: any) {
     if (storefront.isApiError(error)) {
       return badRequest({
-        formError: 'Something went wrong. Please try again later.',
+        formError:
+          'Hubo un error al crear la cuenta. Por favor, inténtalo de nuevo.',
       });
     }
 
@@ -81,7 +83,7 @@ export const action: ActionFunction = async ({request, context, params}) => {
      */
     return badRequest({
       formError:
-        'Sorry. We could not create an account with this email. User might already exist, try to login instead.',
+        'Lo sentimos. No pudimos crear una cuenta con este correo electrónico. Es posible que el usuario ya exista, intenta iniciar sesión en su lugar.',
     });
   }
 };
@@ -100,7 +102,9 @@ export default function Register() {
   return (
     <div className="flex justify-center my-24 px-4">
       <div className="max-w-md w-full">
-        <h1 className="text-4xl">Create an Account.</h1>
+        <h1 className="text-4xl font-Righteous font-semibold text-rose-100">
+          Crear cuenta
+        </h1>
         {/* TODO: Add onSubmit to validate _before_ submission with native? */}
         <Form
           method="post"
@@ -120,15 +124,15 @@ export default function Register() {
               type="email"
               autoComplete="email"
               required
-              placeholder="Email address"
-              aria-label="Email address"
+              placeholder="Email"
+              aria-label="Email"
               // eslint-disable-next-line jsx-a11y/no-autofocus
               autoFocus
               onBlur={(event) => {
                 setNativeEmailError(
                   event.currentTarget.value.length &&
                     !event.currentTarget.validity.valid
-                    ? 'Invalid email address'
+                    ? 'Email invalido'
                     : null,
                 );
               }}
@@ -144,8 +148,8 @@ export default function Register() {
               name="password"
               type="password"
               autoComplete="current-password"
-              placeholder="Password"
-              aria-label="Password"
+              placeholder="contraseña"
+              aria-label="contraseña"
               minLength={8}
               required
               // eslint-disable-next-line jsx-a11y/no-autofocus
@@ -159,8 +163,8 @@ export default function Register() {
                 } else {
                   setNativePasswordError(
                     event.currentTarget.validity.valueMissing
-                      ? 'Please enter a password'
-                      : 'Passwords must be at least 8 characters',
+                      ? 'Ingresa una contraseña'
+                      : 'Contraseña deberia tener al menos 8 caracteres.',
                   );
                 }
               }}
@@ -174,18 +178,18 @@ export default function Register() {
           </div>
           <div className="flex items-center justify-between">
             <button
-              className="bg-primary text-contrast rounded py-2 px-4 focus:shadow-outline block w-full"
+              className="bg-blue-200 text-lg text-black font-outfit rounded py-2 px-4 focus:shadow-outline block w-full"
               type="submit"
               disabled={!!(nativePasswordError || nativeEmailError)}
             >
-              Create Account
+              Crear cuenta
             </button>
           </div>
           <div className="flex items-center mt-8 border-t border-gray-300">
-            <p className="align-baseline text-sm mt-6">
-              Already have an account? &nbsp;
+            <p className="align-baseline text-sm mt-6 text-rose-100 font-outfit">
+              Ya tienes cuenta? &nbsp;
               <Link className="inline underline" to="/account/login">
-                Sign in
+                Iniciar sesión
               </Link>
             </p>
           </div>

@@ -26,7 +26,7 @@ export const action: ActionFunction = async ({
     typeof activationToken !== 'string'
   ) {
     return badRequest({
-      formError: 'Wrong token. The link you followed might be wrong.',
+      formError: 'Token invalido. Por favor, intenta de nuevo.',
     });
   }
 
@@ -43,7 +43,7 @@ export const action: ActionFunction = async ({
     password !== passwordConfirm
   ) {
     return badRequest({
-      formError: 'Please provide matching passwords',
+      formError: 'Por favor, introduce una contraseña válida.',
     });
   }
 
@@ -79,7 +79,8 @@ export const action: ActionFunction = async ({
   } catch (error: any) {
     if (storefront.isApiError(error)) {
       return badRequest({
-        formError: 'Something went wrong. Please try again later.',
+        formError:
+          'Hubo un error al activar tu cuenta. Por favor, intenta de nuevo.',
       });
     }
 
@@ -88,7 +89,8 @@ export const action: ActionFunction = async ({
      * Let's make one up.
      */
     return badRequest({
-      formError: 'Sorry. We could not activate your account.',
+      formError:
+        'Lo siento, hubo un error al activar tu cuenta. Por favor, intenta de nuevo.',
     });
   }
 };
@@ -116,7 +118,7 @@ export default function Activate() {
       passwordConfirmInput.current.value.length &&
       passwordConfirmInput.current.value !== passwordInput.current?.value
     ) {
-      setNativePasswordConfirmError('The two passwords entered did not match.');
+      setNativePasswordConfirmError('Las contraseñas no coinciden');
     } else if (
       passwordConfirmInput.current.validity.valid ||
       !passwordConfirmInput.current.value.length
@@ -125,8 +127,8 @@ export default function Activate() {
     } else {
       setNativePasswordConfirmError(
         passwordConfirmInput.current.validity.valueMissing
-          ? 'Please re-enter the password'
-          : 'Passwords must be at least 8 characters',
+          ? 'Re ingresa tu contraseña'
+          : 'Contraseña de al menos 8 caracteres',
       );
     }
   };
@@ -135,7 +137,7 @@ export default function Activate() {
     <div className="flex justify-center my-24 px-4">
       <div className="max-w-md w-full">
         <h1 className="text-4xl">Activate Account.</h1>
-        <p className="mt-4">Create your password to activate your account.</p>
+        <p className="mt-4">Crea tu contraseña para activar tu cuenta.</p>
         {/* TODO: Add onSubmit to validate _before_ submission with native? */}
         <Form
           method="post"
@@ -155,7 +157,7 @@ export default function Activate() {
               name="password"
               type="password"
               autoComplete="current-password"
-              placeholder="Password"
+              placeholder="Contraseña actual"
               aria-label="Password"
               minLength={8}
               required
@@ -171,8 +173,8 @@ export default function Activate() {
                 } else {
                   setNativePasswordError(
                     event.currentTarget.validity.valueMissing
-                      ? 'Please enter a password'
-                      : 'Passwords must be at least 8 characters',
+                      ? 'Re ingresa tu contraseña'
+                      : 'Contraseña de al menos 8 caracteres',
                   );
                 }
               }}
@@ -194,7 +196,7 @@ export default function Activate() {
               name="passwordConfirm"
               type="password"
               autoComplete="current-password"
-              placeholder="Re-enter password"
+              placeholder="Re ingresa tu contraseña"
               aria-label="Re-enter password"
               minLength={8}
               required
@@ -214,7 +216,7 @@ export default function Activate() {
               className="bg-primary text-contrast rounded py-2 px-4 focus:shadow-outline block w-full"
               type="submit"
             >
-              Save
+              Guardar
             </button>
           </div>
         </Form>

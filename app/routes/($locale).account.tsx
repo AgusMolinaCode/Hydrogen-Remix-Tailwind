@@ -67,9 +67,9 @@ export async function loader({request, context, params}: LoaderFunctionArgs) {
 
   const heading = customer
     ? customer.firstName
-      ? `Welcome, ${customer.firstName}.`
-      : `Welcome to your account.`
-    : 'Account Details';
+      ? `Bienvenido, ${customer.firstName}.`
+      : `Bienvenido a tu cuenta de AM MOTOS.`
+    : 'Detalles de la cuenta';
 
   return defer(
     {
@@ -133,13 +133,19 @@ function Account({customer, heading, featuredData}: AccountType) {
 
   return (
     <>
-      <PageHeader heading={heading}>
+      <div className="grid w-full gap-4 p-4 py-6 md:gap-8 md:p-8 lg:p-12">
+        <h1 className="font-Righteous font-semibold text-3xl sm:text-5xl text-gray-300">
+          {heading}
+        </h1>
         <Form method="post" action={usePrefixPathWithLocale('/account/logout')}>
-          <button type="submit" className="text-primary/50">
-            Sign out
+          <button
+            type="submit"
+            className="font-outfit p-2 bg-red-300 text-black rounded-xl"
+          >
+            Cerrar sesión
           </button>
         </Form>
-      </PageHeader>
+      </div>
       {orders && <AccountOrderHistory orders={orders} />}
       <AccountDetails customer={customer} />
       <AccountAddressBook addresses={addresses} customer={customer} />
@@ -147,12 +153,12 @@ function Account({customer, heading, featuredData}: AccountType) {
         <Suspense>
           <Await
             resolve={featuredData}
-            errorElement="There was a problem loading featured products."
+            errorElement="Hubo un problema al cargar los productos destacados. Intenta recargar la página."
           >
             {(data) => (
               <>
                 <FeaturedCollections
-                  title="Popular Collections"
+                  title="Colecciones destacadas"
                   collections={data.featuredCollections}
                 />
                 <ProductSwimlane products={data.featuredProducts} />
@@ -173,7 +179,9 @@ function AccountOrderHistory({orders}: OrderCardsProps) {
   return (
     <div className="mt-6">
       <div className="grid w-full gap-4 p-4 py-6 md:gap-8 md:p-8 lg:p-12">
-        <h2 className="font-bold text-lead">Order History</h2>
+        <h2 className="font-bold  font-outfit text-rose-100 text-xl">
+          Historial de ordenes
+        </h2>
         {orders?.length ? <Orders orders={orders} /> : <EmptyOrders />}
       </div>
     </div>
@@ -183,16 +191,20 @@ function AccountOrderHistory({orders}: OrderCardsProps) {
 function EmptyOrders() {
   return (
     <div>
-      <Text className="mb-1" size="fine" width="narrow" as="p">
-        You haven&apos;t placed any orders yet.
+      <Text
+        className="mb-1 text-gray-300 font-outfit text-md"
+        size="lead"
+        width="narrow"
+        as="p"
+      >
+        Aun no has realizado ninguna orden.
       </Text>
-      <div className="w-48">
+      <div className="w-48 pt-4">
         <Button
-          className="w-full mt-2 text-sm"
-          variant="secondary"
+          className="font-outfit p-2 bg-blue-300 text-black rounded-xl"
           to={usePrefixPathWithLocale('/')}
         >
-          Start Shopping
+          Comprar ahora
         </Button>
       </div>
     </div>

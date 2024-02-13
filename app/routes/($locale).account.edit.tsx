@@ -55,7 +55,7 @@ export const action: ActionFunction = async ({request, context, params}) => {
 
   invariant(
     customerAccessToken,
-    'You must be logged in to update your account details.',
+    'Debes iniciar sesión para actualizar los detalles de tu cuenta.',
   );
 
   // Double-check current user is logged in.
@@ -69,7 +69,7 @@ export const action: ActionFunction = async ({request, context, params}) => {
     return badRequest({
       fieldErrors: {
         currentPassword:
-          'Please enter your current password before entering a new password.',
+          'Por favor, introduce tu contraseña actual antes de introducir una nueva contraseña.',
       },
     });
   }
@@ -80,7 +80,7 @@ export const action: ActionFunction = async ({request, context, params}) => {
   ) {
     return badRequest({
       fieldErrors: {
-        newPassword2: 'New passwords must match.',
+        newPassword2: 'Nuevas contraseñas deben coincidir.',
       },
     });
   }
@@ -147,7 +147,7 @@ export default function AccountDetailsEdit() {
             name="firstName"
             type="text"
             autoComplete="given-name"
-            placeholder="First name"
+            placeholder="Nombre"
             aria-label="First name"
             defaultValue={customer.firstName ?? ''}
           />
@@ -159,7 +159,7 @@ export default function AccountDetailsEdit() {
             name="lastName"
             type="text"
             autoComplete="family-name"
-            placeholder="Last name"
+            placeholder="Apellido"
             aria-label="Last name"
             defaultValue={customer.lastName ?? ''}
           />
@@ -171,8 +171,8 @@ export default function AccountDetailsEdit() {
             name="phone"
             type="tel"
             autoComplete="tel"
-            placeholder="Mobile"
-            aria-label="Mobile"
+            placeholder="Celular (ejemplo: +541112345678)"
+            aria-label="Celular"
             defaultValue={customer.phone ?? ''}
           />
         </div>
@@ -184,8 +184,8 @@ export default function AccountDetailsEdit() {
             type="email"
             autoComplete="email"
             required
-            placeholder="Email address"
-            aria-label="Email address"
+            placeholder="Email"
+            aria-label="Email"
             defaultValue={customer.email ?? ''}
           />
           {actionData?.fieldErrors?.email && (
@@ -199,7 +199,7 @@ export default function AccountDetailsEdit() {
         </Text>
         <Password
           name="currentPassword"
-          label="Current password"
+          label="contraseña actual"
           passwordError={actionData?.fieldErrors?.currentPassword}
         />
         {actionData?.fieldErrors?.currentPassword && (
@@ -209,12 +209,12 @@ export default function AccountDetailsEdit() {
         )}
         <Password
           name="newPassword"
-          label="New password"
+          label="Nueva contraseña"
           passwordError={actionData?.fieldErrors?.newPassword}
         />
         <Password
           name="newPassword2"
-          label="Re-enter new password"
+          label="Re-ingresa tu nueva contraseña"
           passwordError={actionData?.fieldErrors?.newPassword2}
         />
         <Text
@@ -225,7 +225,7 @@ export default function AccountDetailsEdit() {
             actionData?.fieldErrors?.newPassword && 'text-red-500',
           )}
         >
-          Passwords must be at least 8 characters.
+          Tu contraseña debe tener al menos 8 caracteres.
         </Text>
         {actionData?.fieldErrors?.newPassword2 ? <br /> : null}
         {actionData?.fieldErrors?.newPassword2 && (
@@ -241,12 +241,12 @@ export default function AccountDetailsEdit() {
             type="submit"
             disabled={state !== 'idle'}
           >
-            {state !== 'idle' ? 'Saving' : 'Save'}
+            {state !== 'idle' ? 'Guardando...' : 'Guardar'}
           </Button>
         </div>
         <div className="mb-4">
           <Button to=".." className="text-sm" variant="secondary" width="full">
-            Cancel
+            Cancelar
           </Button>
         </div>
       </Form>

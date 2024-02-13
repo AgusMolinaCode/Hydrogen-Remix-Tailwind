@@ -30,10 +30,16 @@ export const action: ActionFunction = async ({request, context, params}) => {
   const formData = await request.formData();
 
   const customerAccessToken = await session.get('customerAccessToken');
-  invariant(customerAccessToken, 'You must be logged in to edit your account.');
+  invariant(
+    customerAccessToken,
+    'Necesitas estas logueado para iniciar sesión.',
+  );
 
   const addressId = formData.get('addressId');
-  invariant(typeof addressId === 'string', 'You must provide an address id.');
+  invariant(
+    typeof addressId === 'string',
+    'Necesitas prooveer una direccion ID.',
+  );
 
   if (request.method === 'DELETE') {
     try {
@@ -82,7 +88,7 @@ export const action: ActionFunction = async ({request, context, params}) => {
       assertApiErrors(data.customerAddressCreate);
 
       const newId = data.customerAddressCreate?.customerAddress?.id;
-      invariant(newId, 'Expected customer address to be created');
+      invariant(newId, 'Se esperaba que se creara la dirección del cliente');
 
       if (defaultAddress) {
         const data = await storefront.mutate(UPDATE_DEFAULT_ADDRESS_MUTATION, {
@@ -171,7 +177,7 @@ export default function EditAddress() {
               required
               type="text"
               autoComplete="given-name"
-              placeholder="First name"
+              placeholder="Nombre"
               aria-label="First name"
               defaultValue={address?.firstName ?? ''}
             />
@@ -184,7 +190,7 @@ export default function EditAddress() {
               required
               type="text"
               autoComplete="family-name"
-              placeholder="Last name"
+              placeholder="Apellido"
               aria-label="Last name"
               defaultValue={address?.lastName ?? ''}
             />
@@ -196,7 +202,7 @@ export default function EditAddress() {
               name="company"
               type="text"
               autoComplete="organization"
-              placeholder="Company"
+              placeholder="Empresa"
               aria-label="Company"
               defaultValue={address?.company ?? ''}
             />
@@ -208,7 +214,7 @@ export default function EditAddress() {
               name="address1"
               type="text"
               autoComplete="address-line1"
-              placeholder="Address line 1*"
+              placeholder="Direccion 1"
               required
               aria-label="Address line 1"
               defaultValue={address?.address1 ?? ''}
@@ -221,7 +227,7 @@ export default function EditAddress() {
               name="address2"
               type="text"
               autoComplete="address-line2"
-              placeholder="Address line 2"
+              placeholder="Direccion 2"
               aria-label="Address line 2"
               defaultValue={address?.address2 ?? ''}
             />
@@ -234,7 +240,7 @@ export default function EditAddress() {
               type="text"
               required
               autoComplete="address-level2"
-              placeholder="City"
+              placeholder="Ciudad"
               aria-label="City"
               defaultValue={address?.city ?? ''}
             />
@@ -246,7 +252,7 @@ export default function EditAddress() {
               name="province"
               type="text"
               autoComplete="address-level1"
-              placeholder="State / Province"
+              placeholder="Provincia"
               required
               aria-label="State"
               defaultValue={address?.province ?? ''}
@@ -259,7 +265,7 @@ export default function EditAddress() {
               name="zip"
               type="text"
               autoComplete="postal-code"
-              placeholder="Zip / Postal Code"
+              placeholder="Codigo Postal"
               required
               aria-label="Zip"
               defaultValue={address?.zip ?? ''}
@@ -272,7 +278,7 @@ export default function EditAddress() {
               name="country"
               type="text"
               autoComplete="country-name"
-              placeholder="Country"
+              placeholder="Pais"
               required
               aria-label="Country"
               defaultValue={address?.country ?? ''}
@@ -285,7 +291,7 @@ export default function EditAddress() {
               name="phone"
               type="tel"
               autoComplete="tel"
-              placeholder="Phone"
+              placeholder="Telefono"
               aria-label="Phone"
               defaultValue={address?.phone ?? ''}
             />
@@ -302,7 +308,7 @@ export default function EditAddress() {
               className="inline-block ml-2 text-sm cursor-pointer"
               htmlFor="defaultAddress"
             >
-              Set as default address
+              Guardar como dirección por defecto
             </label>
           </div>
           <div className="mt-8">
@@ -312,7 +318,7 @@ export default function EditAddress() {
               variant="primary"
               disabled={state !== 'idle'}
             >
-              {state !== 'idle' ? 'Saving' : 'Save'}
+              {state !== 'idle' ? 'Guardando...' : 'Guardado'}
             </Button>
           </div>
           <div>
@@ -321,7 +327,7 @@ export default function EditAddress() {
               className="w-full mt-2 rounded focus:shadow-outline"
               variant="secondary"
             >
-              Cancel
+              Cancelar
             </Button>
           </div>
         </Form>

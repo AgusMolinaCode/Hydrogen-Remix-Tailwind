@@ -25,7 +25,7 @@ const HeroTwo = () => {
             Ofertas
           </motion.h1>
           <motion.p
-            variants={fadeIn('left', 'tween', 0.2, 0.7)}
+            variants={fadeIn('right', 'spring', 0.2, 0.7)}
             className="font-Righteous font-semibold text-2xl sm:text-3xl max-w-lg flex justify-center mx-auto text-center pt-8 text-rose-100"
           >
             Hasta 50% de descuento en productos seleccionados. <br />

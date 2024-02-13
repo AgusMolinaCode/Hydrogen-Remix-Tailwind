@@ -69,16 +69,16 @@ export function ProductCardTwo({
         <div className={clsx('grid gap-4 relative overflow-hidden', className)}>
           <div className="">
             {image && (
-              <div className="flex justify-center items-center bg-transparent backdrop-blur h-[430px] w-full relative rounded-2xl bg-gradient-to-bl from-gray-900 via-gray-500 to-gray-900 border-r border-l border-gray-500 overflow-hidden">
+              <div className="flex justify-center items-center bg-transparent backdrop-blur h-[300px] md:h-[430px] w-full relative rounded-2xl bg-zinc-600 border-r border-l border-gray-500 overflow-hidden">
                 <Image
-                  className="object-center object-contain fadeIn p-2 rounded-xl h-full w-full hover:scale-105 duration-300"
+                  className="object-center sm:object-contain fadeIn p-4 rounded-xl md:h-full md:w-full hover:scale-105 duration-300"
                   data={image}
                   alt={image.altText || `Picture of ${product.title}`}
                   loading={loading}
                 />
               </div>
             )}
-            <div className="w-full px-2 rounded-bl-xl flex flex-col items-center justify-center rounded-br-xl bg-orange-200/40 absolute bottom-0 backdrop-blur-3xl border-t h-[80px]">
+            <div className="flex justify-between gap-4 absolute bottom-0 w-full rounded-bl-xl items-center rounded-br-xl bg-black/20 border-t h-14 backdrop-blur-3xl px-3">
               {/* <Text
                 className="text-rose-300 font-Righteous font-semibold"
                 as="h3"
@@ -87,13 +87,13 @@ export function ProductCardTwo({
                 {product.vendor}
               </Text> */}
               <Text
-                className="text-gray-800 font-Righteous font-bold text-center text-xl"
+                className="text-rose-100 font-Righteous font-bold text-sm sm:text-lg"
                 as="h3"
-                size="Thirdxl"
+                size="copy"
               >
                 {truncateTitle(product.title)}
               </Text>
-              <Text className="text-gray-900 font-Righteous font-bold py-2 flex gap-2">
+              <Text className="text-rose-100 font-Righteous font-bold hidden sm:block">
                 <Money withoutTrailingZeros data={price!} />
                 {isDiscounted(price as MoneyV2, compareAtPrice as MoneyV2) && (
                   <CompareAtPrice

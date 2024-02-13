@@ -13,7 +13,7 @@ export default function SliderMenuWsp() {
 
   return (
     <div className="relative">
-      <div className="fixed bottom-2 right-2 z-50 w-[100px] sm:w-[120px] h-[100px] sm:h-[120px] animate-fade-left animate-delay-[1200ms] animate-duration-[1200ms]">
+      <div className="fixed bottom-2 right-2 z-50 w-[100px] sm:w-[120px] h-[100px] sm:h-[120px]">
         <svg
           viewBox="0 0 100 100"
           className="w-full h-full sm:viewBox[0 0 120 120]"
