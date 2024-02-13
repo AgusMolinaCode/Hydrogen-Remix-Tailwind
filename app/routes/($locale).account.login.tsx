@@ -193,7 +193,7 @@ export default function Login() {
             <p className="align-baseline text-sm mt-6">
               {/* {shopName} &nbsp; */}
               <Link
-                className="inline underline font-outfit font-rose-100"
+                className="inline underline font-outfit text-rose-100"
                 to="/account/register"
               >
                 crear cuenta

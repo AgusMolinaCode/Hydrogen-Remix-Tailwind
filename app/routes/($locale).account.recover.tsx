@@ -132,7 +132,7 @@ export default function Recover() {
               <div className="flex items-center mt-8 border-t border-gray-300">
                 <p className="align-baseline text-sm mt-6">
                   <Link
-                    className="inline underline font-outfit font-rose-100"
+                    className="inline underline font-outfit text-rose-100"
                     to="/account/login"
                   >
                     Iniciar sesión
