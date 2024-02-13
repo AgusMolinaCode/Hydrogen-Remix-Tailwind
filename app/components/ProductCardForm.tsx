@@ -84,16 +84,8 @@ export function ProductCardForm({
   }
 
   return (
-    <motion.div
-      variants={staggerContainer(1, 0.1)}
-      initial="hidden"
-      whileInView="show"
-      viewport={{once: false, amount: 0.25}}
-    >
-      <motion.div
-        variants={fade('spring', 0.3, 0.5)}
-        className="flex flex-wrap gap-6 justify-center mx-auto mt-8 sm:mb-20"
-      >
+    <div>
+      <div className="flex flex-wrap gap-6 justify-center mx-auto mt-8 sm:mb-20">
         <div>
           {image && (
             <div className="h-[300px] md:h-[430px] w-full  relative">
@@ -167,8 +159,8 @@ export function ProductCardForm({
             </div>
           </div>
         </div>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 }
 

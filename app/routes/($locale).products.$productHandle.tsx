@@ -13,6 +13,7 @@ import {
 } from '@shopify/hydrogen';
 import invariant from 'tiny-invariant';
 import clsx from 'clsx';
+import {ChevronDoubleDownIcon} from '@heroicons/react/16/solid';
 
 import type {
   ProductQuery,
@@ -495,12 +496,14 @@ function ProductDetail({
               >
                 {title}
               </Text>
-              <IconClose
-                className={clsx(
-                  'transition-transform transform-gpu duration-200',
-                  !open && 'rotate-[45deg]',
-                )}
-              />
+              <div className="m-2 border rounded-full">
+                <ChevronDoubleDownIcon
+                  className={clsx(
+                    'transition-transform transform-gpu duration-200 text-white w-8 h-8 animate-pulse ',
+                    !open && 'rotate-[90deg]',
+                  )}
+                />
+              </div>
             </div>
           </Disclosure.Button>
 
