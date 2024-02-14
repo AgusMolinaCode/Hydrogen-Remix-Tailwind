@@ -240,7 +240,7 @@ export default function Product() {
                 )}
                 {shippingPolicy?.body && (
                   <ProductDetail
-                    title="Shipping"
+                    title="Informacion de envio"
                     content={getExcerpt(shippingPolicy.body)}
                     learnMore={`/policies/${shippingPolicy.handle}`}
                   />
@@ -515,7 +515,7 @@ function ProductDetail({
             {learnMore && (
               <div className="">
                 <Link
-                  className="pb-px border-b border-primary/30 text-primary/50"
+                  className="pb-px border-b border-gray-300 text-gray-300 font-outfit"
                   to={learnMore}
                 >
                   Ver más

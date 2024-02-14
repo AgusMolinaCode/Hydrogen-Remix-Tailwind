@@ -8,6 +8,14 @@ import {seoPayload} from '~/lib/seo.server';
 
 export const headers = routeHeaders;
 
+const policyTitleSpanish: Record<string, string> = {
+  'Privacy Policy': 'Política de privacidad',
+  'Shipping Policy': 'Política de envío',
+  'Terms of Service': 'Términos de servicio',
+  'Refund Policy': 'Política de reembolso',
+  // Agrega aquí cualquier otro título de política que necesites traducir
+};
+
 export async function loader({request, params, context}: LoaderFunctionArgs) {
   invariant(params.policyHandle, 'Missing policy handle');
 
@@ -50,15 +58,15 @@ export default function Policies() {
         className="flex-col items-baseline w-full gap-8 md:flex-row"
       >
         <PageHeader
-          heading={policy.title}
-          className="grid items-start flex-grow gap-4 md:sticky top-36 md:w-5/12"
+          heading={policyTitleSpanish[policy.title] || policy.title}
+          className="grid items-start flex-grow gap-4 md:sticky top-36 md:w-5/12 text-gray-100 font-outfit"
         >
           <Button
-            className="justify-self-start"
+            className="justify-self-start text-gray-300 font-outfit"
             variant="inline"
-            to={'/policies'}
+            to={'/'}
           >
-            &larr; Back to Policies
+            &larr; Volver
           </Button>
         </PageHeader>
         <div className="flex-grow w-full md:w-7/12">
