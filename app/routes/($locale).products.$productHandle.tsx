@@ -203,7 +203,7 @@ export default function Product() {
                         withoutTrailingZeros
                         data={selectedVariant?.compareAtPrice!}
                         as="span"
-                        className="opacity-50 strike"
+                        className="opacity-50 strike text-xl sm:text-3xl"
                       />
                     )}
                   </div>
@@ -350,9 +350,9 @@ export function ProductForm({
                             </Listbox.Button>
                             <Listbox.Options
                               className={clsx(
-                                'border-white bg-black/50 backdrop-blur-lg absolute bottom-12 z-30 grid h-48 w-full rounded-2xl border px-2 py-2 transition-[max-height] duration-150 sm:bottom-auto font-outfit font-bold',
+                                'border-white bg-black/50 backdrop-blur-lg absolute bottom-12 z-30 grid h-[22rem] w-full rounded-2xl border px-2 py-2 transition-[max-height] duration-150 sm:bottom-auto font-outfit font-bold overflow-auto',
                                 open
-                                  ? 'max-h-48 md:rounded-t-none md:border-t-0'
+                                  ? 'max-h-[22rem] md:rounded-t-none md:border-t-0'
                                   : 'max-h-0',
                               )}
                             >
@@ -398,6 +398,12 @@ export function ProductForm({
         </VariantSelector>
         {selectedVariant && (
           <div className="grid items-stretch gap-4">
+            <div className="bg-[#f0a494] rounded-xl flex gap-3 items-center justify-center">
+              <p className="font-outfit font-semibold text-black text-center text-[0.8rem] sm:text-[1rem]">
+                Si no encuentra el producto que busca, puede contactarnos a
+                través de nuestro whatsapp
+              </p>
+            </div>
             <div className="bg-[#59ff00] rounded-xl flex gap-3 items-center justify-center">
               <img
                 src="/delivery.png"
