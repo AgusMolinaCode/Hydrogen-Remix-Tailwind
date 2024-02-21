@@ -145,7 +145,7 @@ export default function Homepage() {
             {({products}) => {
               if (!products?.nodes) return <></>;
               const filteredProducts = products.nodes.filter(
-                (product: {vendor: string}) => product.vendor === '100%',
+                (product: {vendor: string}) => product.vendor === 'Pro Racing',
               );
 
               return (
@@ -262,7 +262,7 @@ const HOMEPAGE_SEO_QUERY = `#graphql
 export const HOMEPAGE_FEATURED_PRODUCTS_QUERY = `#graphql
   query homepageFeaturedProducts($country: CountryCode, $language: LanguageCode)
   @inContext(country: $country, language: $language) {
-    products(first: 70,sortKey: UPDATED_AT) {
+    products(first: 250,sortKey: UPDATED_AT) {
       nodes {
         ...ProductCard
       }

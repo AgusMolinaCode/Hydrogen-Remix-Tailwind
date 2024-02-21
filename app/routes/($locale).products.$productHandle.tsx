@@ -165,31 +165,38 @@ export default function Product() {
             className="w-full xl:w-[80%] mx-auto sm:ml-auto object-contain"
           />
           <div className="sticky md:-mb-nav md:top-nav md:-translate-y-nav md:pt-nav hiddenScroll md:overflow-y-scroll ">
+            <div className="flex gap-2 items-center">
+              {vendor && (
+                <Link
+                  to={`/collections/todos-los-productos?filter.productVendor="${vendor}"`}
+                  className="font-outfit text-gray-300 text-lg"
+                >
+                  <span className="align-self:flex-start h-8 animate-background-shine items-center justify-center rounded-full border border-gray-800 bg-[linear-gradient(110deg,#000,45%,#4D4B4B,55%,#000)] bg-[length:250%_100%] px-3 py-1 text-sm font-medium font-racing text-gray-300">
+                    {vendor}
+                  </span>
+                </Link>
+              )}
+              {isOnSale && (
+                <div
+                  className="relative w-20 h-20 p-1 m-1 mr-auto flex items-center justify-center"
+                  style={{
+                    backgroundImage: 'url(/etiqueta.webp)',
+                    backgroundSize: 'cover',
+                  }}
+                >
+                  <span className="text-xl text-white font-semibold font-outfit">{`-${Math.round(
+                    discountPercentage,
+                  )}%`}</span>
+                </div>
+              )}
+            </div>
             <section className="flex flex-col w-full max-w-xl gap-4 mx-auto md:mx-0 md:mr-auto md:max-w-xl md:px-0">
               <div className="grid gap-2">
-                {vendor && (
-                  <Text className={'font-medium font-Righteous text-gray-500'}>
-                    {vendor}
-                  </Text>
-                )}
                 <Heading
                   as="h1"
-                  className="whitespace-normal text-rose-100 font-Righteous text-3xl sm:text-5xl border-b border-gray-400/40 pb-6 flex gap-2 items-center justify-between h-24"
+                  className="whitespace-normal text-rose-100 font-Righteous text-3xl sm:text-5xl border-b border-gray-400/40 pb-4 flex gap-2 items-center justify-between flex-wrap"
                 >
                   {title}
-                  {isOnSale && (
-                    <div
-                      className="relative w-28 h-28 mr-auto flex items-center justify-center"
-                      style={{
-                        backgroundImage: 'url(/etiqueta.webp)',
-                        backgroundSize: 'cover',
-                      }}
-                    >
-                      <span className="text-2xl text-white font-semibold">{`-${Math.round(
-                        discountPercentage,
-                      )}%`}</span>
-                    </div>
-                  )}
                 </Heading>
                 <div className="max-w-lg flex flex-col gap-4">
                   <div className="flex gap-4 font-semibold font-outfit text-2xl sm:text-4xl text-orange-400">
@@ -209,7 +216,7 @@ export default function Product() {
                   </div>
                   <div>
                     {selectedVariant?.sku && (
-                      <p className="font-outfit text-2xl text-white">
+                      <p className="font-outfit text-2xl text-white font-semibold">
                         <span className="font-semibold font-outfit text-gray-300 text-xl">
                           Codigo:
                         </span>{' '}
@@ -318,14 +325,14 @@ export function ProductForm({
             return (
               <div
                 key={option.name}
-                className="grid sm:grid-cols-2 items-center mb-4 gap-y-2 last:mb-0"
+                className="grid  items-center mb-4 gap-y-2 last:mb-0"
               >
                 <Heading
                   as="legend"
                   size="lead"
-                  className="min-w-[4rem] font-outfit text-rose-100 font-semibold text-lg"
+                  className="min-w-[4rem] font-semibold font-outfit text-gray-300 text-xl"
                 >
-                  {option.name}
+                  {option.name}:
                 </Heading>
                 <div className="flex flex-wrap gap-4">
                   {option.values.length > 1 && (
@@ -398,10 +405,10 @@ export function ProductForm({
         </VariantSelector>
         {selectedVariant && (
           <div className="grid items-stretch gap-4">
-            <div className="bg-[#f0a494] rounded-xl flex gap-3 items-center justify-center">
-              <p className="font-outfit font-semibold text-black text-center text-[0.8rem] sm:text-[1rem]">
+            <div className="rounded-xl flex gap-3 items-center justify-center">
+              <p className="font-outfit font-semibold text-gray-100 text-left text-[0.8rem] sm:text-[1rem]">
                 Si no encuentra el producto que busca, puede contactarnos a
-                través de nuestro whatsapp
+                través de nuestro whatsapp.
               </p>
             </div>
             <div className="bg-[#59ff00] rounded-xl flex gap-3 items-center justify-center">
