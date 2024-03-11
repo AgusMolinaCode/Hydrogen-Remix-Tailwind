@@ -194,7 +194,7 @@ export default function Product() {
               <div className="grid gap-2">
                 <Heading
                   as="h1"
-                  className="whitespace-normal text-rose-100 font-Righteous text-3xl sm:text-5xl border-b border-gray-400/40 pb-4 flex gap-2 items-center justify-between flex-wrap"
+                  className="whitespace-normal text-rose-100 font-Righteous text-3xl sm:text-4xl border-b border-gray-400/40 pb-4 flex gap-2 items-center justify-between flex-wrap"
                 >
                   {title}
                 </Heading>
@@ -330,7 +330,7 @@ export function ProductForm({
                 <Heading
                   as="legend"
                   size="lead"
-                  className="min-w-[4rem] font-semibold font-outfit text-gray-300 text-xl"
+                  className="h-full font-semibold font-outfit text-gray-300 text-xl"
                 >
                   {option.name}:
                 </Heading>
@@ -357,7 +357,7 @@ export function ProductForm({
                             </Listbox.Button>
                             <Listbox.Options
                               className={clsx(
-                                'border-white bg-black/50 backdrop-blur-lg absolute bottom-12 z-30 grid h-[22rem] w-full rounded-2xl border px-2 py-2 transition-[max-height] duration-150 sm:bottom-auto font-outfit font-bold overflow-auto',
+                                'border-white bg-black/85 backdrop-blur-lg absolute bottom-12 z-30 grid h-12rem w-full rounded-2xl border px-2 py-2 transition-[max-height] duration-150 sm:bottom-auto font-outfit font-bold overflow-auto',
                                 open
                                   ? 'max-h-[22rem] md:rounded-t-none md:border-t-0'
                                   : 'max-h-0',

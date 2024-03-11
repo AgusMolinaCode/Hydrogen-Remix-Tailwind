@@ -37,7 +37,7 @@ const HeroTwo = () => {
             <Link to="/collections/ofertas">
               <Button className="bg-black/20 backdrop-blur-xl text-rose-100 px-3 sm:px-6 rounded-2xl shadow-lg font-bold font-Righteous text-lg sm:text-xl py-6 border border-rose-100 animate-fade-up animate-duration-300 delay-500">
                 Ver Coleccion
-                <ChevronDoubleRightIcon className="w-6 sm:w-8 h-6 sm:h-8 ml-2 animate-fade animate-infinite animate-duration-[1500ms]" />
+                <ChevronDoubleRightIcon className="w-6 sm:w-8 h-6 sm:h-8 ml-2 animate-fade animate-infinite animate-duration-[600ms]" />
               </Button>
             </Link>
           </motion.div>

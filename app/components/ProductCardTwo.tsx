@@ -2,6 +2,8 @@ import clsx from 'clsx';
 import type {ShopifyAnalyticsProduct} from '@shopify/hydrogen';
 import {flattenConnection, Image, Money, useMoney} from '@shopify/hydrogen';
 import type {MoneyV2, Product} from '@shopify/hydrogen/storefront-api-types';
+import {useMediaQuery} from 'react-responsive';
+import {ShoppingBagIcon} from '@heroicons/react/16/solid';
 
 import type {ProductCardFragment} from 'storefrontapi.generated';
 import {Text, Link, AddToCartButton, Button} from '~/components';
@@ -52,8 +54,12 @@ export function ProductCardTwo({
   };
 
   function truncateTitle(title: string) {
-    if (title.length > 25) {
-      return title.substring(0, 25) + '...';
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const isSmallScreen = useMediaQuery({query: '(max-width: 640px)'}); // Ajusta el valor según tu necesidad
+    const maxLength = isSmallScreen ? 20 : 65;
+
+    if (title.length > maxLength) {
+      return title.substring(0, maxLength) + '...';
     } else {
       return title;
     }
@@ -67,6 +73,20 @@ export function ProductCardTwo({
         prefetch="intent"
       >
         <div className={clsx('grid gap-4 relative overflow-hidden', className)}>
+          <div className="text-black absolute top-1 z-20 w-full">
+            <div className="flex justify-between px-3 py-2">
+              <ShoppingBagIcon className="w-8 h-8 bg-rose-100 duration-200 rounded-full p-1" />
+              <Text className="text-rose-100 font-Righteous text-sm p-1 rounded-2xl font-bold bg-gray-900 border border-gray-100 sm:flex gap-2">
+                <Money withoutTrailingZeros data={price!} />
+                {isDiscounted(price as MoneyV2, compareAtPrice as MoneyV2) && (
+                  <CompareAtPrice
+                    className={'opacity-50'}
+                    data={compareAtPrice as MoneyV2}
+                  />
+                )}
+              </Text>
+            </div>
+          </div>
           <div className="">
             {image && (
               <div className="flex justify-center items-center bg-transparent backdrop-blur h-[300px] md:h-[430px] w-full relative rounded-2xl bg-zinc-600 border-r border-l border-gray-500 overflow-hidden">
@@ -78,7 +98,7 @@ export function ProductCardTwo({
                 />
               </div>
             )}
-            <div className="flex justify-between gap-4 absolute bottom-0 w-full rounded-bl-xl items-center rounded-br-xl bg-black/20 border-t h-14 backdrop-blur-3xl px-3">
+            <div className="flex justify-between gap-4 absolute bottom-0 w-full rounded-bl-xl items-center rounded-br-xl bg-black/60 border-t h-14 sm:h-20 backdrop-blur-3xl px-3">
               {/* <Text
                 className="text-rose-300 font-Righteous font-semibold"
                 as="h3"
@@ -87,13 +107,13 @@ export function ProductCardTwo({
                 {product.vendor}
               </Text> */}
               <Text
-                className="text-rose-100 font-Righteous font-bold text-sm sm:text-lg"
+                className="text-rose-100 font-Righteous font-bold text-sm sm:text-[1rem]"
                 as="h3"
                 size="copy"
               >
                 {truncateTitle(product.title)}
               </Text>
-              <Text className="text-rose-100 font-Righteous font-bold hidden sm:block">
+              {/* <Text className="text-rose-100 font-Righteous font-bold hidden sm:block">
                 <Money withoutTrailingZeros data={price!} />
                 {isDiscounted(price as MoneyV2, compareAtPrice as MoneyV2) && (
                   <CompareAtPrice
@@ -101,7 +121,7 @@ export function ProductCardTwo({
                     data={compareAtPrice as MoneyV2}
                   />
                 )}
-              </Text>
+              </Text> */}
             </div>
           </div>
         </div>

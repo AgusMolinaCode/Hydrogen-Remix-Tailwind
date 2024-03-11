@@ -10,9 +10,9 @@ const HeroInfo = () => {
     <div className="hero-info">
       <div>
         <Link to="/collections/todos-los-productos">
-          <Button className="bg-black/20 backdrop-blur-xl text-rose-100 px-6 mt-[22rem] md:mt-[35rem] rounded-2xl shadow-lg font-bold font-Righteous text-xl py-6 border border-rose-100 animate-fade-up animate-duration-[2200ms] animate-delay-[1200ms]">
+          <Button className="bg-black/20 backdrop-blur-xl text-rose-100 px-6 mt-[22rem] md:mt-[35rem] rounded-2xl shadow-lg font-bold font-Righteous text-xl py-6 border border-rose-100 animate-fade-up animate-duration-[600ms] animate-delay-[600ms]">
             Ver Coleccion
-            <ChevronDoubleRightIcon className="w-8 h-8 ml-2 animate-fade animate-infinite animate-duration-[1500ms]" />
+            <ChevronDoubleRightIcon className="w-8 h-8 ml-2 animate-fade animate-infinite animate-duration-[600ms]" />
           </Button>
         </Link>
         <div className="absolute bottom-0 left-0 w-full">

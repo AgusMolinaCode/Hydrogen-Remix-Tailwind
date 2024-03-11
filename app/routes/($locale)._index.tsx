@@ -1,10 +1,11 @@
-import {Suspense} from 'react';
+import {Suspense, useContext} from 'react';
 import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {Await, useLoaderData} from '@remix-run/react';
 import {AnalyticsPageType} from '@shopify/hydrogen';
 import {motion} from 'framer-motion';
 
-import {ProductSwimlane, FeaturedCollections, Hero} from '~/components';
+import FilterContext from '~/context/FilterContext';
+import {ProductSwimlane} from '~/components';
 import {MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import {seoPayload} from '~/lib/seo.server';
 import {routeHeaders} from '~/data/cache';
@@ -15,6 +16,7 @@ import SliderMenuVendor from '~/components/SliderMenuVendor';
 import {ProductCardForm} from '~/components/ProductCardForm';
 import SliderInfinite from '~/components/SliderInfinite';
 import {BentoGridSecondDemo} from '~/components/BentoGridSecondDemo';
+import SortHome from '~/components/SortHome';
 
 import {
   slideIn,
@@ -64,7 +66,7 @@ export async function loader({params, context}: LoaderFunctionArgs) {
     ),
     featuredProduct: context.storefront.query(FEATURED_PRODUCT_QUERY, {
       variables: {
-        handle: 'kit-biela-hot-rods',
+        handle: 'kit-cilindro-ktm300exc-tpi-tc300i-2019-2023',
         country,
         language,
       },
@@ -91,11 +93,15 @@ export default function Homepage() {
     featuredProduct,
   } = useLoaderData<typeof loader>();
 
+  const filters = useContext(FilterContext);
+  console.log(filters);
   return (
     <>
       <div className="h-[545px] md:h-[820px] bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-stone-900 via-gray-900 to-neutral-800">
         <HeroInfo />
       </div>
+
+      <div className="py-10"></div>
 
       {featuredProducts && (
         <Suspense>
@@ -117,7 +123,7 @@ export default function Homepage() {
                 >
                   <motion.div variants={fadeIn('right', 'spring', 0.2, 1)}>
                     <h1 className="flex flex-wrap justify-center text-rose-100 text-3xl sm:text-5xl font-racing font-semibold mx-auto items-center gap-2 pt-8">
-                      productos
+                      Productos
                       <span className="font-racing text-3xl sm:text-5xl text-center font-bold text-red-200">
                         {filteredProducts[0].collections.edges[0].node.title}
                       </span>

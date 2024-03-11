@@ -3,6 +3,7 @@ import type {ShopifyAnalyticsProduct} from '@shopify/hydrogen';
 import {flattenConnection, Image, Money, useMoney} from '@shopify/hydrogen';
 import {ShoppingBagIcon} from '@heroicons/react/16/solid';
 import type {MoneyV2, Product} from '@shopify/hydrogen/storefront-api-types';
+import {useMediaQuery} from 'react-responsive';
 
 import type {ProductCardFragment, MediaFragment} from 'storefrontapi.generated';
 import {Text, Link, AddToCartButton, Button} from '~/components';
@@ -54,8 +55,12 @@ export function ProductCard({
   };
 
   function truncateTitle(title: string) {
-    if (title.length > 25) {
-      return title.substring(0, 25) + '...';
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const isSmallScreen = useMediaQuery({query: '(max-width: 640px)'}); // Ajusta el valor según tu necesidad
+    const maxLength = isSmallScreen ? 25 : 75;
+
+    if (title.length > maxLength) {
+      return title.substring(0, maxLength) + '...';
     } else {
       return title;
     }
@@ -69,8 +74,19 @@ export function ProductCard({
         prefetch="intent"
       >
         <div className={clsx('grid gap-4 overflow-hidden', className)}>
-          <div className="absolute top-2 left-2 text-black bg-rose-200 hover:bg-rose-100 duration-200 rounded-full p-1 z-20">
-            <ShoppingBagIcon className="w-6 h-6" />
+          <div className="text-black absolute top-1 z-20 w-full">
+            <div className="flex justify-between px-3 py-2">
+              <ShoppingBagIcon className="w-8 h-8 bg-rose-100 duration-200 rounded-full p-1" />
+              <Text className="text-rose-100 font-Righteous text-sm p-1 rounded-2xl font-bold bg-gray-900 border border-gray-100 sm:flex gap-2">
+                <Money withoutTrailingZeros data={price!} />
+                {isDiscounted(price as MoneyV2, compareAtPrice as MoneyV2) && (
+                  <CompareAtPrice
+                    className={'opacity-50'}
+                    data={compareAtPrice as MoneyV2}
+                  />
+                )}
+              </Text>
+            </div>
           </div>
           <div className="">
             {image && (
@@ -83,16 +99,16 @@ export function ProductCard({
                 />
               </div>
             )}
-            <div className="flex justify-between gap-4 absolute bottom-0 w-full rounded-bl-xl items-center rounded-br-xl bg-black/20 border-t h-14 backdrop-blur-3xl px-3">
+            <div className="flex justify-between gap-4 absolute bottom-0 w-full rounded-bl-xl items-center rounded-br-xl bg-black/60 border-t h-[4rem] backdrop-blur-3xl px-3">
               <Text
-                className="text-rose-100 font-Righteous font-bold text-sm sm:text-lg"
+                className="text-rose-100 font-Righteous font-semibold text-sm sm:text-[1rem]"
                 as="h3"
                 size="copy"
               >
                 {truncateTitle(product.title)}
               </Text>
 
-              <Text className="text-rose-100 font-Righteous font-bold hidden sm:block">
+              {/* <Text className="text-rose-100 font-Righteous text-sm p-1 rounded-3xl font-bold sm:hidden block">
                 <Money withoutTrailingZeros data={price!} />
                 {isDiscounted(price as MoneyV2, compareAtPrice as MoneyV2) && (
                   <CompareAtPrice
@@ -100,7 +116,7 @@ export function ProductCard({
                     data={compareAtPrice as MoneyV2}
                   />
                 )}
-              </Text>
+              </Text> */}
             </div>
           </div>
         </div>

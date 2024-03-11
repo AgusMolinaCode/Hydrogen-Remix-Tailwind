@@ -87,7 +87,6 @@ export function FiltersDrawer({
 }: Omit<Props, 'children'>) {
   const [params] = useSearchParams();
   const location = useLocation();
-
   const filterMarkup = (filter: Filter, option: Filter['values'][0]) => {
     switch (filter.type) {
       case 'PRICE_RANGE':
@@ -113,7 +112,6 @@ export function FiltersDrawer({
         );
     }
   };
-
   return (
     <>
       <nav className="py-8">

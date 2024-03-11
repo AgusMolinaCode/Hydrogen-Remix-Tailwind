@@ -24,18 +24,18 @@ const LOGOS = [
     className="h-[4.5rem]"
   />,
   <img
-    key="logo3"
+    key="logo4"
     src="/rekluse.png"
-    alt="logo3"
+    alt="logo4"
     width={400}
     height={400}
     className="h-[4.5rem]"
   />,
 
   <img
-    key="logo3"
+    key="logo5"
     src="/ohlins.png"
-    alt="logo3"
+    alt="logo5"
     width={400}
     height={400}
     className="h-[5rem]"

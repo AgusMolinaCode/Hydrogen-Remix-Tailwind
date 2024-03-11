@@ -64,8 +64,8 @@ export function ProductCardForm({
   };
 
   function truncateTitle(title: string) {
-    if (title.length > 35) {
-      return title.substring(0, 35) + '...';
+    if (title.length > 80) {
+      return title.substring(0, 80) + '...';
     } else {
       return title;
     }

@@ -1,43 +1,47 @@
 {
-    "editor.stickyScroll.enabled": true,
-    "activitusbar.alignment": "Left",
-    "activitusbar.views": [
-
-
-        {
-            "name": "terminal",
-            "codicon": "terminal-view-icon",
-        },
-        {
-            "name": "explorer",
-            "codicon": "explorer-view-icon"
-        },
-        {
-            "name": "search",
-            "codicon": "search-view-icon"
-        },
-        {
-            "name": "scm",
-            "codicon": "source-control-view-icon"
-        },
-        {
-            "name": "debug",
-            "codicon": "run-view-icon"
-        },
-        {
-            "name": "extensions",
-            "codicon": "extensions-view-icon"
-        }
-    ],
-    "editor.fontSize": 14,
-    "files.autoSave": "afterDelay",
-    "terminal.integrated.fontSize": 14,
-    "chat.editor.fontSize": 12,
-    "editor.fontFamily": "'Monaspace Neon', monospace",
-    "notebook.output.fontFamily": "monospace",
-    "terminal.integrated.fontFamily": "monospace",
-    "scm.inputFontFamily": "default",
-    "errorLens.fontFamily": "monospace",
-    "editor.foldingImportsByDefault": false,
-    "workbench.fontAliasing": "default"
-}
+    "workbench.colorTheme": "Aura Dark",
+    "editor.fontLigatures": false,
+    "editor.fontFamily": "Space Mono,Consolas, 'Courier New', monospace",
+    "errorLens.fontFamily": "Space Mono",
+    "gitlens.blame.fontFamily": "Space Mono",
+    "editor.inlayHints.fontFamily": "Space Mono",
+    "errorLens.fontWeight":"500",
+    "editor.fontWeight": 500,
+    "[typescriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 100,
+  "debug.console.fontSize": 13,
+  "terminal.integrated.fontSize": 13,
+  "chat.editor.fontSize": 13,
+  "workbench.iconTheme": "material-icon-theme",
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "explorer.decorations.badges": true,
+  "explorer.decorations.colors": true,
+  "explorer.compactFolders": false,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "editor.minimap.autohide": true,
+  "window.zoomLevel": 1,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.wordWrap": "on",
+  "prettier.endOfLine": "auto",
+  "editor.unfoldOnClickAfterEndOfLine": true,
+  
+  }
+  

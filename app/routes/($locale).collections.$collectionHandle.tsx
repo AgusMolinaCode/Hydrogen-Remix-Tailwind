@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {json, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {useLoaderData, useNavigate} from '@remix-run/react';
 import {useInView} from 'react-intersection-observer';
@@ -31,6 +31,7 @@ import type {SortParam} from '~/components/SortFilter';
 import {FILTER_URL_PREFIX} from '~/components/SortFilter';
 import {getImageLoadingPriority} from '~/lib/const';
 import {parseAsCurrency} from '~/lib/utils';
+import SortHome from '~/components/SortHome';
 
 export const headers = routeHeaders;
 
@@ -147,9 +148,18 @@ export default function Collection() {
     useLoaderData<typeof loader>();
 
   const {ref, inView} = useInView();
+  const [filters, setFilters] = useState(
+    collection.products.filters as Filter[],
+  );
 
   return (
     <>
+      <SortHome filters={filters}>
+        {(filters) => (
+          // Aquí puedes usar los filtros para renderizar lo que necesites
+          <div></div>
+        )}
+      </SortHome>
       <div>
         <h1 className="text-center font-racing text-4xl sm:text-6xl text-rose-100 mt-8 sm:mt-12">
           {collection.title}
