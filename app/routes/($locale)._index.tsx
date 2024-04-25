@@ -1,4 +1,4 @@
-import {Suspense, useContext} from 'react';
+import {Suspense, useContext, useState, useEffect} from 'react';
 import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {Await, useLoaderData} from '@remix-run/react';
 import {AnalyticsPageType} from '@shopify/hydrogen';
@@ -93,7 +93,14 @@ export default function Homepage() {
     featuredProduct,
   } = useLoaderData<typeof loader>();
 
-  const filters = useContext(FilterContext);
+  const [isSortHomeRendered, setIsSortHomeRendered] = useState(false);
+
+  useEffect(() => {
+    setIsSortHomeRendered(true);
+  }, []);
+
+  const contextFilters = useContext(FilterContext);
+  const filters = isSortHomeRendered ? contextFilters : undefined;
   console.log(filters);
   return (
     <>

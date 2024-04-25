@@ -34,7 +34,7 @@ export default function SliderMenuWsp() {
             </textPath>
           </motion.text>
           <Link
-            to="https://wa.me/5491159474844"
+            to="https://wa.me/5491150494936"
             target="_blank"
             rel="noopener noreferrer"
           >
