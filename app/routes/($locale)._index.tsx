@@ -113,7 +113,7 @@ export default function Homepage() {
           <Await resolve={featuredCollection}>
             {({collection}) => {
               if (!collection) return <></>;
-              console.log(collection);
+
               return (
                 <motion.div
                   variants={staggerContainer(1, 0.1)}
