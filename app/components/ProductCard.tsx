@@ -57,7 +57,7 @@ export function ProductCard({
   function truncateTitle(title: string) {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const isSmallScreen = useMediaQuery({query: '(max-width: 640px)'}); // Ajusta el valor según tu necesidad
-    const maxLength = isSmallScreen ? 25 : 75;
+    const maxLength = isSmallScreen ? 150 : 100;
 
     if (title.length > maxLength) {
       return title.substring(0, maxLength) + '...';
@@ -101,7 +101,7 @@ export function ProductCard({
             )}
             <div className="flex justify-between gap-4 absolute bottom-0 w-full rounded-bl-xl items-center rounded-br-xl bg-black/60 border-t h-[4rem] backdrop-blur-3xl px-3">
               <Text
-                className="text-rose-100 font-Righteous font-semibold text-sm sm:text-[1rem]"
+                className="text-rose-100 font-Righteous font-thin lg:font-bold text-sm sm:text-[1rem]"
                 as="h3"
                 size="copy"
               >
@@ -144,7 +144,7 @@ export function ProductCard({
       {quickAdd && !firstVariant.availableForSale && (
         <Button variant="secondary" className="mt-2" disabled>
           <Text as="span" className="flex items-center justify-center gap-2">
-            Sold out
+            Sin stock
           </Text>
         </Button>
       )}

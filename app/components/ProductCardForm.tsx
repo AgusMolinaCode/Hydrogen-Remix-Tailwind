@@ -109,7 +109,7 @@ export function ProductCardForm({
             )}
           >
             <div className="">
-              <h1 className="text-rose-100 font-Righteous font-bold text-4xl sm:text-5xl">
+              <h1 className="text-rose-100 font-Righteous font-medium sm:font-bold text-4xl sm:text-5xl">
                 {truncateTitle(product.title)}
               </h1>
 

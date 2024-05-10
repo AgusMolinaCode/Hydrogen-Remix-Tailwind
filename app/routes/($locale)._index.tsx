@@ -50,7 +50,7 @@ export async function loader({params, context}: LoaderFunctionArgs) {
     shop,
     featuredCollection: context.storefront.query(FEATURED_COLLECTION_QUERY, {
       variables: {
-        handle: 'OFERTAS',
+        handle: 'MAS-VENDIDOS',
         country,
         language,
       },
@@ -101,16 +101,52 @@ export default function Homepage() {
 
   const contextFilters = useContext(FilterContext);
   const filters = isSortHomeRendered ? contextFilters : undefined;
-  console.log(filters);
+
   return (
     <>
       <div className="h-[545px] md:h-[820px] bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-stone-900 via-gray-900 to-neutral-800">
         <HeroInfo />
       </div>
 
-      <div className="py-10"></div>
+      {featuredCollection && (
+        <Suspense>
+          <Await resolve={featuredCollection}>
+            {({collection}) => {
+              if (!collection) return <></>;
+              console.log(collection);
+              return (
+                <motion.div
+                  variants={staggerContainer(1, 0.1)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{once: false, amount: 0.25}}
+                >
+                  <motion.div variants={fadeIn('right', 'spring', 0.2, 1)}>
+                    <h1 className="flex justify-center text-rose-100 text-3xl sm:text-5xl font-racing font-semibold mx-auto items-center gap-2 pt-8">
+                      <span className="font-racing text-3xl sm:text-5xl text-center font-bold text-red-200">
+                        {collection?.title}
+                      </span>
+                    </h1>
+                    <p className="text-center font-Righteous sm:text-xl">
+                      {collection?.descriptionHtml}
+                    </p>
+                  </motion.div>
 
-      {featuredProducts && (
+                  <ProductSwimlane
+                    products={{
+                      nodes: collection.products.edges.map(
+                        (product: any) => product.node,
+                      ),
+                    }}
+                    count={4}
+                  />
+                </motion.div>
+              );
+            }}
+          </Await>
+        </Suspense>
+      )}
+      {/* {featuredProducts && (
         <Suspense>
           <Await resolve={featuredProducts}>
             {({products}) => {
@@ -145,12 +181,44 @@ export default function Homepage() {
             }}
           </Await>
         </Suspense>
-      )}
+      )} */}
+      {/* {featuredProducts && (
+        <Suspense>
+          <Await resolve={featuredProducts}>
+            {({products}) => {
+              if (!products?.nodes) return <></>;
 
+              const filteredProducts = products.nodes.filter(
+                (product: {vendor: string}) => product.vendor === 'Vertex',
+              );
+              return (
+                <motion.div
+                  variants={staggerContainer(1, 0.1)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{once: false, amount: 0.25}}
+                >
+                  <motion.div variants={fadeIn('right', 'spring', 0.2, 1)}>
+                    <h1 className="flex justify-center text-rose-100 text-3xl sm:text-5xl font-racing font-semibold mx-auto items-center gap-2 pt-8">
+                      productos
+                      <span className="font-racing text-3xl sm:text-6xl text-center font-bold text-red-300">
+                        {filteredProducts[0].vendor}
+                      </span>
+                    </h1>
+                  </motion.div>
+                  <ProductSwimlaneTwo
+                    products={{nodes: filteredProducts}}
+                    count={4}
+                  />
+                </motion.div>
+              );
+            }}
+          </Await>
+        </Suspense>
+      )} */}
       <div className="pt-2 sm:pt-14">
         <HeroTwo />
       </div>
-
       <SliderMenuVendor />
       {featuredProducts && (
         <Suspense>
@@ -186,7 +254,6 @@ export default function Homepage() {
           </Await>
         </Suspense>
       )}
-
       {featuredProduct && (
         <Suspense>
           <Await resolve={featuredProduct}>
@@ -200,10 +267,10 @@ export default function Homepage() {
                   viewport={{once: false, amount: 0.25}}
                 >
                   <motion.div variants={fadeIn('right', 'spring', 0.2, 1)}>
-                    <h1 className="flex justify-center text-rose-100 text-4xl sm:text-5xl font-racing font-semibold mx-auto items-center gap-2 pt-10 sm:pt-16 pb-4">
+                    <h1 className="flex justify-center text-rose-100 text-4xl sm:text-5xl font-racing font-thin sm:font-semibold mx-auto items-center gap-2 pt-10 sm:pt-16 pb-4">
                       Producto destacado
                     </h1>
-                    <p className="font-racing font-semibold text-center text-xl text-gray-300 sm:text-2xl">
+                    <p className="font-racing font-thin sm:font-semibold text-center text-xl text-gray-300 sm:text-2xl">
                       Descubre el producto más vendido de la semana, no te
                       quedes sin el tuyo.
                     </p>
@@ -215,9 +282,7 @@ export default function Homepage() {
           </Await>
         </Suspense>
       )}
-
       <SliderInfinite />
-
       <BentoGridSecondDemo />
     </>
   );
@@ -229,6 +294,7 @@ const COLLECTION_CONTENT_FRAGMENT = `#graphql
     handle
     title
     descriptionHtml
+    
     heading: metafield(namespace: "hero", key: "title") {
       value
     }
@@ -254,8 +320,16 @@ const COLLECTION_CONTENT_FRAGMENT = `#graphql
       height
       url
     }
+    products(first: 8) {
+      edges {
+        node {
+          ...ProductCard
+        }
+      }
+    }
   }
   ${MEDIA_FRAGMENT}
+  ${PRODUCT_CARD_FRAGMENT}
 ` as const;
 
 const HOMEPAGE_SEO_QUERY = `#graphql

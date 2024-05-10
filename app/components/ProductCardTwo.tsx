@@ -56,7 +56,7 @@ export function ProductCardTwo({
   function truncateTitle(title: string) {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const isSmallScreen = useMediaQuery({query: '(max-width: 640px)'}); // Ajusta el valor según tu necesidad
-    const maxLength = isSmallScreen ? 20 : 65;
+    const maxLength = isSmallScreen ? 35 : 85;
 
     if (title.length > maxLength) {
       return title.substring(0, maxLength) + '...';
@@ -107,7 +107,7 @@ export function ProductCardTwo({
                 {product.vendor}
               </Text> */}
               <Text
-                className="text-rose-100 font-Righteous font-bold text-sm sm:text-[1rem]"
+                className="text-rose-100 font-Righteous font-thin lg:font-bold text-sm sm:text-[1rem]"
                 as="h3"
                 size="copy"
               >
