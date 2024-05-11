@@ -66,7 +66,7 @@ export async function loader({params, context}: LoaderFunctionArgs) {
     ),
     featuredProduct: context.storefront.query(FEATURED_PRODUCT_QUERY, {
       variables: {
-        handle: 'kit-cilindro-ktm300exc-tpi-tc300i-2019-2023',
+        handle: 'cadena-de-distribucion-honda-pro-x',
         country,
         language,
       },

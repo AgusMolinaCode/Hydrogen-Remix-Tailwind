@@ -89,9 +89,12 @@ export function ProductCardForm({
         <div>
           {image && (
             <div className="h-[300px] md:h-[430px] w-full  relative">
-              <span className="inline-flex h-8 animate-background-shine items-center justify-center rounded-full border border-gray-800 bg-[linear-gradient(110deg,#000,45%,#4D4B4B,55%,#000)] bg-[length:250%_100%] px-3 py-1 text-sm font-medium font-racing text-gray-300 absolute top-1 left-4">
-                {cardLabel}
-              </span>
+              {cardLabel && (
+                <span className="inline-flex h-8 animate-background-shine items-center justify-center rounded-full border border-gray-800 bg-[linear-gradient(110deg,#000,45%,#4D4B4B,55%,#000)] bg-[length:250%_100%] px-3 py-1 text-sm font-medium font-racing text-gray-300 absolute top-1 left-4">
+                  {cardLabel}
+                </span>
+              )}
+
               <Image
                 className="object-center sm:object-contain h-full w-full "
                 data={image}
