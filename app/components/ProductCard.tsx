@@ -57,7 +57,7 @@ export function ProductCard({
   function truncateTitle(title: string) {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const isSmallScreen = useMediaQuery({query: '(max-width: 640px)'}); // Ajusta el valor según tu necesidad
-    const maxLength = isSmallScreen ? 150 : 100;
+    const maxLength = isSmallScreen ? 50 : 100;
 
     if (title.length > maxLength) {
       return title.substring(0, maxLength) + '...';

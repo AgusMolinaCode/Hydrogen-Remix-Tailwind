@@ -7,6 +7,7 @@ import {
   useLocation,
   useSearchParams,
   useNavigate,
+  useMatch,
 } from '@remix-run/react';
 import {useDebounce} from 'react-use';
 import type {
@@ -44,6 +45,7 @@ export function SortFilter({
   collections = [],
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
+
   return (
     <>
       <div className="grid justify-items-center mx-auto justify-center sm:flex gap-1 items-center sm:justify-between w-full px-2">
@@ -120,11 +122,22 @@ export function FiltersDrawer({
             <AppliedFilters filters={appliedFilters} />
           </div>
         ) : null}
-
+        {location.pathname !== '/collections/todos-los-productos' && (
+          <>
+            <Link
+              to={`/collections/todos-los-productos`}
+              className="font-outfit text-gray-300 text-lg"
+            >
+              <span className="align-self:flex-start h-8 animate-background-shine items-center justify-center rounded-full border border-gray-800 bg-[linear-gradient(110deg,#000,45%,#4D4B4B,55%,#000)] bg-[length:250%_100%] px-3 py-1 text-sm font-medium font-racing text-gray-300">
+                Ver todos los productos
+              </span>
+            </Link>
+          </>
+        )}
         <Heading
           as="h4"
           size="copy"
-          className="pb-4 font-outfit font-bold text-rose-100"
+          className="py-3 font-outfit font-bold text-rose-100 underline underline-offset-2"
         >
           Filtros
         </Heading>
@@ -183,11 +196,11 @@ function AppliedFilters({filters = []}: {filters: AppliedFilter[]}) {
               className="flex px-2 border border-rose-100 rounded-full gap-2 items-center"
               key={`${filter.label}-${JSON.stringify(filter.filter)}`}
             >
-              <span className="flex-grow font-outfit text-rose-100 text-lg font-semibold">
+              <span className="flex-grow font-outfit text-rose-100 text-sm font-semibold">
                 {filter.label}
               </span>
               <span>
-                <XMarkIcon className="w-8 h-8 text-rose-100" />
+                <XMarkIcon className="w-6 h-6 text-rose-100" />
               </span>
             </Link>
           );
@@ -283,7 +296,7 @@ function PriceRangeFilter({max, min}: {max?: number; min?: number}) {
         <span>Minimo</span>
         <input
           name="minPrice"
-          className="text-black"
+          className="text-black md:max-w-[11rem]"
           type="number"
           value={minPrice ?? ''}
           placeholder={'$'}
@@ -294,7 +307,7 @@ function PriceRangeFilter({max, min}: {max?: number; min?: number}) {
         <span>Maximo</span>
         <input
           name="maxPrice"
-          className="text-black"
+          className="text-black md:max-w-[11rem]"
           type="number"
           value={maxPrice ?? ''}
           placeholder={'$'}

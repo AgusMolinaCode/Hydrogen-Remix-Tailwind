@@ -127,7 +127,7 @@ export default function Homepage() {
                         {collection?.title}
                       </span>
                     </h1>
-                    <p className="text-center font-Righteous sm:text-xl">
+                    <p className="text-center font-Righteous sm:text-xl text-rose-100">
                       {collection?.descriptionHtml}
                     </p>
                   </motion.div>

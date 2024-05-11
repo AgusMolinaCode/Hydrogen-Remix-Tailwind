@@ -78,19 +78,19 @@ export default function Search() {
   return (
     <>
       <PageHeader>
-        <Heading as="h1" size="copy">
-          Search
+        <Heading as="h1" size="copy" className="text-rose-100 font-Righteous">
+          Buscar productos
         </Heading>
         <Form method="get" className="relative flex w-full text-heading">
           <Input
             defaultValue={searchTerm}
             name="q"
-            placeholder="Search…"
+            placeholder="Buscar..."
             type="search"
             variant="search"
           />
           <button className="absolute right-0 py-2" type="submit">
-            Go
+            Ir
           </button>
         </Form>
       </PageHeader>

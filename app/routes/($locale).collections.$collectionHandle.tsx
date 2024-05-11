@@ -154,12 +154,6 @@ export default function Collection() {
 
   return (
     <>
-      <SortHome filters={filters}>
-        {(filters) => (
-          // Aquí puedes usar los filtros para renderizar lo que necesites
-          <div></div>
-        )}
-      </SortHome>
       <div>
         <h1 className="text-center font-racing text-4xl sm:text-6xl text-rose-100 mt-8 sm:mt-12">
           {collection.title}
@@ -189,41 +183,47 @@ export default function Collection() {
               nextPageUrl,
               hasNextPage,
               state,
-            }) => (
-              <>
-                <div className="flex items-center justify-center mb-6">
-                  <Button
-                    as={PreviousLink}
-                    variant="secondary"
-                    className="relative h-12 overflow-hidden rounded bg-neutral-950 px-5 py-2.5 text-white transition-all duration-300 hover:bg-neutral-800 hover:ring-2 hover:ring-neutral-800 hover:ring-offset-2"
-                  >
-                    <span className="relative font-Righteous text-rose-100">
-                      {isLoading ? 'Cargando...' : 'Cargar anterior'}
-                    </span>
-                  </Button>
+            }) =>
+              nodes.length === 0 ? (
+                <div className="flex items-center justify-center mt-20 font-Righteous text-center text-lg sm:text-2xl">
+                  <p>Aún no hay productos en esta colección.</p>
                 </div>
+              ) : (
+                <>
+                  <div className="flex items-center justify-center mb-6">
+                    <Button
+                      as={PreviousLink}
+                      variant="secondary"
+                      className="relative h-12 overflow-hidden rounded bg-neutral-950 px-5 py-2.5 text-white transition-all duration-300 hover:bg-neutral-800 hover:ring-2 hover:ring-neutral-800 hover:ring-offset-2"
+                    >
+                      <span className="relative font-Righteous text-rose-100">
+                        {isLoading ? 'Cargando...' : 'Cargar anterior'}
+                      </span>
+                    </Button>
+                  </div>
 
-                <ProductsLoadedOnScroll
-                  nodes={nodes}
-                  inView={inView}
-                  nextPageUrl={nextPageUrl}
-                  hasNextPage={hasNextPage}
-                  state={state}
-                />
-                <div className="flex items-center justify-center mt-6">
-                  <Button
-                    ref={ref}
-                    as={NextLink}
-                    variant="secondary"
-                    className="relative h-12 overflow-hidden rounded bg-neutral-950 px-5 py-2.5 text-white transition-all duration-300 hover:bg-neutral-800 hover:ring-2 hover:ring-neutral-800 hover:ring-offset-2"
-                  >
-                    <span className="relative font-Righteous text-rose-100">
-                      {isLoading ? 'Cargando...' : 'Cargar mas productos'}
-                    </span>
-                  </Button>
-                </div>
-              </>
-            )}
+                  <ProductsLoadedOnScroll
+                    nodes={nodes}
+                    inView={inView}
+                    nextPageUrl={nextPageUrl}
+                    hasNextPage={hasNextPage}
+                    state={state}
+                  />
+                  <div className="flex items-center justify-center mt-6">
+                    <Button
+                      ref={ref}
+                      as={NextLink}
+                      variant="secondary"
+                      className="relative h-12 overflow-hidden rounded bg-neutral-950 px-5 py-2.5 text-white transition-all duration-300 hover:bg-neutral-800 hover:ring-2 hover:ring-neutral-800 hover:ring-offset-2"
+                    >
+                      <span className="relative font-Righteous text-rose-100">
+                        {isLoading ? 'Cargando...' : 'Cargar mas productos'}
+                      </span>
+                    </Button>
+                  </div>
+                </>
+              )
+            }
           </Pagination>
         </SortFilter>
       </Section>
