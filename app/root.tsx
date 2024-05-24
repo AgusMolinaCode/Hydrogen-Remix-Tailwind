@@ -53,6 +53,15 @@ export const shouldRevalidate: ShouldRevalidateFunction = ({
   return false;
 };
 
+export const handle = {
+  seo: {
+    title: 'AM MOTOS REPUESTOS',
+    titleTemplate: 'AM MOTOS REPUESTOS',
+    description:
+      'Tienda de repuestos y accesorios para motos en Argentina. Encuentra todo lo que necesitas para tu moto en un solo lugar. Envíos a todo el país.',
+  },
+};
+
 export const links: LinksFunction = () => {
   return [
     {rel: 'stylesheet', href: styles},
@@ -110,6 +119,10 @@ export default function App() {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta name="msvalidate.01" content="A352E6A0AF9A652267361BBB572B8468" />
+        <meta
+          name="google-site-verification"
+          content="kgRV-TzaZrKp-v6lon80auuO-kz3v-c9JLPApCa4keo"
+        />
         <Seo />
         <Meta />
         <Links />
