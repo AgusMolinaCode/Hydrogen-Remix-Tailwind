@@ -66,7 +66,7 @@ export async function loader({params, context}: LoaderFunctionArgs) {
     ),
     featuredProduct: context.storefront.query(FEATURED_PRODUCT_QUERY, {
       variables: {
-        handle: 'cadena-de-distribucion-honda-pro-x',
+        handle: 'carburador-honda-crf450r',
         country,
         language,
       },
