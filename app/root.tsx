@@ -123,6 +123,7 @@ export default function App() {
           name="google-site-verification"
           content="kgRV-TzaZrKp-v6lon80auuO-kz3v-c9JLPApCa4keo"
         />
+
         <Seo />
         <Meta />
         <Links />

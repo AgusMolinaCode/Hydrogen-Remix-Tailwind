@@ -451,3 +451,11 @@ shop-pay-button {
   justify-content: center;
   color: var(--swiper-navigation-color, var(--swiper-theme-color));
 }
+
+.clip-path-left {
+  clip-path: polygon(2% 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.clip-path {
+  clip-path: polygon(0 0, 100% 0, 98% 100%, 0% 100%);
+}

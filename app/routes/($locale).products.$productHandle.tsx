@@ -190,16 +190,16 @@ export default function Product() {
                 </div>
               )}
             </div>
-            <section className="flex flex-col w-full max-w-xl gap-4 mx-auto md:mx-0 md:mr-auto md:max-w-xl md:px-0">
+            <section className="flex flex-col w-full max-w-xl gap-4 mx-auto md:mx-0 md:mr-auto md:max-w-xl md:px-0 pt-2">
               <div className="grid gap-2">
                 <Heading
                   as="h1"
-                  className="whitespace-normal text-rose-100 font-Righteous text-3xl sm:text-4xl border-b border-gray-400/40 pb-4 flex gap-2 items-center justify-between flex-wrap"
+                  className="whitespace-normal text-rose-100 font-Righteous text-2xl sm:text-3xl border-b border-gray-400/40 pb-4 flex gap-2 items-center justify-between flex-wrap"
                 >
                   {title}
                 </Heading>
                 <div className="max-w-lg flex flex-col gap-4">
-                  <div className="flex gap-4 font-semibold font-outfit text-2xl sm:text-4xl text-orange-400">
+                  <div className="flex gap-4 font-semibold font-outfit text-2xl sm:text-3xl text-orange-400">
                     <Money
                       withoutTrailingZeros
                       data={selectedVariant?.price!}
@@ -216,8 +216,8 @@ export default function Product() {
                   </div>
                   <div>
                     {selectedVariant?.sku && (
-                      <p className="font-outfit text-2xl text-white font-semibold">
-                        <span className="font-semibold font-outfit text-gray-300 text-xl">
+                      <p className="font-outfit text-xl text-white font-semibold">
+                        <span className="font-semibold font-outfit text-gray-300 text-lg">
                           Codigo:
                         </span>{' '}
                         {selectedVariant.sku}
@@ -422,64 +422,69 @@ export function ProductForm({
                 {formatDate(twentyDaysLater)}.
               </p>
             </div>
+            <div className="flex justify-center w-full">
+              <div className="w-full rounded-l-2xl clip-path">
+                {isOutOfStock ? (
+                  <Button variant="secondary" disabled>
+                    <Text className="font-outfit">Sin stock</Text>
+                  </Button>
+                ) : (
+                  <AddToCartButton
+                    lines={[
+                      {
+                        merchandiseId: selectedVariant.id!,
+                        quantity: 1,
+                      },
+                    ]}
+                    data-test="add-to-cart"
+                    analytics={{
+                      products: [productAnalytics],
+                      totalValue: parseFloat(productAnalytics.price),
+                    }}
+                  >
+                    <button className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-tl-2xl rounded-bl-2xl bg-indigo-600 px-6 font-medium text-neutral-200 duration-500 w-full ">
+                      <div className="translate-x-0 opacity-100 transition group-hover:-translate-x-[150%] group-hover:opacity-0 font-outfit text-md md:text-lg">
+                        Agregar al carrito
+                      </div>
+                      <div className="absolute translate-x-[150%] opacity-0 transition group-hover:translate-x-0 group-hover:opacity-100">
+                        <svg
+                          width="209px"
+                          height="209px"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          stroke="#000000"
+                          className="w-6 h-6"
+                        >
+                          <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                          <g
+                            id="SVGRepo_tracerCarrier"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          ></g>
+                          <g id="SVGRepo_iconCarrier">
+                            {' '}
+                            <path
+                              d="M6.29977 5H21L19 12H7.37671M20 16H8L6 3H3M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z"
+                              stroke="#ffffff"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            ></path>{' '}
+                          </g>
+                        </svg>
+                      </div>
+                    </button>
+                  </AddToCartButton>
+                )}
+              </div>
 
-            {isOutOfStock ? (
-              <Button variant="secondary" disabled>
-                <Text className="font-outfit">Sin stock</Text>
-              </Button>
-            ) : (
-              <AddToCartButton
-                lines={[
-                  {
-                    merchandiseId: selectedVariant.id!,
-                    quantity: 1,
-                  },
-                ]}
-                data-test="add-to-cart"
-                analytics={{
-                  products: [productAnalytics],
-                  totalValue: parseFloat(productAnalytics.price),
-                }}
-              >
-                <button className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-3xl bg-indigo-600 px-6 font-medium text-neutral-200 duration-500 w-full">
-                  <div className="translate-x-0 opacity-100 transition group-hover:-translate-x-[150%] group-hover:opacity-0 font-outfit text-lg">
-                    Agregar al carrito
-                  </div>
-                  <div className="absolute translate-x-[150%] opacity-0 transition group-hover:translate-x-0 group-hover:opacity-100">
-                    <svg
-                      width="209px"
-                      height="209px"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      stroke="#000000"
-                      className="w-6 h-6"
-                    >
-                      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                      <g
-                        id="SVGRepo_tracerCarrier"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></g>
-                      <g id="SVGRepo_iconCarrier">
-                        {' '}
-                        <path
-                          d="M6.29977 5H21L19 12H7.37671M20 16H8L6 3H3M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z"
-                          stroke="#ffffff"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        ></path>{' '}
-                      </g>
-                    </svg>
-                  </div>
-                </button>
-              </AddToCartButton>
-            )}
-            <BuyNowButton
-              lines={[{merchandiseId: selectedVariant.id, quantity: 1}]}
-              disabled={isOutOfStock}
-            />
+              <BuyNowButton
+                lines={[{merchandiseId: selectedVariant.id, quantity: 1}]}
+                disabled={isOutOfStock}
+                buttonClassName="w-full"
+              />
+            </div>
           </div>
         )}
       </div>
