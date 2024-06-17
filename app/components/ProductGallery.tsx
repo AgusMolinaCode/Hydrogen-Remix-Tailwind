@@ -36,6 +36,8 @@ export function ProductGallery({
     return null;
   }
 
+  // console.log(media);
+
   return (
     <div
       className={`${

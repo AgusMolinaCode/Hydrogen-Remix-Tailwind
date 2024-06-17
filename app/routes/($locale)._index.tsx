@@ -66,7 +66,7 @@ export async function loader({params, context}: LoaderFunctionArgs) {
     ),
     featuredProduct: context.storefront.query(FEATURED_PRODUCT_QUERY, {
       variables: {
-        handle: 'carburador-honda-crf450r',
+        handle: 'kit-medio-motor-vertex-ktm-sxf-xcf-w250-2009-2013',
         country,
         language,
       },

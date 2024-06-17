@@ -134,12 +134,12 @@ function redirectToFirstVariant({
     302,
   );
 }
-
 export default function Product() {
   const {product, shop, recommended, variants} = useLoaderData<typeof loader>();
   const {media, title, vendor, descriptionHtml, selectedVariant} = product;
   const {shippingPolicy, refundPolicy} = shop;
   const isOutOfStock = !selectedVariant?.availableForSale;
+  console.log(product);
 
   const isOnSale =
     selectedVariant?.price?.amount &&
@@ -604,7 +604,7 @@ const PRODUCT_QUERY = `#graphql
       selectedVariant: variantBySelectedOptions(selectedOptions: $selectedOptions) {
         ...ProductVariantFragment
       }
-      media(first: 7) {
+      media(first: 10) {
         nodes {
           ...Media
         }
