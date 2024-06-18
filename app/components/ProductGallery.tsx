@@ -6,7 +6,7 @@ import 'swiper/css/scrollbar';
 import 'swiper/css/pagination';
 
 import type {MediaFragment} from 'storefrontapi.generated';
-import {ProductCard, Section} from '~/components';
+
 export function ProductGallery({
   media,
   className,
@@ -17,7 +17,6 @@ export function ProductGallery({
   const [selectedImage, setSelectedImage] = useState(media[0]);
   const [windowWidth, setWindowWidth] = useState(0);
 
-  // Actualizar el ancho de la ventana al montar y al cambiar el tamaño de la ventana
   useEffect(() => {
     setWindowWidth(window.innerWidth);
 
@@ -40,16 +39,14 @@ export function ProductGallery({
     return null;
   }
 
-  // console.log(media);
-
   return (
     <>
       <div
         className={`${
           media.length > 1 ? 'swimlane' : ''
-        } md:grid-flow-row hiddenScroll md:p-0 md:overflow-x-auto md:grid-cols-1 pb-6 sm:pb-0 ${className}`}
+        } hidden md:block md:grid-flow-row hiddenScroll md:p-0 md:overflow-x-auto md:grid-cols-1 pb-6 sm:pb-0 ${className}`}
       >
-        <div className="aspect-square snap-center bg-white dark:bg-contrast/10 w-mobileGallery mx-auto md:w-full h-[600px] rounded-xl">
+        <div className="aspect-square snap-center bg-white dark:bg-contrast/10 w-mobileGallery mx-auto md:w-full md:h-[600px] rounded-xl">
           {selectedImage.__typename === 'MediaImage' && (
             <Image
               loading="eager"
@@ -66,7 +63,7 @@ export function ProductGallery({
           <Swiper
             modules={[Autoplay, Pagination]}
             autoplay={{
-              delay: 2000,
+              delay: 3000,
               disableOnInteraction: false,
             }}
             pagination={{
@@ -80,7 +77,7 @@ export function ProductGallery({
               display: 'flex',
               justifyContent: 'center',
               margin: 'auto',
-              padding: '0 1rem',
+              padding: '1rem 1rem',
             }}
           >
             {media.map((med, i) => {

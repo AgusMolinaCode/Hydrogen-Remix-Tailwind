@@ -39,6 +39,7 @@ import {seoPayload} from '~/lib/seo.server';
 import type {Storefront} from '~/lib/type';
 import {routeHeaders} from '~/data/cache';
 import {MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
+import {ProductGalleryMobile} from '~/components/ProductGalleryMobile';
 
 export const headers = routeHeaders;
 
@@ -139,7 +140,6 @@ export default function Product() {
   const {media, title, vendor, descriptionHtml, selectedVariant} = product;
   const {shippingPolicy, refundPolicy} = shop;
   const isOutOfStock = !selectedVariant?.availableForSale;
-  console.log(product);
 
   const isOnSale =
     selectedVariant?.price?.amount &&
@@ -164,6 +164,7 @@ export default function Product() {
             media={media.nodes}
             className="w-full xl:w-[80%] mx-auto sm:ml-auto object-contain"
           />
+          <ProductGalleryMobile media={media.nodes} />
           <div className="sticky md:-mb-nav md:top-nav md:-translate-y-nav md:pt-nav hiddenScroll md:overflow-y-scroll ">
             <div className="flex gap-2 items-center">
               {vendor && (

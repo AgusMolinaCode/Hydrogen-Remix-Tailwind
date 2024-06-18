@@ -81,7 +81,10 @@ export default function Search() {
         <Heading as="h1" size="copy" className="text-rose-100 font-Righteous">
           Buscar productos
         </Heading>
-        <Form method="get" className="relative flex w-full text-heading">
+        <Form
+          method="get"
+          className="relative flex w-full text-white font-semibold text-lg"
+        >
           <Input
             defaultValue={searchTerm}
             name="q"
@@ -89,7 +92,10 @@ export default function Search() {
             type="search"
             variant="search"
           />
-          <button className="absolute right-0 py-2" type="submit">
+          <button
+            className="absolute right-0 py-2 text-white font-bold"
+            type="submit"
+          >
             Ir
           </button>
         </Form>
@@ -145,14 +151,12 @@ function NoResults({
     <>
       {noResults && (
         <Section padding="x">
-          <Text className="opacity-50">
-            No results, try a different search.
-          </Text>
+          <Text className="opacity-50">No hay resultados para tu búsqueda</Text>
         </Section>
       )}
       <Suspense>
         <Await
-          errorElement="There was a problem loading related products"
+          errorElement="Hubo un error al cargar los productos"
           resolve={recommendations}
         >
           {(result) => {
