@@ -3,7 +3,7 @@ import {Disclosure, Listbox} from '@headlessui/react';
 import {defer, redirect, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {useLoaderData, Await} from '@remix-run/react';
 import type {ShopifyAnalyticsProduct} from '@shopify/hydrogen';
-import '../styles/app.css';
+//import '../styles/app.css';
 import {
   AnalyticsPageType,
   Money,
