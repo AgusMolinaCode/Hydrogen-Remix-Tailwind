@@ -242,7 +242,7 @@ export default function Product() {
               <div className="grid gap-4 py-4">
                 {descriptionHtml && (
                   <ProductDetail
-                    title="Detalles del producto"
+                    title="Detalles del producto / Compatabilidad"
                     content={descriptionHtml}
                   />
                 )}
@@ -255,7 +255,7 @@ export default function Product() {
                 )}
                 {refundPolicy?.body && (
                   <ProductDetail
-                    title="Returns"
+                    title="Devoluciones"
                     content={getExcerpt(refundPolicy.body)}
                     learnMore={`/policies/${refundPolicy.handle}`}
                   />
