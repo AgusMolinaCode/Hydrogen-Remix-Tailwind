@@ -71,7 +71,7 @@ function ParallaxText({children, baseVelocity = 80}: ParallaxProps) {
           >
             {children}{' '}
             <span className="font-bold text-base sm:text-lg ml-1 font-Righteous tracking-normal text-gray-900">
-              $25.000 pesos
+              $50.000 pesos
             </span>
           </p>
         ))}

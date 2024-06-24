@@ -61,12 +61,20 @@ export async function loader({params, context}: LoaderFunctionArgs) {
         variables: {
           country,
           language,
+          reverse: true,
         },
       },
     ),
+    vendorProducts: context.storefront.query(VENDOR_FEATURED_PRODUCTS_QUERY, {
+      variables: {
+        country,
+        language,
+        reverse: true,
+      },
+    }),
     featuredProduct: context.storefront.query(FEATURED_PRODUCT_QUERY, {
       variables: {
-        handle: 'kit-medio-motor-vertex-ktm-sxf-xcf-w250-2009-2013',
+        handle: 'kit-piston-honda-cr125r-1992-1999-vertex',
         country,
         language,
       },
@@ -88,6 +96,7 @@ export async function loader({params, context}: LoaderFunctionArgs) {
 export default function Homepage() {
   const {
     featuredCollections,
+    vendorProducts,
     featuredProducts,
     featuredCollection,
     featuredProduct,
@@ -124,11 +133,11 @@ export default function Homepage() {
                   <motion.div variants={fadeIn('right', 'spring', 0.2, 1)}>
                     <h1 className="flex justify-center text-rose-100 text-3xl sm:text-5xl font-racing font-semibold mx-auto items-center gap-2 pt-8">
                       <span className="font-racing text-3xl sm:text-5xl text-center font-bold text-red-200">
-                        {collection?.title}
+                        Mas vendidos
                       </span>
                     </h1>
                     <p className="text-center font-Righteous sm:text-xl text-rose-100">
-                      {collection?.descriptionHtml}
+                      Descubre los productos más vendidos de nuestra tienda.
                     </p>
                   </motion.div>
 
@@ -146,88 +155,13 @@ export default function Homepage() {
           </Await>
         </Suspense>
       )}
-      {/* {featuredProducts && (
-        <Suspense>
-          <Await resolve={featuredProducts}>
-            {({products}) => {
-              if (!products?.nodes) return <></>;
-              const filteredProducts = products.nodes.filter(
-                (product) =>
-                  product.collections.edges.length > 0 &&
-                  product.collections.edges[0].node.title === 'MAS VENDIDOS',
-              );
-
-              return (
-                <motion.div
-                  variants={staggerContainer(1, 0.1)}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{once: false, amount: 0.25}}
-                >
-                  <motion.div variants={fadeIn('right', 'spring', 0.2, 1)}>
-                    <h1 className="flex flex-wrap justify-center text-rose-100 text-3xl sm:text-5xl font-racing font-semibold mx-auto items-center gap-2 pt-8">
-                      Productos
-                      <span className="font-racing text-3xl sm:text-5xl text-center font-bold text-red-200">
-                        {filteredProducts[0].collections.edges[0].node.title}
-                      </span>
-                    </h1>
-                  </motion.div>
-                  <ProductSwimlane
-                    products={{nodes: filteredProducts}}
-                    count={4}
-                  />
-                </motion.div>
-              );
-            }}
-          </Await>
-        </Suspense>
-      )} */}
-      {/* {featuredProducts && (
-        <Suspense>
-          <Await resolve={featuredProducts}>
-            {({products}) => {
-              if (!products?.nodes) return <></>;
-
-              const filteredProducts = products.nodes.filter(
-                (product: {vendor: string}) => product.vendor === 'Vertex',
-              );
-              return (
-                <motion.div
-                  variants={staggerContainer(1, 0.1)}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{once: false, amount: 0.25}}
-                >
-                  <motion.div variants={fadeIn('right', 'spring', 0.2, 1)}>
-                    <h1 className="flex justify-center text-rose-100 text-3xl sm:text-5xl font-racing font-semibold mx-auto items-center gap-2 pt-8">
-                      productos
-                      <span className="font-racing text-3xl sm:text-6xl text-center font-bold text-red-300">
-                        {filteredProducts[0].vendor}
-                      </span>
-                    </h1>
-                  </motion.div>
-                  <ProductSwimlaneTwo
-                    products={{nodes: filteredProducts}}
-                    count={4}
-                  />
-                </motion.div>
-              );
-            }}
-          </Await>
-        </Suspense>
-      )} */}
-      <div className="pt-2 sm:pt-14">
-        <HeroTwo />
-      </div>
-      <SliderMenuVendor />
       {featuredProducts && (
         <Suspense>
           <Await resolve={featuredProducts}>
             {({products}) => {
               if (!products?.nodes) return <></>;
-              const filteredProducts = products.nodes.filter(
-                (product: {vendor: string}) => product.vendor === 'Pro Racing',
-              );
+
+              const latestProducts = products.nodes;
 
               return (
                 <motion.div
@@ -238,14 +172,56 @@ export default function Homepage() {
                 >
                   <motion.div variants={fadeIn('right', 'spring', 0.2, 1)}>
                     <h1 className="flex justify-center text-rose-100 text-3xl sm:text-5xl font-racing font-semibold mx-auto items-center gap-2 pt-8">
-                      productos
-                      <span className="font-racing text-3xl sm:text-6xl text-center font-bold text-red-300">
-                        {filteredProducts[0].vendor}
+                      <span className="font-racing text-3xl sm:text-5xl text-center font-bold text-red-200">
+                        Nuevos
                       </span>
                     </h1>
+                    <p className="text-center font-Righteous sm:text-xl text-rose-100">
+                      Descubre los últimos productos en llegar a nuestra tienda.
+                    </p>
                   </motion.div>
                   <ProductSwimlaneTwo
-                    products={{nodes: filteredProducts}}
+                    products={{nodes: latestProducts}}
+                    count={4}
+                  />
+                </motion.div>
+              );
+            }}
+          </Await>
+        </Suspense>
+      )}
+
+      <div className="pt-2 sm:pt-14">
+        <HeroTwo />
+      </div>
+      <SliderMenuVendor />
+      {vendorProducts && (
+        <Suspense>
+          <Await resolve={vendorProducts}>
+            {({products}) => {
+              if (!products?.nodes) return <></>;
+
+              const latestProducts = products.nodes;
+
+              return (
+                <motion.div
+                  variants={staggerContainer(1, 0.1)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{once: false, amount: 0.25}}
+                >
+                  <motion.div variants={fadeIn('right', 'spring', 0.2, 1)}>
+                    <h1 className="flex justify-center text-rose-100 text-3xl sm:text-5xl font-racing font-semibold mx-auto items-center gap-2 pt-8">
+                      <span className="font-racing text-3xl sm:text-5xl text-center font-bold text-red-200">
+                        Pro-x
+                      </span>
+                    </h1>
+                    <p className="text-center font-Righteous sm:text-xl text-rose-100">
+                      Descubre los productos Pro-x.
+                    </p>
+                  </motion.div>
+                  <ProductSwimlaneTwo
+                    products={{nodes: latestProducts}}
                     count={4}
                   />
                 </motion.div>
@@ -347,9 +323,21 @@ const HOMEPAGE_SEO_QUERY = `#graphql
 ` as const;
 
 export const HOMEPAGE_FEATURED_PRODUCTS_QUERY = `#graphql
-  query homepageFeaturedProducts($country: CountryCode, $language: LanguageCode)
+  query homepageFeaturedProducts($country: CountryCode, $language: LanguageCode, $reverse: Boolean!)
   @inContext(country: $country, language: $language) {
-    products(first: 250,sortKey: UPDATED_AT) {
+    products(first: 10, sortKey: CREATED_AT, reverse: $reverse) {
+      nodes {
+        ...ProductCard
+      }
+    }
+  }
+  ${PRODUCT_CARD_FRAGMENT}
+` as const;
+
+export const VENDOR_FEATURED_PRODUCTS_QUERY = `#graphql
+  query homepageFeaturedProducts($country: CountryCode, $language: LanguageCode, $reverse: Boolean!)
+  @inContext(country: $country, language: $language) {
+    products(first: 20, sortKey: CREATED_AT, reverse: $reverse, query: "vendor:pro-x") {
       nodes {
         ...ProductCard
       }

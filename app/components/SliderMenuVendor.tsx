@@ -89,7 +89,7 @@ export default function SliderMenuHeader() {
   return (
     <section>
       <ParallaxText baseVelocity={6} prefixText="por transferencia y efectivo">
-        10% OFF
+        5% OFF
       </ParallaxText>
     </section>
   );

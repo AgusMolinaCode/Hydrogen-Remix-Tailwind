@@ -148,13 +148,30 @@ export default function Product() {
 
   const compareAtPriceAmount =
     Number(selectedVariant?.compareAtPrice?.amount) || 0;
-  const priceAmount = Number(selectedVariant?.price?.amount) || 0;
+  const priceAmount = Number(selectedVariant?.price?.amount ?? 0);
 
   const discountPercentage: number =
     compareAtPriceAmount && priceAmount
       ? (((((compareAtPriceAmount as number) - priceAmount) as number) /
           compareAtPriceAmount) as number) * 100
       : 0;
+
+  const dosCuotas = priceAmount / 2;
+  const tresCuotas = priceAmount / 3;
+  // Formatea dosCuotas para incluir comas y usar la moneda ARS
+  const dosCuotasFormateado = new Intl.NumberFormat('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
+  })
+    .format(dosCuotas)
+    .replace(/,00$/, '');
+
+  const tresCuotasFormateado = new Intl.NumberFormat('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
+  })
+    .format(tresCuotas)
+    .replace(/,00$/, '');
 
   return (
     <>
@@ -200,19 +217,49 @@ export default function Product() {
                   {title}
                 </Heading>
                 <div className="max-w-lg flex flex-col gap-4">
-                  <div className="flex gap-4 font-semibold font-outfit text-2xl sm:text-3xl text-orange-400">
-                    <Money
-                      withoutTrailingZeros
-                      data={selectedVariant?.price!}
-                      as="span"
-                    />
-                    {isOnSale && (
+                  <div className="flex flex-wrap gap-4 font-semibold font-outfit text-2xl sm:text-3xl text-orange-400">
+                    <div>
+                      ${' '}
                       <Money
                         withoutTrailingZeros
-                        data={selectedVariant?.compareAtPrice!}
+                        withoutCurrency
+                        data={selectedVariant?.price!}
                         as="span"
-                        className="opacity-50 strike text-xl sm:text-3xl"
                       />
+                      {'  '}
+                    </div>
+                    <div className="flex gap-1">
+                      {isOnSale && (
+                        <>
+                          <p className="opacity-50 strike text-2xl sm:text-3xl">
+                            $
+                          </p>
+                          <Money
+                            withoutTrailingZeros
+                            withoutCurrency
+                            data={selectedVariant?.compareAtPrice!}
+                            as="span"
+                            className="opacity-50 strike text-2xl sm:text-3xl"
+                          />
+                          {'  '}
+                        </>
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-2 font-semibold font-outfit text-[1rem] sm:text-lg text-orange-400">
+                    <div>
+                      <span className="text-gray-300 text-[0.9rem] md:text-lg">
+                        2 cuotas de
+                      </span>{' '}
+                      {dosCuotasFormateado}{' '}
+                    </div>
+                    {priceAmount > 300000 && (
+                      <div>
+                        <span className="text-gray-300 text-[0.9rem] md:text-lg">
+                          3 cuotas de
+                        </span>{' '}
+                        {tresCuotasFormateado}{' '}
+                      </div>
                     )}
                   </div>
                   <div>
@@ -407,7 +454,7 @@ export function ProductForm({
         {selectedVariant && (
           <div className="grid items-stretch gap-4">
             <div className="rounded-xl flex gap-3 items-center justify-center">
-              <p className="font-outfit font-semibold text-gray-100 text-left text-[0.8rem] sm:text-[1rem]">
+              <p className="font-outfit font-semibold text-gray-100 text-left text-[0.8rem] md:text-[1rem]">
                 Si no encuentra el producto que busca, puede contactarnos a
                 través de nuestro whatsapp.
               </p>
