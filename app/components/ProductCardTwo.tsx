@@ -72,11 +72,12 @@ export function ProductCardTwo({
         to={`/products/${product.handle}`}
         prefetch="intent"
       >
-        <div className={clsx('grid gap-4 relative overflow-hidden', className)}>
+        <div className={clsx('grid gap-2 relative overflow-hidden', className)}>
           <div className="text-black absolute top-1 z-20 w-full">
             <div className="flex justify-between px-3 py-2">
               <ShoppingBagIcon className="w-8 h-8 bg-rose-100 duration-200 rounded-full p-1" />
-              <Text className="text-rose-100 font-Righteous text-sm p-1 rounded-2xl font-thin bg-gray-900 border border-gray-100 sm:flex gap-2">
+
+              <div className="text-rose-100 font-Righteous text-sm p-1 rounded-2xl font-thin bg-gray-900 border border-gray-100 flex justify-center gap-2 items-center">
                 $<Money withoutTrailingZeros withoutCurrency data={price!} />
                 {isDiscounted(price as MoneyV2, compareAtPrice as MoneyV2) && (
                   <CompareAtPrice
@@ -84,7 +85,7 @@ export function ProductCardTwo({
                     data={compareAtPrice as MoneyV2}
                   />
                 )}
-              </Text>
+              </div>
             </div>
           </div>
           <div className="">
