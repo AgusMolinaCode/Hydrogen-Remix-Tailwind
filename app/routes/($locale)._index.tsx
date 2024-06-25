@@ -136,7 +136,7 @@ export default function Homepage() {
                         Mas vendidos
                       </span>
                     </h1>
-                    <p className="text-center font-Righteous sm:text-xl text-rose-100">
+                    <p className="font-racing font-thin text-center text-lg text-gray-300 sm:text-2xl px-2">
                       Descubre los productos más vendidos de nuestra tienda.
                     </p>
                   </motion.div>
@@ -176,7 +176,7 @@ export default function Homepage() {
                         Nuevos
                       </span>
                     </h1>
-                    <p className="text-center font-Righteous sm:text-xl text-rose-100">
+                    <p className="font-racing font-thin text-center text-lg text-gray-300 sm:text-2xl px-2">
                       Descubre los últimos productos en llegar a nuestra tienda.
                     </p>
                   </motion.div>
@@ -216,7 +216,7 @@ export default function Homepage() {
                         Pro-x
                       </span>
                     </h1>
-                    <p className="text-center font-Righteous sm:text-xl text-rose-100">
+                    <p className="font-racing font-thin text-center text-lg text-gray-300 sm:text-2xl px-2">
                       Descubre los productos Pro-x.
                     </p>
                   </motion.div>
@@ -246,7 +246,7 @@ export default function Homepage() {
                     <h1 className="flex justify-center text-rose-100 text-4xl sm:text-5xl font-racing font-thin sm:font-semibold mx-auto items-center gap-2 pt-10 sm:pt-16 pb-4">
                       Producto destacado
                     </h1>
-                    <p className="font-racing font-thin sm:font-semibold text-center text-xl text-gray-300 sm:text-2xl">
+                    <p className="font-racing font-thin text-center text-lg text-gray-300 sm:text-2xl px-2">
                       Descubre el producto más vendido de la semana, no te
                       quedes sin el tuyo.
                     </p>
