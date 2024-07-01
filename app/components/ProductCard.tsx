@@ -108,7 +108,7 @@ export function ProductCard({
                 {truncateTitle(product.title)}
               </Text>
 
-              {/* <Text className="text-rose-100 font-Righteous text-sm p-1 rounded-3xl font-bold sm:hidden block">
+              <Text className="text-rose-100 font-Righteous text-sm p-1 rounded-3xl font-bold sm:hidden block">
                 <Money withoutTrailingZeros data={price!} />
                 {isDiscounted(price as MoneyV2, compareAtPrice as MoneyV2) && (
                   <CompareAtPrice
@@ -116,7 +116,7 @@ export function ProductCard({
                     data={compareAtPrice as MoneyV2}
                   />
                 )}
-              </Text> */}
+              </Text>
             </div>
           </div>
         </div>

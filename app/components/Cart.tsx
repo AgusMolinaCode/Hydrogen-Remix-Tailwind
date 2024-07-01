@@ -16,6 +16,7 @@ import type {
   CartLine,
   CartLineUpdateInput,
 } from '@shopify/hydrogen/storefront-api-types';
+import {Input} from '@nextui-org/react';
 
 import {
   Button,
@@ -26,7 +27,6 @@ import {
   FeaturedProducts,
 } from '~/components';
 import {getInputStyleClasses} from '~/lib/utils';
-import {Input} from '@nextui-org/react';
 
 type Layouts = 'page' | 'drawer';
 
@@ -487,15 +487,15 @@ export function CartEmpty({
           <Button onClick={onClose}>Comprar</Button>
         </div>
       </section>
-      {/* <section className="grid gap-2 pt-16">
-        <FeaturedProducts
+      <section className="grid gap-2 pt-16">
+        {/* <FeaturedProducts
           count={4}
           heading="Compra los mas vendidos"
           layout={layout}
           onClose={onClose}
           sortKey="BEST_SELLING"
-        />
-      </section> */}
+        /> */}
+      </section>
     </div>
   );
 }

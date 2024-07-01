@@ -158,6 +158,7 @@ export default function Product() {
 
   const dosCuotas = priceAmount / 2;
   const tresCuotas = priceAmount / 3;
+  const descuento = priceAmount * (1 - 0.1);
   // Formatea dosCuotas para incluir comas y usar la moneda ARS
   const dosCuotasFormateado = new Intl.NumberFormat('es-AR', {
     style: 'currency',
@@ -171,6 +172,13 @@ export default function Product() {
     currency: 'ARS',
   })
     .format(tresCuotas)
+    .replace(/,00$/, '');
+
+  const descuentoFormateado = new Intl.NumberFormat('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
+  })
+    .format(descuento)
     .replace(/,00$/, '');
 
   return (
@@ -261,6 +269,14 @@ export default function Product() {
                         {tresCuotasFormateado}{' '}
                       </div>
                     )}
+                  </div>
+                  <div>
+                    <p className="font-semibold font-outfit text-[1rem] sm:text-lg text-orange-400">
+                      <span className="font-semibold font-outfit text-gray-300 text-lg">
+                        Obtener 10% de descuento con transferencia
+                      </span>{' '}
+                      {descuentoFormateado}
+                    </p>
                   </div>
                   <div>
                     {selectedVariant?.sku && (
