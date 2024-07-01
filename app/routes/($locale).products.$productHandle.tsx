@@ -269,14 +269,14 @@ export default function Product() {
                       </div>
                     )}
                   </div>
-                  <div className="bg-indigo-600/50 hover:bg-indigo-600/80 duration-250 w-full p-1 rounded-2xl flex justify-center items-center">
+                  <div className="bg-indigo-600/30 hover:bg-indigo-600/50 duration-250 w-full p-1 rounded-2xl flex justify-center items-center">
                     <ReactWhatsapp
                       element="button"
                       number="+5491150494936"
                       message={`Hola, estoy interesado en el producto "${title}" y codigo "${selectedVariant?.sku}", quiero obtener el descuento del 10% con transferencia. Abonando ${descuentoFormateado} mediante transferencia, gracias!.`}
                     >
-                      <p className="font-semibold font-outfit text-[1rem] sm:text-lg text-orange-400">
-                        <span className="font-semibold font-outfit text-gray-200 text-lg">
+                      <p className="font-semibold font-outfit text-[1rem] md:text-lg sm:text-lg text-orange-400">
+                        <span className="font-semibold font-outfit text-gray-200 text-[1rem] md:text-lg">
                           Obtener 10% de descuento con transferencia
                         </span>{' '}
                         {descuentoFormateado}
