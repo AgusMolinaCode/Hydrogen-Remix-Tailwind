@@ -94,6 +94,11 @@ export default {
             transform: 'translateX(calc(-250px * 5))',
           },
         },
+        scroll: {
+          to: {
+            transform: 'translate(calc(-50% - 0.5rem))',
+          },
+        },
       },
       animation: {
         fadeIn: 'fadeIn .8s ease-in-out',
@@ -101,6 +106,8 @@ export default {
         blink: 'blink 1.4s both infinite',
         'background-shine': 'background-shine 2s linear infinite',
         'infinite-slider': 'infiniteSlider 30s linear infinite',
+        scroll:
+          'scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite',
       },
     },
   },

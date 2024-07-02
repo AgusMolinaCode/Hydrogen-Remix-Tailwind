@@ -56,7 +56,7 @@ export function ProductCardTwo({
   function truncateTitle(title: string) {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const isSmallScreen = useMediaQuery({query: '(max-width: 640px)'}); // Ajusta el valor según tu necesidad
-    const maxLength = isSmallScreen ? 35 : 85;
+    const maxLength = isSmallScreen ? 80 : 100;
 
     if (title.length > maxLength) {
       return title.substring(0, maxLength) + '...';
@@ -75,7 +75,7 @@ export function ProductCardTwo({
         <div className={clsx('grid gap-2 relative overflow-hidden', className)}>
           <div className="text-black absolute top-1 z-20 w-full">
             <div className="flex justify-between px-3 py-2">
-              <ShoppingBagIcon className="w-8 h-8 bg-rose-100 duration-200 rounded-full p-1" />
+              {/* <ShoppingBagIcon className="w-8 h-8 bg-rose-100 duration-200 rounded-full p-1" /> */}
 
               <div className="text-rose-100 font-Righteous text-sm p-1 rounded-2xl font-thin bg-gray-900 border border-gray-100 flex justify-center gap-2 items-center">
                 $<Money withoutTrailingZeros withoutCurrency data={price!} />
@@ -107,13 +107,9 @@ export function ProductCardTwo({
               >
                 {product.vendor}
               </Text> */}
-              <Text
-                className="text-rose-100 font-Righteous font-thin lg:font-bold text-sm sm:text-[1rem]"
-                as="h3"
-                size="copy"
-              >
+              <p className="text-rose-100 font-Righteous font-thin lg:font-bold text-[12px] sm:text-[1rem]">
                 {truncateTitle(product.title)}
-              </Text>
+              </p>
               {/* <Text className="text-rose-100 font-Righteous font-bold hidden sm:block">
                 <Money withoutTrailingZeros data={price!} />
                 {isDiscounted(price as MoneyV2, compareAtPrice as MoneyV2) && (

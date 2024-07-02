@@ -24,8 +24,9 @@ export function ProductSwimlane({
       <Swiper
         modules={[Autoplay, Pagination]}
         autoplay={{
-          delay: 2000,
+          delay: 3000,
           disableOnInteraction: false,
+          reverseDirection: true,
         }}
         pagination={{
           clickable: true,
@@ -52,7 +53,7 @@ export function ProductSwimlane({
         }}
       >
         <div className="flex">
-          {products.nodes.map((product) => (
+          {products.nodes.map((product: any) => (
             <SwiperSlide key={`slide-${product.id}`} className="">
               <ProductCard product={product} key={product.id} />
             </SwiperSlide>

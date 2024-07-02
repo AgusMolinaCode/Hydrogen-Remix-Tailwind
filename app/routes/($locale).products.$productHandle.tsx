@@ -158,7 +158,7 @@ export default function Product() {
   const dosCuotas = priceAmount / 2;
   const tresCuotas = priceAmount / 3;
   const descuento = priceAmount * (1 - 0.1);
-  // Formatea dosCuotas para incluir comas y usar la moneda ARS
+
   const dosCuotasFormateado = new Intl.NumberFormat('es-AR', {
     style: 'currency',
     currency: 'ARS',
