@@ -74,7 +74,7 @@ export async function loader({params, context}: LoaderFunctionArgs) {
     }),
     featuredProduct: context.storefront.query(FEATURED_PRODUCT_QUERY, {
       variables: {
-        handle: 'kit-piston-honda-cr125r-1992-1999-vertex',
+        handle: 'alpinestars-tech-7-enduro',
         country,
         language,
       },
