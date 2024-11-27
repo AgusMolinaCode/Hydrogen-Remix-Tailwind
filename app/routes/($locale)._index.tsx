@@ -74,7 +74,7 @@ export async function loader({params, context}: LoaderFunctionArgs) {
     }),
     featuredProduct: context.storefront.query(FEATURED_PRODUCT_QUERY, {
       variables: {
-        handle: 'alpinestars-tech-7-enduro',
+        handle: 'casco-fly-racing-trekker-cw-solid',
         country,
         language,
       },
@@ -323,7 +323,7 @@ const HOMEPAGE_SEO_QUERY = `#graphql
 ` as const;
 
 export const HOMEPAGE_FEATURED_PRODUCTS_QUERY = `#graphql
-  query homepageFeaturedProducts($country: CountryCode, $language: LanguageCode, $reverse: Boolean!)
+  query homepageFeaturedProductsIndex($country: CountryCode, $language: LanguageCode, $reverse: Boolean!)
   @inContext(country: $country, language: $language) {
     products(first: 10, sortKey: CREATED_AT, reverse: $reverse) {
       nodes {
