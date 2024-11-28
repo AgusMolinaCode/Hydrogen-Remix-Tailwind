@@ -2,7 +2,7 @@
     "workbench.colorTheme": "Aura Dark",
     "editor.fontLigatures": false,
     "editor.fontFamily": "Jetbrains Mono,Consolas, 'Courier New', monospace",
-    "errorLens.fontFamily": "Space Mono",
+    "errorLens.fontFamily": "Jetbrains Mono",
     "gitlens.blame.fontFamily": "Space Mono",
     "editor.inlayHints.fontFamily": "Jetbrains Mono",
     "errorLens.fontWeight":"500",

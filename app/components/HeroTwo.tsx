@@ -20,15 +20,18 @@ const HeroTwo = () => {
         <div className="flex flex-col h-[350px] sm:h-[400px] items-center justify-center mx-auto bg-black/80 border-1 border-gray-700 p-2 rounded-3xl">
           <motion.h1
             variants={textVariant(0.25)}
-            className="text-6xl sm:text-[8rem] font-racing text-center text-red-200  font-bold"
+            className="text-4xl sm:text-[4rem] font-racing text-center text-red-200  font-bold"
           >
-            Ofertas
+            Repuestos Usados
           </motion.h1>
           <motion.p
             variants={fadeIn('right', 'spring', 0.2, 0.7)}
-            className="font-Righteous font-semibold text-2xl sm:text-3xl max-w-lg flex justify-center mx-auto text-center pt-8 text-rose-100"
+            className="font-Righteous font-semibold text-lg sm:text-xl max-w-lg flex justify-center mx-auto text-center pt-8 text-rose-100"
           >
-            Hasta 50% de descuento en productos seleccionados. <br />
+            Importamos repuestos usados de motos de alta calidad, con garantía y
+            a un precio accesible. Encuentra lo que necesitas para tu moto en
+            nuestra colección de repuestos usados.
+            <br />
           </motion.p>
           <motion.div
             variants={fadeIn('left', 'tween', 0.2, 0.7)}

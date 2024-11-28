@@ -56,7 +56,7 @@ export function Layout({children, layout}: LayoutProps) {
   const {headerMenu, footerMenu} = layout || {};
   return (
     <>
-      <div className="flex flex-col lg:pt-10 pb-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-900 to-gray-600 bg-gradient-to-r">
+      <div className="flex flex-col lg:pt-10 pb-10 bg-gradient-to-b from-gray-800 to-gray-700 bg-gradient-to-r">
         <div className="">
           <a href="#mainContent" className="sr-only">
             Skip to content
