@@ -45,6 +45,7 @@
   "debug.console.fontFamily": "Jetbrains Mono",
   "terminal.integrated.fontFamily": "Jetbrains Mono",
   "chat.editor.fontFamily": "Jetbrains Mono",
+  "git.ignoreLimitWarning": true,
   
   }
   
