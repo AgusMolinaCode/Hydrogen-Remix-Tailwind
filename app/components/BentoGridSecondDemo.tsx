@@ -67,12 +67,12 @@ const items = [
     className: 'md:col-span-2',
   },
   {
-    title: 'ofertas',
+    title: 'repuestos usados',
     header: (
       <img
         className="object-cover w-full h-full hover:scale-105 transition-transform duration-300 ease-in-out"
         src="/OFERTAS.webp"
-        alt="Catalogo Ofertas"
+        alt="Catalogo repuestos usados"
       />
     ),
     className: 'md:col-span-1',
