@@ -21,6 +21,8 @@ import SortHome from '~/components/SortHome';
 import {staggerContainer, fadeIn} from '../utils/motion';
 import {ProductCardGrid} from '~/components/ProductCardGrid';
 import ChevronDoubleRightIcon from '@heroicons/react/16/solid/ChevronDoubleRightIcon';
+import FetchParts from '~/components/FetchParts';
+import ProxCatalog from '~/components/ProxCatalog';
 export const headers = routeHeaders;
 
 export async function loader({params, context}: LoaderFunctionArgs) {

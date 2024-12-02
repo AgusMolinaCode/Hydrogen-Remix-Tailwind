@@ -30,6 +30,7 @@
     "@shopify/hydrogen": "~2023.10.3",
     "@shopify/remix-oxygen": "^2.0.2",
     "@tabler/icons-react": "^2.47.0",
+    "cheerio": "^1.0.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^1.2.1",
     "cross-env": "^7.0.3",
